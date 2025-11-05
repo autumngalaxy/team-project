@@ -1,4 +1,4 @@
-package entity;
+package entity.application;
 
 public class SurveyBuilder {
     SurveyInfo survey;

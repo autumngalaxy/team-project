@@ -1,8 +1,13 @@
-package entity;
+package entity.application;
 
+import entity.Pet;
 
 import java.time.LocalDate;
 
+/**
+* An entity representing an Application for Adoption.
+ * Applications contain essential information (Pet, name of Adopter, ID, address, etc.), and survey information (who they live with, how they'll interact with the pet, etc.)
+* */
 public class AdoptionApplication {
     // Required info
     public enum IDType {PHOTO_CARD, DRIVERS_LICENSE, MAIL, OTHER}

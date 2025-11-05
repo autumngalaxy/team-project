@@ -1,6 +1,7 @@
 package app;
 
-import entity.*;
+import entity.application.*;
+import entity.Pet;
 
 public class Main {
     public static void main(String[] args) {

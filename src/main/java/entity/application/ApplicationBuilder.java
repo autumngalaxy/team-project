@@ -1,4 +1,6 @@
-package entity;
+package entity.application;
+
+import entity.Pet;
 
 public class ApplicationBuilder {
 
