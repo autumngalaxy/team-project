@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class AdoptionApplication {
     // Required info
-    enum IDType {PHOTO_CARD, DRIVERS_LICENSE, MAIL, OTHER}
+    public enum IDType {PHOTO_CARD, DRIVERS_LICENSE, MAIL, OTHER}
 
     private Pet corespondingPet;
     private String adopterName;
@@ -83,5 +83,41 @@ public class AdoptionApplication {
 
     public void setApplicationDate() {
         this.applicationDate = LocalDate.now();
+    }
+
+    /* ToString */
+
+    private String addressToString() {
+        String result = "{";
+        for(int i = 0; i < adopterAddress.length; i++){
+            result += adopterAddress[i];
+            result += " ";
+        }
+        result += "}";
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("Application: ")
+                .append("[Pet: ")
+                .append(corespondingPet)
+                .append("] [Name: ")
+                .append(adopterName)
+                .append("] [idType: ")
+                .append(idType)
+                .append("] [Address: ")
+                .append(addressToString())
+                .append("] [Phone: ")
+                .append(adopterPhone)
+                .append("] [Email: ")
+                .append(adopterEmail)
+                .append("] [SurveyInfo: ")
+                .append(surveyInfo)
+                .append("] [Date: ")
+                .append(applicationDate)
+                .append("]")
+                .toString();
     }
 }
