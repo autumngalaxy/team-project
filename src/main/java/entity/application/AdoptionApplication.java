@@ -93,13 +93,15 @@ public class AdoptionApplication {
     /* ToString */
 
     private String addressToString() {
-        String result = "{";
-        for(int i = 0; i < adopterAddress.length; i++){
-            result += adopterAddress[i];
-            result += " ";
+        StringBuilder result = new StringBuilder();
+        result.append("{");
+
+        for (String address : adopterAddress) {
+            result.append(address);
+            result.append(", ");
         }
-        result += "}";
-        return result;
+        result.append("}");
+        return result.toString();
     }
 
     @Override
