@@ -1,23 +1,27 @@
 package entity.application;
 
+/**
+ * An entity representing an Adoption Survey.
+ * Applications contains survey information (who they live with, how they'll interact with the pet, etc.)
+ * */
 public class SurveyInfo {
-    enum EnergyOfHome {QUIET, LOUD, BOTH}
-    enum AnimalStaying {LOOSE, CONFINED, CRATED, OUTSIDE, OTHER}
-    enum AloneTime {MORE_THAN_TEN, EIGHT_TO_TEN, FOUR_TO_SIX, LESS_THAN_FOUR}
+    public enum EnergyOfHome {QUIET, LOUD, BOTH}
+    public enum AnimalStaying {LOOSE, CONFINED, CRATED, OUTSIDE, OTHER}
+    public enum AloneTime {MORE_THAN_TEN, EIGHT_TO_TEN, FOUR_TO_SIX, LESS_THAN_FOUR}
     private EnergyOfHome adopterEnergy;
     private AnimalStaying animalStaying;
     private AloneTime animalAlone;
 
 
-    enum LiveWithIndex {ADULT, CHILDREN, SENIORS, TEENAGERS, CATS, DOGS, BIRDS, MAMMALS}
+    public enum LiveWithIndex {ADULT, CHILDREN, SENIORS, TEENAGERS, CATS, DOGS, BIRDS, MAMMALS}
     final int LIVEWITHSIZE = 8;
     private boolean[] adopterLivesWith = new boolean[LIVEWITHSIZE];
 
-    enum TimeWithIndex {CITY, PARKS_AND_PUBLIC, HIKES, JOGGING_OR_BIKING, WATER_TIMER, CAMPING, QUIET_DAYS, OTHER}
+    public enum TimeWithIndex {CITY, PARKS_AND_PUBLIC, HIKES, JOGGING_OR_BIKING, WATER_TIMER, CAMPING, QUIET_DAYS, OTHER}
     final int TIMEWITHSIZE = 8;
     private boolean[] adopterSpendsTimeWith = new boolean[TIMEWITHSIZE];
 
-    enum EnrichmentIndex {TOYS, BRUSHING_OR_PETTING, OTHER_ANIMALS, PLAYTIME, OTHER}
+    public enum EnrichmentIndex {TOYS, BRUSHING_OR_PETTING, OTHER_ANIMALS, PLAYTIME, OTHER}
     final int ENRICHMENTSIZE = 5;
     private boolean[] adopterEnrichment = new boolean[ENRICHMENTSIZE];
 
