@@ -43,12 +43,14 @@ public class api_token {
         return token;
     }
 
+
+/*
     public static JSONArray extractPetsAsJsonArray(String token) {
         List<Map<String, Object>> pets = extractPetsAsMapList(token);
         return new JSONArray(pets); // 自动转成 JList / JMap 格式
     }
 
-    // 子函数：解析为 List<Map>
+
     private static List<Map<String, Object>> extractPetsAsMapList(String jsonResponse) {
 
         JSONObject root = new JSONObject(jsonResponse);
@@ -95,6 +97,8 @@ public class api_token {
 
         return results;
     }
+
+ */
 
 
 

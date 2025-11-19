@@ -1,5 +1,8 @@
 package api;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -15,9 +18,8 @@ public class petfinder_api {
 
         con.setRequestMethod("GET");
 
-        // ⭐ 把 access token 放在 HTTP Header
+        // put access token in HTTP Header
         con.setRequestProperty("Authorization", "Bearer " + accessToken);
-
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         StringBuilder response = new StringBuilder();
         String inputLine;
@@ -28,7 +30,8 @@ public class petfinder_api {
         in.close();
 
         System.out.println(response.toString());
-        return url;
+        return response.toString();
     }
 }
+
 
