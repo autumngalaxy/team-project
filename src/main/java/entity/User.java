@@ -2,8 +2,9 @@ package entity;
 
 public class User {
 
-    private String username;
-    private String userpassword;
+    private final String name;
+    private final String password;
+
     /**
      * Creates a new user with the given non-empty name and non-empty password.
      * @param name the username
@@ -16,18 +17,17 @@ public class User {
         }
         if ("".equals(password)) {
             throw new IllegalArgumentException("Password cannot be empty");
-            //password length should between 6-20
         }
-        this.username = name;
-        this.userpassword = password;
+        this.name = name;
+        this.password = password;
     }
 
     public String getName() {
-        return username;
+        return name;
     }
 
     public String getPassword() {
-        return userpassword;
+        return password;
     }
 
 }

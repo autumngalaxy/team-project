@@ -1,10 +1,14 @@
 package view;
 
 import entity.User;
+import interface_adapter.user_login.UserLoginController;
+import interface_adapter.user_login.UserLoginState;
 import interface_adapter.user_login.UserLoginViewModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserLoginView extends JPanel {
 
@@ -19,7 +23,7 @@ public class UserLoginView extends JPanel {
 
     private final JButton logIn;
     private final JButton cancel;
-    // private LoginController loginController = null;
+    private UserLoginController userLoginController = null;
 
     public UserLoginView(UserLoginViewModel userloginViewModel) {
         UserloginViewModel = userloginViewModel;
@@ -37,9 +41,36 @@ public class UserLoginView extends JPanel {
         buttons.add(logIn);
         cancel = new JButton("cancel");
         buttons.add(cancel);
+
+        logIn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(logIn)) {
+                            final UserLoginState currentState = UserloginViewModel.getState();
+
+                            userLoginController.execute(
+                                    currentState.getUsername(),
+                                    currentState.getUserPassword()
+                            );
+                        }
+                    }
+                }
+        );
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.add(title);
+        this.add(usernameInfo);
+        this.add(usernameErrorField);
+        this.add(passwordErrorField);
+        this.add(passwordInfo);
+        this.add(buttons);
+
     }
 
-
+    public String getViewName() {
+        return viewName;
+    }
 
 
 }
