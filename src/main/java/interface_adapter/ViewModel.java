@@ -1,6 +1,9 @@
 package interface_adapter;
 
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 /**
  * The ViewModel for our CA implementation.
  * This class delegates work to a PropertyChangeSupport object for
@@ -13,6 +16,8 @@ public class ViewModel<T> {
     private final String viewName;
 
     private T state;
+
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public ViewModel(String viewName) {
         this.viewName = viewName;
@@ -30,6 +35,16 @@ public class ViewModel<T> {
         return this.state;
     }
 
+    public void firePropertyChange() {
+        this.support.firePropertyChange("state", null, this.state);
+    }
 
+    public void firePropertyChange(String propertyName) {
+        this.support.firePropertyChange(propertyName, null, this.state);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.support.addPropertyChangeListener(listener);
+    }
 
 }
