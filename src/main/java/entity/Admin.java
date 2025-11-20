@@ -1,8 +1,8 @@
 package entity;
 
 public class Admin {
-    private String adminid;
-    private String adminpassword;
+    private int id;
+    private String password;
 
     /**
      * Creates a new admin with the given non-empty id and non-empty password.
@@ -10,5 +10,4 @@ public class Admin {
      * @param password the admin password
      * @throws IllegalArgumentException if the password or id are empty
      */
-
 }
