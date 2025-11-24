@@ -1,5 +1,8 @@
 package use_case.fill_application;
 
+/**
+ * The output boundary for the Fill Application use case.
+ */
 public interface FillApplicationOutputBoundary {
     /**
      * Prepares the success view for the Fill Application use case.

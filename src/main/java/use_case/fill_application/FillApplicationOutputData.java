@@ -2,7 +2,7 @@ package use_case.fill_application;
 import entity.Pet;
 
 /**
- * Output data for the Fill Application use case.
+ * Output Data for the Fill Application use case.
  */
 public class FillApplicationOutputData {
 

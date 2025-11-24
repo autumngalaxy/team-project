@@ -1,5 +1,8 @@
 package entity.application;
 
+/**
+ * An entity that builds Survey Info entities. Requires adding desired info using methods, then calling build().
+ */
 public class SurveyBuilder {
     SurveyInfo survey;
 
