@@ -1,5 +1,9 @@
 package entity;
+/*
+Add an attribute: user_type: String, its equal to user or admin,
+input data depend on the page its login, access to different DB, and show different logged in view.
 
+ */
 public class User {
 
     private final String name;

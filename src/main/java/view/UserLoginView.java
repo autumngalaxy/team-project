@@ -6,11 +6,15 @@ import interface_adapter.user_login.UserLoginState;
 import interface_adapter.user_login.UserLoginViewModel;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class UserLoginView extends JPanel {
+public class UserLoginView extends JPanel implements ActionListener, PropertyChangeListener {
 
     private final String viewName = "log in";
     private final UserLoginViewModel UserloginViewModel;
@@ -26,7 +30,8 @@ public class UserLoginView extends JPanel {
     private UserLoginController userLoginController = null;
 
     public UserLoginView(UserLoginViewModel userloginViewModel) {
-        UserloginViewModel = userloginViewModel;
+        this.UserloginViewModel  = userloginViewModel ;
+        this.UserloginViewModel.addPropertyChangeListener(this);
 
         final JLabel title = new JLabel("Login Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -56,6 +61,55 @@ public class UserLoginView extends JPanel {
                     }
                 }
         );
+        cancel.addActionListener(this);
+
+        usernameInputField.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void documentListenerHelper() {
+                final UserLoginState currentState = userloginViewModel.getState();
+                currentState.setUsername(usernameInputField.getText());
+                userloginViewModel.setState(currentState);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
+
+        passwordInputField.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void documentListenerHelper() {
+                final UserLoginState currentState = userloginViewModel.getState();
+                currentState.setUserPassword(new String(passwordInputField.getPassword()));
+                userloginViewModel.setState(currentState);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -68,9 +122,27 @@ public class UserLoginView extends JPanel {
 
     }
 
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final UserLoginState state = (UserLoginState) evt.getNewValue();
+        setFields(state);
+        usernameErrorField.setText(state.getLoginError());
+    }
+
+    private void setFields(UserLoginState state) {
+        usernameInputField.setText(state.getUsername());
+    }
+
     public String getViewName() {
         return viewName;
     }
 
+    public void setLoginController(UserLoginController loginController) {
+        this.userLoginController = loginController;
+    }
 
 }

@@ -1,38 +1,37 @@
 package interface_adapter.user_login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.pet_pending.PetPendingState;
-import interface_adapter.pet_pending.PetPendingViewModel;
+import interface_adapter.homepage.HomepageState;
+import interface_adapter.homepage.HomepageViewModel;
 import use_case.user_login.UserLoginOutputBoundary;
 import use_case.user_login.UserLoginOutputData;
-import view.PetPendingView;
 
 public class UserLoginPresenter implements UserLoginOutputBoundary {
 
     private final UserLoginViewModel userLoginViewModel;
-    private final PetPendingViewModel petPendingViewModel;
+    private final HomepageViewModel homepageViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public UserLoginPresenter(ViewManagerModel viewManagerModel,
-                              PetPendingViewModel petPendingViewModel,
+                              HomepageViewModel homepageViewModel,
                               UserLoginViewModel userLoginViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.petPendingViewModel = petPendingViewModel;
+        this.homepageViewModel = homepageViewModel;
         this.userLoginViewModel = userLoginViewModel;
     }
 
     @Override
     public void prepareSuccessView(UserLoginOutputData response) {
-        // On success, update the loggedInViewModel's state
-        final PetPendingState petPendingState = petPendingViewModel.getState();
-        petPendingState.setUsername(response.getUsername());
-        this.petPendingViewModel.firePropertyChange();
+        // On success, update the homepageViewModel state 	
+        final HomepageState homepageState = homepageViewModel.getState();
+        homepageState.setUsername(response.getUsername());
+        this.homepageViewModel.firePropertyChange();
 
         // and clear everything from the LoginViewModel's state
         userLoginViewModel.setState(new UserLoginState());
 
         // switch to the logged in view
-        this.viewManagerModel.setState(petPendingViewModel.getViewName());
+        this.viewManagerModel.setState(homepageViewModel.getViewName());
         this.viewManagerModel.firePropertyChange();
     }
 
