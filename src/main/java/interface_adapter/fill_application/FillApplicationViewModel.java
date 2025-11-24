@@ -17,6 +17,12 @@ public class FillApplicationViewModel extends ViewModel<FillApplicationState> {
     public static final String SUBMIT_BUTTON_LABEL = "Submit Application";
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
 
+    // PHOTO_CARD, DRIVERS_LICENSE, MAIL, OTHER
+    public static final String PHOTOCARD_LABEL = "Photo Card";
+    public static final String DRIVERS_LABEL = "Driver's License";
+    public static final String MAIL_LABEL = "Mail";
+    public static final String OTHER_LABEL = "Other";
+
     public FillApplicationViewModel(){
         super("fill application");
         setState(new FillApplicationState());
