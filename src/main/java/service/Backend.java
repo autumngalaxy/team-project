@@ -50,6 +50,11 @@ public class Backend {
         users.put(user.getId(), user);
     }
 
+    public User getUserById(int userId) {
+        assert(!users.containsKey(userId));
+        return users.get(userId);
+    }
+
 
     public void addPet(Pet pet) {
         assert(!pets.containsKey(pet.getId()));
@@ -59,6 +64,11 @@ public class Backend {
     public void removePet(Pet pet) {
         assert(pets.containsKey(pet.getId()));
         pets.remove(pet.getId());
+    }
+
+    public Pet getPetById(int petId) {
+        assert(!pets.containsKey(petId));
+        return pets.get(petId);
     }
 
     public void addAdmin(Admin admin) {
@@ -129,7 +139,7 @@ public class Backend {
     }
 
 
-    void approveApplication(int applicationId) {
+    public void approveApplication(int applicationId) {
         assert(applications.containsKey(applicationId));
         Application app = applications.get(applicationId);
         app.setStatus(Application.Status.APPROVED);
@@ -151,7 +161,7 @@ public class Backend {
         }
     }
 
-    void rejectApplication(int applicationId) {
+    public void rejectApplication(int applicationId) {
         assert(applications.containsKey(applicationId));
         Application app = applications.get(applicationId);
         app.setStatus(Application.Status.REJECTED);
