@@ -1,19 +1,16 @@
-package interface_adapter.pet_pending;
+package interface_adapter.homepage;
 
-public class PetPendingState {
+public class HomepageState {
     private String username = "";
-
     private String password = "";
-    private String passwordError;
-
-    public PetPendingState(PetPendingState copy) {
+    
+    public HomepageState(HomepageState copy) {
         username = copy.username;
         password = copy.password;
-        passwordError = copy.passwordError;
     }
 
     // Because of the previous copy constructor, the default constructor must be explicit.
-    public PetPendingState() {
+    public HomepageState() {
 
     }
 
@@ -32,7 +29,7 @@ public class PetPendingState {
     public String getPassword() {
         return password;
     }
-
+    /*
     public void setPasswordError(String passwordError) {
         this.passwordError = passwordError;
     }
@@ -40,4 +37,6 @@ public class PetPendingState {
     public String getPasswordError() {
         return passwordError;
     }
+
+  */
 }

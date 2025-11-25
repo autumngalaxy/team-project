@@ -17,17 +17,13 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
         final String username = loginInputData.getUsername();
         final String password = loginInputData.getPassword();
 
-        // final UserLoginOutputData loginOutputData = new UserLoginOutputData(user.getName());
-        final UserLoginOutputData loginOutputData = new UserLoginOutputData("username");
-        userLoginPresenter.prepareSuccessView(loginOutputData);
-        /*
         if (!userDataAccessObject.existsByName(username)) {
-            loginPresenter.prepareFailView(username + ": Account does not exist.");
+            userLoginPresenter.prepareFailView(username + ": Account does not exist.");
         }
         else {
             final String pwd = userDataAccessObject.get(username).getPassword();
             if (!password.equals(pwd)) {
-                loginPresenter.prepareFailView("Incorrect password for \"" + username + "\".");
+                userLoginPresenter.prepareFailView("Incorrect password for \"" + username + "\".");
             }
             else {
 
@@ -35,10 +31,9 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
 
                 userDataAccessObject.setCurrentUsername(username);
 
-                final UserLoginOutputData loginOutputData = new UserLoginOutputData(user.getName());
-                userLoginPresenter.prepareSuccessView(loginOutputData);
+                final UserLoginOutputData userLoginOutputData = new UserLoginOutputData(user.getName());
+                userLoginPresenter.prepareSuccessView(userLoginOutputData);
             }
         }
-         */
     }
 }
