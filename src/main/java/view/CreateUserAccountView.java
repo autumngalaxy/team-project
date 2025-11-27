@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import interface_adapter.homepage.LoginChooseViewModel;
+
 import java.awt.*;
 
 public class CreateUserAccountView extends JPanel {
@@ -13,8 +16,12 @@ public class CreateUserAccountView extends JPanel {
 
     private final JButton signUpButton = new JButton("Sign Up");
     private final JButton cancelButton = new JButton("Cancel");
+    private final JButton goBackButton = new JButton("go back");
+    
+    private final LoginChooseViewModel loginChooseViewModel;
 
-    public CreateUserAccountView() {
+    public CreateUserAccountView(LoginChooseViewModel loginChooseViewModel) {
+        this.loginChooseViewModel  = loginChooseViewModel ;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -46,12 +53,15 @@ public class CreateUserAccountView extends JPanel {
         btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
         btnPanel.add(signUpButton);
         btnPanel.add(cancelButton);
+        btnPanel.add(goBackButton);
 
         add(btnPanel);
 
         // Events
         signUpButton.addActionListener(e -> checkPasswords());
         cancelButton.addActionListener(e -> clearFields());
+        goBackButton.addActionListener(e -> 
+        loginChooseViewModel.firePropertyChange("goBack"));
     }
 
     /** Creates one row (label + textfield) */
@@ -67,7 +77,11 @@ public class CreateUserAccountView extends JPanel {
 
         return panel;
     }
-
+    
+    public String getViewName() {
+        return viewName;
+    }
+    
     /** Validate password match */
     private void checkPasswords() {
         String p1 = new String(passwordField.getPassword());

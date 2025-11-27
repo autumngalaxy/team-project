@@ -16,7 +16,8 @@ public class ViewModel<T> {
     private final String viewName;
 
     private T state;
-
+    private String windowTitle;
+    
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public ViewModel(String viewName) {
@@ -35,6 +36,15 @@ public class ViewModel<T> {
         return this.state;
     }
 
+    public void setWindowTitle(String title) {
+        this.windowTitle = title;
+        support.firePropertyChange("title", null, this.windowTitle);
+    }
+
+    public String getWindowTitle() {
+        return windowTitle;
+    }
+    
     public void firePropertyChange() {
         this.support.firePropertyChange("state", null, this.state);
     }
@@ -42,7 +52,12 @@ public class ViewModel<T> {
     public void firePropertyChange(String propertyName) {
         this.support.firePropertyChange(propertyName, null, this.state);
     }
-
+    
+    /** 用来通知事件（例如 Login / Logout / GoBack） */
+    public void firePropertyChange(String propertyName, Object newValue) {
+        support.firePropertyChange(propertyName, null, newValue);
+    }
+    
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         this.support.addPropertyChangeListener(listener);
     }

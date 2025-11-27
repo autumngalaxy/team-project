@@ -22,6 +22,8 @@ public class UserLoginPresenter implements UserLoginOutputBoundary {
 
     @Override
     public void prepareSuccessView(UserLoginOutputData response) {
+        String userType = response.getUserType();
+        
         // On success, update the homepageViewModel state 	
         final HomepageState homepageState = homepageViewModel.getState();
         homepageState.setUsername(response.getUsername());
@@ -30,8 +32,23 @@ public class UserLoginPresenter implements UserLoginOutputBoundary {
         // and clear everything from the LoginViewModel's state
         userLoginViewModel.setState(new UserLoginState());
 
+        // ★ Redirect to different menus based on user type ★ 根据用户类型跳转不同菜单
+        switch(userType) {
+            case "user":
+                viewManagerModel.setState("homepage");
+                break;
+
+            case "staff":
+                viewManagerModel.setState("staffMenu");
+                break;
+
+            case "admin":
+                viewManagerModel.setState("adminMenu");
+                break;
+        }
+        
         // switch to the logged in view
-        this.viewManagerModel.setState(homepageViewModel.getViewName());
+//        this.viewManagerModel.setState(homepageViewModel.getViewName());
         this.viewManagerModel.firePropertyChange();
     }
 
@@ -41,6 +58,13 @@ public class UserLoginPresenter implements UserLoginOutputBoundary {
         loginState.setLoginError(error);
         userLoginViewModel.firePropertyChange();
     }
+
+	@Override
+	public void prepareGoBackView(String viewName) {
+        this.viewManagerModel.setState(viewName);
+        this.viewManagerModel.setWindowTitle("Pet Adoption System");
+        this.viewManagerModel.firePropertyChange();		
+	}
 
     //for admin the successView is applicationManagement
 }

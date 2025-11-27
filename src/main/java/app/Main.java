@@ -8,12 +8,18 @@ public class Main {
         JFrame application = appBuilder
                 .addLoginChooseView()
                 .addUserLoginView()
+                .addLoginChoosePresenter()
+//                .addStaffLoginView()
+//                .addAdminLoginView()
+                .addCreateUserAccountView()
                 .addHomepageView()
                 .addUserLoginUseCase()
+                .addUserLogoutUseCase()
                 .build();
 
         application.pack();
         application.setLocationRelativeTo(null);
         application.setVisible(true);
+        application.setSize(400, 380);
     }
 }

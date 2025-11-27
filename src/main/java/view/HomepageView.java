@@ -2,6 +2,7 @@ package view;
 
 import interface_adapter.homepage.HomepageState;
 import interface_adapter.homepage.HomepageViewModel;
+import interface_adapter.user_logout.UserLogoutController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,38 +24,7 @@ public class HomepageView extends JPanel implements ActionListener, PropertyChan
 
     private final JButton petpending;
     private final JButton homepage;
-
-
-//    public HomepageView(HomepageViewModel homepageViewModel, JLabel username){
-//    public HomepageView(HomepageViewModel homepageViewModel){
-//        this.homepageViewModel = homepageViewModel;
-////        this.username = new JLabel(homepageViewModel.getViewName());
-//        this.username = new JLabel("Hello, " + homepageViewModel.getState().getUsername());
-////         this.petPendingViewModel.addPropertyChangeListener(this);
-//        this.homepageViewModel.addPropertyChangeListener(this);
-//
-////        final JLabel titleLabel = new JLabel("Home Page");
-////        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-//
-//        final JLabel title = this.username;
-//        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        
-//        final JPanel petpending_button = new JPanel();
-//        petpending = new JButton("Pet");
-//        petpending_button.add(petpending);
-//
-//        final JPanel homepage_button = new JPanel();
-//        homepage = new JButton("Homepage");
-//        homepage_button.add(homepage);
-//
-//        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-//
-////        this.add(titleLabel);
-//        this.add(title);
-//        this.add(username);
-//        this.add(petpending_button);
-//        this.add(homepage_button);
-//    }
+    private UserLogoutController userLogoutController;
 
     public HomepageView(HomepageViewModel homepageViewModel){
         this.homepageViewModel = homepageViewModel;
@@ -93,6 +63,14 @@ public class HomepageView extends JPanel implements ActionListener, PropertyChan
         center.add(logoutButton);
         center.add(Box.createVerticalStrut(20));
 
+        logoutButton.addActionListener(
+                evt -> {
+                    if(evt.getSource().equals(logoutButton)){
+                        this.userLogoutController.execute();
+                    }
+                }
+        );
+        
         // ===== 底部导航栏 =====
         JPanel bottomNav = new JPanel();
         bottomNav.setLayout(new GridLayout(1, 2));
@@ -120,7 +98,11 @@ public class HomepageView extends JPanel implements ActionListener, PropertyChan
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
     }
-
+    
+    public void setUserLogoutController(UserLogoutController userLogoutController) {
+        this.userLogoutController = userLogoutController;
+    }
+    
     // add start 20251124
     // ===== 动态更新 username 和 窗口标题 =====
     @Override
@@ -135,6 +117,8 @@ public class HomepageView extends JPanel implements ActionListener, PropertyChan
                 frame.setTitle("Homepage - " + homepageViewModel.getState().getUsername());
             }            
         }
+        
+      
 //        else if (evt.getPropertyName().equals("password")) {
 //            final LoggedInState state = (LoggedInState) evt.getNewValue();
 //            if (state.getPasswordError() == null) {

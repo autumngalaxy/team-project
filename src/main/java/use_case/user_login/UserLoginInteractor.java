@@ -3,10 +3,10 @@ package use_case.user_login;
 import entity.User;
 
 public class UserLoginInteractor implements UserLoginInputBoundary {
-    private final LoginUserDataAccessInterface userDataAccessObject;
+    private final UserLoginUserDataAccessInterface userDataAccessObject;
     private final UserLoginOutputBoundary userLoginPresenter;
 
-    public UserLoginInteractor(LoginUserDataAccessInterface userDataAccessInterface,
+    public UserLoginInteractor(UserLoginUserDataAccessInterface userDataAccessInterface,
                            UserLoginOutputBoundary loginOutputBoundary) {
         this.userDataAccessObject = userDataAccessInterface;
         this.userLoginPresenter = loginOutputBoundary;
@@ -14,6 +14,7 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
 
     @Override
     public void execute(UserLoginInputData loginInputData) {
+        final String userType = loginInputData.getUserType();
         final String username = loginInputData.getUsername();
         final String password = loginInputData.getPassword();
 
@@ -31,9 +32,14 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
 
                 userDataAccessObject.setCurrentUsername(username);
 
-                final UserLoginOutputData userLoginOutputData = new UserLoginOutputData(user.getName());
+                final UserLoginOutputData userLoginOutputData = new UserLoginOutputData(user.getName(), userType);
                 userLoginPresenter.prepareSuccessView(userLoginOutputData);
             }
         }
     }
+
+	@Override
+	public void goBack() {
+		userLoginPresenter.prepareGoBackView("loginChoose");		
+	}
 }

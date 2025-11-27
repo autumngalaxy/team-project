@@ -5,11 +5,11 @@ import entity.UserFactory;
 import okhttp3.*;
 import org.json.JSONException;
 import org.json.JSONObject;
-import use_case.user_login.LoginUserDataAccessInterface;
+import use_case.user_login.UserLoginUserDataAccessInterface;
 
 import java.io.IOException;
 
-public class DBUserDataAccessObject implements LoginUserDataAccessInterface {
+public class DBUserDataAccessObject implements UserLoginUserDataAccessInterface {
     private static final int SUCCESS_CODE = 200;
     private static final String CONTENT_TYPE_LABEL = "Content-Type";
     private static final String CONTENT_TYPE_JSON = "application/json";
