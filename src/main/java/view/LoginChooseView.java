@@ -1,8 +1,8 @@
 package view;
 
 import javax.swing.*;
-
 import interface_adapter.homepage.LoginChooseViewModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,67 +10,63 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class LoginChooseView extends JPanel implements ActionListener, PropertyChangeListener {
-	
+
     private final String viewName = "loginChoose";
-
-    // 使用你的架构的 ViewModel（不要再定义局部变量遮蔽）
     private final LoginChooseViewModel loginChooseViewModel;
-//    private final UserLoginViewModel userLoginViewModel;
 
-//    public LoginChooseView(LoginChooseView loginChooseView) {
     public LoginChooseView(LoginChooseViewModel loginChooseViewModel) {
-        this.loginChooseViewModel  = loginChooseViewModel ;
-
-        // 让这个 View 监听自己的 ViewModel
+        this.loginChooseViewModel = loginChooseViewModel;
         this.loginChooseViewModel.addPropertyChangeListener(this);
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        // background color
+        setBackground(new Color(0xF5F7FB));
+        setLayout(new GridBagLayout());
 
+        // Panel
+        JPanel card = new JPanel();
+        card.setBackground(Color.WHITE);
+        card.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEmptyBorder(20, 20, 20, 20),
+                BorderFactory.createLineBorder(new Color(220,220,220), 1, true)
+        ));
+        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+        card.setPreferredSize(new Dimension(350, 380));
+
+        // title
         JLabel title = new JLabel("Pet Adoption System");
         title.setFont(new Font("Arial", Font.BOLD, 22));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setForeground(new Color(60, 60, 75));
 
-        JButton userLoginBtn = new JButton("User Login");
-        JButton staffLoginBtn = new JButton("Staff Login");
-        JButton adminLoginBtn = new JButton("Admin Login");
-        JButton createAccountBtn = new JButton("Create New Account");
+        // button
+        JButton userLoginBtn = UIFactory.createPrimaryButton("User Login");
+        JButton staffLoginBtn = UIFactory.createPrimaryButton("Staff Login");
+        JButton adminLoginBtn = UIFactory.createPrimaryButton("Admin Login");
+        JButton createAccountBtn = UIFactory.createSecondaryButton("Create New Account");
 
-        Dimension buttonSize = new Dimension(200, 40);
-        userLoginBtn.setMaximumSize(buttonSize);
-        staffLoginBtn.setMaximumSize(buttonSize);
-        adminLoginBtn.setMaximumSize(buttonSize);
-        createAccountBtn.setMaximumSize(buttonSize);
+        card.add(Box.createVerticalStrut(20));
+        card.add(title);
 
-        userLoginBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        staffLoginBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        adminLoginBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        createAccountBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        card.add(Box.createVerticalStrut(30));
+        card.add(userLoginBtn);
+        card.add(Box.createVerticalStrut(15));
+        card.add(staffLoginBtn);
+        card.add(Box.createVerticalStrut(15));
+        card.add(adminLoginBtn);
 
-        add(Box.createVerticalStrut(30));
-        add(title);
-        add(Box.createVerticalStrut(30));
+        card.add(Box.createVerticalStrut(25));
+        card.add(createAccountBtn);
+        card.add(Box.createVerticalStrut(20));
 
-        add(userLoginBtn);
-        add(Box.createVerticalStrut(20));
+        add(card);
 
-        add(staffLoginBtn);
-        add(Box.createVerticalStrut(20));
-
-        add(adminLoginBtn);
-        add(Box.createVerticalStrut(20));
-
-        add(createAccountBtn);
-        // 按钮事件 → 设置 state → 通知 viewManager 切换画面        
-        // ★★★ 关键：用 “login” 属性名称 + userType 作为 value
+        // addActionListener
         userLoginBtn.addActionListener(e ->
                 loginChooseViewModel.firePropertyChange("login", "user"));
-
         staffLoginBtn.addActionListener(e ->
                 loginChooseViewModel.firePropertyChange("login", "staff"));
-
         adminLoginBtn.addActionListener(e ->
                 loginChooseViewModel.firePropertyChange("login", "admin"));
-
         createAccountBtn.addActionListener(e ->
                 loginChooseViewModel.firePropertyChange("createAccount"));
     }
@@ -80,13 +76,8 @@ public class LoginChooseView extends JPanel implements ActionListener, PropertyC
     }
 
     @Override
-    public void actionPerformed(ActionEvent evt) {
-        System.out.println("Click " + evt.getActionCommand());
-    }
+    public void actionPerformed(ActionEvent evt) {}
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-       
-	}
-  
+    public void propertyChange(PropertyChangeEvent evt) {}
 }

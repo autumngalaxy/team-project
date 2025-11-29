@@ -8,19 +8,19 @@ import java.awt.*;
 public class UserRegister extends JFrame {
 
     public UserRegister() {
-        setTitle("用户注册");
+        setTitle("user login");
         setSize(400, 300);
         setLayout(new GridLayout(5, 2));
 
         JTextField usernameField = new JTextField();
         JPasswordField passwordField = new JPasswordField();
 
-        JButton registerBtn = new JButton("注册");
-        JButton cancelBtn = new JButton("取消");
+        JButton registerBtn = new JButton("login");
+        JButton cancelBtn = new JButton("cancel");
 
-        add(new JLabel("用户名："));
+        add(new JLabel("username："));
         add(usernameField);
-        add(new JLabel("密码："));
+        add(new JLabel("password："));
         add(passwordField);
 
         add(registerBtn);
@@ -29,15 +29,6 @@ public class UserRegister extends JFrame {
         registerBtn.addActionListener(e -> {
             String user = usernameField.getText();
             String pass = new String(passwordField.getPassword());
-
-//            boolean success = UserRepository.register(user, pass);
-//
-//            if (success) {
-//                JOptionPane.showMessageDialog(this, "注册成功！");
-//                dispose();
-//            } else {
-//                JOptionPane.showMessageDialog(this, "用户名已存在！");
-//            }
         });
 
         cancelBtn.addActionListener(e -> dispose());

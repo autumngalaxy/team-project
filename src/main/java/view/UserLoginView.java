@@ -12,60 +12,89 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+/**
+ * The View for the Login Use Case.
+ */
 
 public class UserLoginView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    // update start 20251126
+    // not change
     private final String viewName = "login";
-//	private final String viewName = "log in";;
-    // update end 20251126
-	
+
     private final UserLoginViewModel UserloginViewModel;
 
     private final JTextField usernameInputField = new JTextField(15);
     private final JLabel usernameErrorField = new JLabel();
-
     private final JPasswordField passwordInputField = new JPasswordField(15);
     private final JLabel passwordErrorField = new JLabel();
 
     private final JButton logIn;
     private final JButton cancel;
     private UserLoginController userLoginController = null;
-    
-    // add start 20251126
-    private String userType = "user";  // ← ★新增：user / staff / admin  ★ 可动态改变（默认 user）
-    private JLabel titleLabel; // ★ 用于 updateTitle() 修改标题
-    // add end 20251126
+
+    private String userType = "user";
+    private JLabel titleLabel;
 
     public UserLoginView(UserLoginViewModel userloginViewModel, String userType) {
-        this.UserloginViewModel  = userloginViewModel ;
+        this.UserloginViewModel  = userloginViewModel;
         this.UserloginViewModel.addPropertyChangeListener(this);
-        // add start 20251126
-        this.userType = userType;                    // ★ 保存调用时类型
-//        this.viewName = userType + " login";          // ★ 修改 viewName
 
-        // ★ 根据角色动态改变标题
-//        final JLabel title = new JLabel(userType.substring(0,1).toUpperCase() 
-//                                        + userType.substring(1) 
-//                                        + " Login");
-        // ★ 标题 label → 可动态改变
+        this.userType = userType;
         this.titleLabel = new JLabel(formatTitle(userType));
-        
         titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
-        // add end 20251126
-        
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setForeground(new Color(60, 60, 75));
 
+        // ====== 布局改动 ======
+        setBackground(new Color(0xF5F7FB));
+        setLayout(new GridBagLayout()); // 居中
+
+        // 中央“卡片”容器，白底、有边框
+        JPanel card = new JPanel();
+        card.setBackground(Color.WHITE);
+        card.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true),
+                BorderFactory.createEmptyBorder(20, 30, 20, 30)
+        ));
+        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+        card.setPreferredSize(new Dimension(360, 320));
+        // ====== end ======
+
+        // put LabelTextPanel into card
         final LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel("Username"), usernameInputField);
         final LabelTextPanel passwordInfo = new LabelTextPanel(
                 new JLabel("Password"), passwordInputField);
 
+        // 输入框简单美化一下边框（不影响逻辑）
+        UIFactory.styleTextField(usernameInputField);
+        UIFactory.styleTextField(passwordInputField);
+
         final JPanel buttons = new JPanel();
-        logIn = new JButton("log in");
+        buttons.setOpaque(false); // 跟卡片底色一致
+
+        logIn = UIFactory.createPrimaryButton("Log in");
+        cancel = UIFactory.createSecondaryButton("Cancel");
         buttons.add(logIn);
-        cancel = new JButton("cancel");
         buttons.add(cancel);
+
+        // ==== 把原来 add 的顺序，换成往 card 里 add ====
+        card.add(Box.createVerticalStrut(10));
+        card.add(titleLabel);
+        card.add(Box.createVerticalStrut(20));
+
+        card.add(usernameInfo);
+        card.add(usernameErrorField);
+        card.add(Box.createVerticalStrut(10));
+
+        card.add(passwordInfo);
+        card.add(passwordErrorField);
+        card.add(Box.createVerticalStrut(20));
+
+        card.add(buttons);
+        card.add(Box.createVerticalStrut(10));
+
+        add(card);
 
         logIn.addActionListener(
                 new ActionListener() {
@@ -73,32 +102,22 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
                         if (evt.getSource().equals(logIn)) {
                             final UserLoginState currentState = UserloginViewModel.getState();
 
-                            // update start 20251126
-                            // ★ 将 loginType 传给 Controller
                             userLoginController.execute(
-                            		userType,
+                                    userType,
                                     currentState.getUsername(),
                                     currentState.getUserPassword()
                             );
-                            // update end 20251126
                         }
                     }
                 }
         );
-//        cancel.addActionListener(
-//                evt -> {
-//                    if(evt.getSource().equals(cancel)){
-//                        this.userLogoutController.execute();
-//                    }
-//                }
-//        );
 
-		cancel.addActionListener(e -> {
-		    if (userLoginController != null) {
-		        userLoginController.goBack();
-		    }
-		});
-        		
+        cancel.addActionListener(e -> {
+            if (userLoginController != null) {
+                userLoginController.goBack();
+            }
+        });
+
         usernameInputField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
@@ -146,22 +165,6 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
                 documentListenerHelper();
             }
         });
-
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        
-        // add start 20251126
-        // ★ 增加上下空间让窗口变高
-        this.add(Box.createVerticalStrut(20)); 
-        // add end 20251126
-        
-//        this.add(title);
-        this.add(titleLabel);   // ★ 添加正确的 titleLabel
-        this.add(usernameInfo);
-        this.add(usernameErrorField);
-        this.add(passwordErrorField);
-        this.add(passwordInfo);
-        this.add(buttons);
-
     }
 
     public void actionPerformed(ActionEvent evt) {
@@ -187,14 +190,11 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
         this.userLoginController = loginController;
     }
 
-    // ★★★★★ 新增：动态设置 userType
     public void setUserType(String userType) {
         this.userType = userType;
-//        this.viewName = userType + " login";
         updateTitle();
     }
 
-    // ★★★★★ 新增：更新标题
     public void updateTitle() {
         this.titleLabel.setText(formatTitle(userType));
 
@@ -212,6 +212,6 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
     }
 
     public String getTitleText() {
-        return formatTitle(userType); // 返回 “User Login” / “Staff Login” / “Admin Login”
+        return formatTitle(userType);
     }
 }

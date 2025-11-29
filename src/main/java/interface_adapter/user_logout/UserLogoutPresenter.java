@@ -5,6 +5,7 @@ import interface_adapter.homepage.HomepageState;
 import interface_adapter.homepage.HomepageViewModel;
 import interface_adapter.user_login.UserLoginState;
 import interface_adapter.user_login.UserLoginViewModel;
+import service.Frontend;
 import use_case.user_logout.UserLogoutOutputBoundary;
 import use_case.user_logout.UserLogoutOutputData;
 
@@ -13,16 +14,16 @@ import use_case.user_logout.UserLogoutOutputData;
  */
 public class UserLogoutPresenter implements UserLogoutOutputBoundary {
 
-    private HomepageViewModel loggedInViewModel;
     private ViewManagerModel viewManagerModel;
-    private UserLoginViewModel loginViewModel;
+    private UserLoginViewModel userLoginViewModel;
+	private final Frontend frontend;
 
     public UserLogoutPresenter(ViewManagerModel viewManagerModel,
-    		HomepageViewModel loggedInViewModel,
-                           UserLoginViewModel loginViewModel) {
+            UserLoginViewModel userLoginViewModel,
+            Frontend frontend) {
         this.viewManagerModel = viewManagerModel;
-        this.loggedInViewModel = loggedInViewModel;
-        this.loginViewModel = loginViewModel;
+        this.frontend = frontend;
+        this.userLoginViewModel = userLoginViewModel;
     }
 
     @Override
@@ -32,18 +33,21 @@ public class UserLogoutPresenter implements UserLogoutOutputBoundary {
 
         // We also need to set the username in the LoggedInState to
         // the empty string.
-
-        final HomepageState loggedInState = loggedInViewModel.getState();
-        loggedInState.setUsername("");
-        loggedInViewModel.firePropertyChange();
-
-        final UserLoginState loginState = loginViewModel.getState();
-        loginState.setUsername(response.getUsername());
-        loginViewModel.firePropertyChange();
+    	
+        // 清除登录信息
+//        final UserLoginState loginState = userLoginViewModel.getState();
+//        loginState.setUsername(response.getUsername());
+        userLoginViewModel.setState(new UserLoginState());
+        userLoginViewModel.firePropertyChange();
+        
+        // 回到 LoginChoose 页面
+//        frontend.showLoginChoose();
 
         // This code tells the View Manager to switch to the LoginView.
-//        this.viewManagerModel.setState(loginViewModel.getViewName());
         this.viewManagerModel.setState("loginChoose");
+        this.viewManagerModel.setWindowTitle("Pet Adoption System");
         this.viewManagerModel.firePropertyChange();
     }
+    
+
 }

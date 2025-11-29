@@ -32,7 +32,7 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
 
                 userDataAccessObject.setCurrentUsername(username);
 
-                final UserLoginOutputData userLoginOutputData = new UserLoginOutputData(user.getName(), userType);
+                final UserLoginOutputData userLoginOutputData = new UserLoginOutputData(user.getName(), user.getUserType());
                 userLoginPresenter.prepareSuccessView(userLoginOutputData);
             }
         }

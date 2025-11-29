@@ -1,70 +1,50 @@
 package interface_adapter.user_login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.homepage.HomepageState;
-import interface_adapter.homepage.HomepageViewModel;
+import service.Frontend;
 import use_case.user_login.UserLoginOutputBoundary;
 import use_case.user_login.UserLoginOutputData;
 
 public class UserLoginPresenter implements UserLoginOutputBoundary {
 
     private final UserLoginViewModel userLoginViewModel;
-    private final HomepageViewModel homepageViewModel;
     private final ViewManagerModel viewManagerModel;
+    private final Frontend frontend;
 
     public UserLoginPresenter(ViewManagerModel viewManagerModel,
-                              HomepageViewModel homepageViewModel,
-                              UserLoginViewModel userLoginViewModel) {
+                              UserLoginViewModel userLoginViewModel,
+                              Frontend frontend) {
         this.viewManagerModel = viewManagerModel;
-        this.homepageViewModel = homepageViewModel;
         this.userLoginViewModel = userLoginViewModel;
+        this.frontend = frontend;
     }
 
     @Override
     public void prepareSuccessView(UserLoginOutputData response) {
-        String userType = response.getUserType();
-        
-        // On success, update the homepageViewModel state 	
-        final HomepageState homepageState = homepageViewModel.getState();
-        homepageState.setUsername(response.getUsername());
-        this.homepageViewModel.firePropertyChange();
-
-        // and clear everything from the LoginViewModel's state
+    	System.out.println("[UserLoginPresenter] success userType = " + response.getUserType());
+        // 清空登录状态
         userLoginViewModel.setState(new UserLoginState());
 
-        // ★ Redirect to different menus based on user type ★ 根据用户类型跳转不同菜单
-        switch(userType) {
-            case "user":
-                viewManagerModel.setState("homepage");
-                break;
+        // 跳转 Dashboard（Admin / Staff / User）
+//        frontend.showDashboard(response.getUserType());
+        // 显示 Dashboard
+        frontend.setVisible(true);  // ★ 关键！！！没有这行看不到任何变化
+        frontend.showDashboard(response.getUserType());
 
-            case "staff":
-                viewManagerModel.setState("staffMenu");
-                break;
-
-            case "admin":
-                viewManagerModel.setState("adminMenu");
-                break;
-        }
-        
-        // switch to the logged in view
-//        this.viewManagerModel.setState(homepageViewModel.getViewName());
-        this.viewManagerModel.firePropertyChange();
+        viewManagerModel.firePropertyChange();
     }
 
     @Override
     public void prepareFailView(String error) {
-        final UserLoginState loginState = userLoginViewModel.getState();
+        UserLoginState loginState = userLoginViewModel.getState();
         loginState.setLoginError(error);
         userLoginViewModel.firePropertyChange();
     }
 
-	@Override
-	public void prepareGoBackView(String viewName) {
-        this.viewManagerModel.setState(viewName);
-        this.viewManagerModel.setWindowTitle("Pet Adoption System");
-        this.viewManagerModel.firePropertyChange();		
-	}
-
-    //for admin the successView is applicationManagement
+    @Override
+    public void prepareGoBackView(String viewName) {
+        viewManagerModel.setState(viewName);
+        viewManagerModel.setWindowTitle("Pet Adoption System");
+        viewManagerModel.firePropertyChange();
+    }
 }
