@@ -11,7 +11,6 @@ import java.awt.*;
 import java.net.URL;
 import java.util.List;
 
-//public class AdminPage extends UIComponent {
 public class AdminPage extends JPanel {
 
     private final JPanel applicationListPanel;
@@ -19,8 +18,8 @@ public class AdminPage extends JPanel {
 
     public AdminPage(JFrame frame, Backend backend) {
 
-    	this.backend = backend;
-        // center window
+        this.backend = backend;
+
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);
 
@@ -28,7 +27,7 @@ public class AdminPage extends JPanel {
 
         JLabel welcome = new JLabel("Welcome Admin");
         welcome.setFont(new Font("Arial", Font.BOLD, 22));
-        welcome.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        welcome.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(welcome, BorderLayout.NORTH);
 
         applicationListPanel = new JPanel();
@@ -48,6 +47,21 @@ public class AdminPage extends JPanel {
         applicationListPanel.removeAll();
 
         List<Application> apps = backend.getPendingApplications();
+
+        // Sort applications
+        apps.sort((a, b) -> {
+            Pet petA = backend.getPetById(a.getPetId());
+            Pet petB = backend.getPetById(b.getPetId());
+
+            String nameA = petA != null ? petA.getName() : "";
+            String nameB = petB != null ? petB.getName() : "";
+
+            int nameCompare = nameA.compareToIgnoreCase(nameB);
+            if (nameCompare != 0) return nameCompare;
+
+            return a.getDate().compareTo(b.getDate());
+        });
+
         System.out.println("Loaded apps: " + apps.size()); // Debug
 
         for (Application app : apps) {
@@ -61,6 +75,7 @@ public class AdminPage extends JPanel {
     }
 
     private JPanel createApplicationCard(Application app) {
+
         JPanel card = new JPanel(new BorderLayout());
         card.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         card.setBackground(new Color(245, 245, 245));
@@ -68,19 +83,15 @@ public class AdminPage extends JPanel {
         card.setMaximumSize(new Dimension(700, 185));
 
         Pet pet = backend.getPetById(app.getPetId());
-        String petName = pet.getName();
-
         User_k user = backend.getUserById(app.getUserId());
-        String userName = user.getName();
 
-        // Left panel: picture
+        // Left: picture
         JLabel picLabel = new JLabel();
         picLabel.setPreferredSize(new Dimension(200, 185));
         picLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         picLabel.setHorizontalAlignment(SwingConstants.CENTER);
         picLabel.setVerticalAlignment(SwingConstants.CENTER);
 
-        // If Application has a picture, set it
         if (pet != null && pet.getImageURL() != null && !pet.getImageURL().isEmpty()) {
             try {
                 final URL url = new URL(pet.getImageURL());
@@ -96,11 +107,9 @@ public class AdminPage extends JPanel {
             }
         } else {
             picLabel.setText("No Image");
-            picLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            picLabel.setVerticalAlignment(SwingConstants.CENTER);
         }
 
-        // Center panel: vertical details
+        // Center: details
         JPanel detailsPanel = new JPanel();
         detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
         detailsPanel.setBackground(new Color(245, 245, 245));
@@ -130,44 +139,63 @@ public class AdminPage extends JPanel {
         detailsPanel.add(petNameLabel);
         detailsPanel.add(statusLabel);
 
-        // Combine picture and details
-        JPanel leftPanel = new JPanel();
-        leftPanel.setLayout(new BorderLayout());
-        leftPanel.setBackground(new Color(245, 245, 245));
-        leftPanel.add(picLabel, BorderLayout.WEST);
-        leftPanel.add(detailsPanel, BorderLayout.CENTER);
+        card.add(picLabel, BorderLayout.WEST);
+        card.add(detailsPanel, BorderLayout.CENTER);
 
-        card.add(leftPanel, BorderLayout.CENTER);
-
-        // Buttons panel
-        final JPanel buttonPanel = new JPanel();
+        // Right: Buttons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setBackground(new Color(245, 245, 245));
-        final JButton approveBtn = new JButton("Approve");
-        final JButton rejectBtn  = new JButton("Reject");
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        approveBtn.setFocusPainted(false);
-        rejectBtn.setFocusPainted(false);
+        JButton approveBtn = new JButton("Approve");
+        JButton rejectBtn = new JButton("Reject");
+        JButton viewUserBtn = new JButton("View User Details");
+
+        approveBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        rejectBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        viewUserBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         buttonPanel.add(approveBtn);
+        buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(rejectBtn);
+        buttonPanel.add(Box.createVerticalStrut(10));
+        buttonPanel.add(viewUserBtn);
 
-        // Button actions
+        // === Action: Approve ===
         approveBtn.addActionListener(e -> {
             backend.approveApplication(app.getId());
             JOptionPane.showMessageDialog(this, "Application approved.");
-            loadApplicationCards(); // refresh UI
+            loadApplicationCards();
         });
 
+        // === Action: Reject ===
         rejectBtn.addActionListener(e -> {
             backend.rejectApplication(app.getId());
             JOptionPane.showMessageDialog(this, "Application rejected.");
             loadApplicationCards();
-            // refresh UI
         });
-        card.add(picLabel, BorderLayout.WEST);
-        card.add(detailsPanel, BorderLayout.CENTER);
+
+        // === Action: View User Details ===
+        viewUserBtn.addActionListener(e -> {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "User Details:\n\n" +
+                            "ID: " + user.getId() + "\n" +
+                            "Name: " + user.getName() + "\n" +
+                            "Address: " + user.getAddress() + "\n" +
+                            "ID Type: " + user.getIdType() + "\n" +
+                            "Phone: " + user.getPhoneNumber() + "\n" +
+                            "Email: " + user.getEmail() + "\n" +
+                            "Username: " + user.getUsername(),
+                    "User Information",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        });
+
         card.add(buttonPanel, BorderLayout.EAST);
 
         return card;
     }
 }
+
