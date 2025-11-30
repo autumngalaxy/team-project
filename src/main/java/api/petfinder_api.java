@@ -8,20 +8,32 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * A simple API client for accessing the Petfinder API.
+ * This class currently provides a method to retrieve cat information
+ * from the Petfinder animals endpoint.
+ */
 public class petfinder_api {
 
+    /**
+     * Sends a GET request to the Petfinder API and retrieves a list of cat data.
+     *
+     * @param accessToken The OAuth access token required by the Petfinder API.
+     * @return A JSON string containing cat data returned by the API.
+     * @throws Exception If the API request fails or the response cannot be read.
+     */
     public static String getCats(String accessToken) throws Exception {
-        String url = "https://api.petfinder.com/v2/animals?type=cat";
+        final String url = "https://api.petfinder.com/v2/animals?type=cat";
 
-        URL obj = new URL(url);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        final URL obj = new URL(url);
+        final HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
         con.setRequestMethod("GET");
 
         // put access token in HTTP Header
         con.setRequestProperty("Authorization", "Bearer " + accessToken);
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        StringBuilder response = new StringBuilder();
+        final BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        final StringBuilder response = new StringBuilder();
         String inputLine;
 
         while ((inputLine = in.readLine()) != null) {
@@ -33,5 +45,3 @@ public class petfinder_api {
         return response.toString();
     }
 }
-
-

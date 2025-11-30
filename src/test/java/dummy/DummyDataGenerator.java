@@ -1,10 +1,7 @@
 package dummy;
 
 import api.APIInterface;
-import entity.Admin;
-import entity.Application;
-import entity.Pet;
-import entity.User;
+import entity.*;
 import org.json.JSONArray;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -22,9 +19,9 @@ public class DummyDataGenerator {
         // Users
         JSONArray users = new JSONArray();
 
-        final User.idType[] idTypes = User.idType.values();
+        final User_k.idType[] idTypes = User_k.idType.values();
         for (int i = 1; i <= num_users; i++) {
-            User user = new User(
+            User_k userK = new User_k(
                     i,
                     "User " + i,
                     "Address " + i,
@@ -35,7 +32,7 @@ public class DummyDataGenerator {
                     "pass" + i
             );
 
-            users.put(user.toJson());
+            users.put(userK.toJson());
         }
 
         // Pets
@@ -51,7 +48,7 @@ public class DummyDataGenerator {
         JSONArray admins = new JSONArray();
 
         for (int i = 1; i <= num_admins; i++) {
-            Admin admin = new Admin(
+            Admin_k adminK = new Admin_k(
                     i,
                     "Admin First" + i,
                     "Admin Last" + i,
@@ -60,7 +57,7 @@ public class DummyDataGenerator {
                     "adminpass" + i
             );
 
-            admins.put(admin.toJson());
+            admins.put(adminK.toJson());
         }
 
         // Applications

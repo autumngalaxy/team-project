@@ -13,13 +13,21 @@ public class UserLoginController {
 
     /**
      * Executes the Login Use Case.
+     * @param userType the userType of the user logging in
      * @param username the username of the user logging in
      * @param password the password of the user logging in
      */
-    public void execute(String username, String password) {
+    public void execute(String userType, String username, String password) {
         final UserLoginInputData loginInputData = new UserLoginInputData(
-                username, password);
+                userType, username, password);
 
         loginUseCaseInteractor.execute(loginInputData);
     }
+
+    /**
+     * Executes the Login Use Case.
+     */
+    public void goBack() {
+        loginUseCaseInteractor.goBack();
+	}
 }

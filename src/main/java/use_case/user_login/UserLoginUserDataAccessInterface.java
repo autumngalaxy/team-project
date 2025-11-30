@@ -2,7 +2,7 @@ package use_case.user_login;
 
 import entity.User;
 
-public interface LoginUserDataAccessInterface {
+public interface UserLoginUserDataAccessInterface {
 
     /**
      * Checks if the given username exists.

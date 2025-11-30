@@ -7,4 +7,6 @@ public interface UserLoginOutputBoundary {
 
     void prepareFailView(String errorMessage);
     // Prepares the failure view for the Login Use Case.
+
+    void prepareGoBackView(String viewName);
 }

@@ -6,6 +6,7 @@ public class LoginChooseViewModel extends ViewModel {
 
     public LoginChooseViewModel() {
         super("loginChoose");
+        // setState(new UserLoginState());
     }
 
 }

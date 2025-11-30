@@ -7,5 +7,11 @@ public interface UserLoginInputBoundary {
      * @param loginInputData the input data
      */
     void execute(UserLoginInputData loginInputData);
+
+    /**
+     * Executes the login use case.
+     */    
+    void goBack();
+
 }
 

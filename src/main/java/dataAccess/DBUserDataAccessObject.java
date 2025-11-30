@@ -1,25 +1,28 @@
-package data_access;
+package dataAccess;
 
 import entity.User;
 import entity.UserFactory;
 import okhttp3.*;
 import org.json.JSONException;
 import org.json.JSONObject;
-import use_case.user_login.LoginUserDataAccessInterface;
+
+import use_case.user_login.UserLoginUserDataAccessInterface;
 
 import java.io.IOException;
 
-public class DBUserDataAccessObject implements LoginUserDataAccessInterface {
+public class DBUserDataAccessObject implements UserLoginUserDataAccessInterface {
     private static final int SUCCESS_CODE = 200;
     private static final String CONTENT_TYPE_LABEL = "Content-Type";
     private static final String CONTENT_TYPE_JSON = "application/json";
     private static final String STATUS_CODE_LABEL = "status_code";
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
+    private static final String USERTYPE = "userType";
     private static final String MESSAGE = "message";
     private final UserFactory userFactory;
 
     private String currentUsername;
+
     public DBUserDataAccessObject(UserFactory userFactory) {
         this.userFactory = userFactory;
     }
@@ -55,6 +58,8 @@ public class DBUserDataAccessObject implements LoginUserDataAccessInterface {
         final JSONObject requestBody = new JSONObject();
         requestBody.put(USERNAME, user.getName());
         requestBody.put(PASSWORD, user.getPassword());
+        requestBody.put(USERTYPE, user.getUserType());
+        
         final RequestBody body = RequestBody.create(requestBody.toString(), mediaType);
         final Request request = new Request.Builder()
                 .url("http://vm003.teach.cs.toronto.edu:20112/user")
@@ -95,8 +100,9 @@ public class DBUserDataAccessObject implements LoginUserDataAccessInterface {
                 final JSONObject userJSONObject = responseBody.getJSONObject("user");
                 final String name = userJSONObject.getString(USERNAME);
                 final String password = userJSONObject.getString(PASSWORD);
+                final String userType = userJSONObject.getString(USERTYPE);
 
-                return userFactory.create(name, password);
+                return userFactory.create(name, password, userType);
             }
             else {
                 throw new RuntimeException(responseBody.getString(MESSAGE));

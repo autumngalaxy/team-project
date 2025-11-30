@@ -11,5 +11,4 @@ public class UserLoginViewModel extends ViewModel<UserLoginState> {
         super("log in");
         setState(new UserLoginState());
     }
-
 }

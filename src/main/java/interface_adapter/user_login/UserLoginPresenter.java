@@ -1,38 +1,34 @@
 package interface_adapter.user_login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.homepage.HomepageState;
-import interface_adapter.homepage.HomepageViewModel;
+import service.Frontend;
 import use_case.user_login.UserLoginOutputBoundary;
 import use_case.user_login.UserLoginOutputData;
 
 public class UserLoginPresenter implements UserLoginOutputBoundary {
 
     private final UserLoginViewModel userLoginViewModel;
-    private final HomepageViewModel homepageViewModel;
     private final ViewManagerModel viewManagerModel;
+    private final Frontend frontend;
 
     public UserLoginPresenter(ViewManagerModel viewManagerModel,
-                              HomepageViewModel homepageViewModel,
-                              UserLoginViewModel userLoginViewModel) {
+                              UserLoginViewModel userLoginViewModel,
+                              Frontend frontend) {
         this.viewManagerModel = viewManagerModel;
-        this.homepageViewModel = homepageViewModel;
         this.userLoginViewModel = userLoginViewModel;
+        this.frontend = frontend;
     }
 
     @Override
     public void prepareSuccessView(UserLoginOutputData response) {
-        // On success, update the homepageViewModel state 	
-        final HomepageState homepageState = homepageViewModel.getState();
-        homepageState.setUsername(response.getUsername());
-        this.homepageViewModel.firePropertyChange();
-
-        // and clear everything from the LoginViewModel's state
+    	System.out.println("[UserLoginPresenter] success userType = " + response.getUserType());
+        // clear login state
         userLoginViewModel.setState(new UserLoginState());
 
-        // switch to the logged in view
-        this.viewManagerModel.setState(homepageViewModel.getViewName());
-        this.viewManagerModel.firePropertyChange();
+        frontend.setVisible(true);
+        frontend.showDashboard(response.getUserType());
+
+        viewManagerModel.firePropertyChange();
     }
 
     @Override
@@ -42,5 +38,10 @@ public class UserLoginPresenter implements UserLoginOutputBoundary {
         userLoginViewModel.firePropertyChange();
     }
 
-    //for admin the successView is applicationManagement
+    @Override
+    public void prepareGoBackView(String viewName) {
+        viewManagerModel.setState(viewName);
+        viewManagerModel.setWindowTitle("Pet Adoption System");
+        viewManagerModel.firePropertyChange();
+    }
 }

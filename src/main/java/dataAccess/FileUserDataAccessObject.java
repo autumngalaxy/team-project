@@ -1,10 +1,10 @@
-package data_access;
+package dataAccess;
 
 import entity.User;
 import entity.UserFactory;
 import use_case.signup.SignupUserDataAccessInterface;
-import use_case.user_login.LoginUserDataAccessInterface;
-
+import use_case.user_login.UserLoginUserDataAccessInterface;
+import use_case.user_logout.UserLogoutUserDataAccessInterface;
 import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -13,9 +13,8 @@ import java.util.Map;
 /**
  * DAO for user data implemented using a File to persist the data.
  */
-public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
-
-    private static final String HEADER = "username,password";
+public class FileUserDataAccessObject implements UserLoginUserDataAccessInterface,
+        UserLogoutUserDataAccessInterface, SignupUserDataAccessInterface {
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
@@ -34,6 +33,7 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
         csvFile = new File(csvPath);
         headers.put("username", 0);
         headers.put("password", 1);
+        headers.put("userType", 2);
 
         if (csvFile.length() == 0) {
             save();
@@ -43,8 +43,9 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 final String header = reader.readLine();
 
-                if (!header.equals(HEADER)) {
-                    throw new RuntimeException(String.format("header should be%n: %s%n but was:%n%s", HEADER, header));
+                if (!header.startsWith("username,password")) {
+                    throw new RuntimeException(String.format(
+                        "CSV header should start with: %s, but was: %s", "username,password", header));
                 }
 
                 String row;
@@ -52,7 +53,8 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
                     final String[] col = row.split(",");
                     final String username = String.valueOf(col[headers.get("username")]);
                     final String password = String.valueOf(col[headers.get("password")]);
-                    final User user = userFactory.create(username, password);
+                    final String userType = String.valueOf(col[headers.get("userType")]);
+                    final User user = userFactory.create(username, password, userType);
                     accounts.put(username, user);
                 }
             }
@@ -70,8 +72,8 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
             writer.newLine();
 
             for (User user : accounts.values()) {
-                final String line = String.format("%s,%s",
-                        user.getName(), user.getPassword());
+                final String line = String.format("%s,%s,%s",
+                        user.getName(), user.getPassword(), user.getUserType());
                 writer.write(line);
                 writer.newLine();
             }

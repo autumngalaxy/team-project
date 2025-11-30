@@ -2,8 +2,7 @@ package view;
 
 import entity.Application;
 import entity.Pet;
-
-import entity.User;
+import entity.User_k;
 import service.Backend;
 
 import javax.imageio.ImageIO;
@@ -12,15 +11,17 @@ import java.awt.*;
 import java.net.URL;
 import java.util.List;
 
-public class AdminPage extends UIComponent {
+//public class AdminPage extends UIComponent {
+public class AdminPage extends JPanel {
 
     private final JPanel applicationListPanel;
+    private final Backend backend;
 
     public AdminPage(JFrame frame, Backend backend) {
-        super(frame, backend);
 
-        frame.setSize(1200, 800);   // wider default
-        frame.setLocationRelativeTo(null); // center window
+    	this.backend = backend;
+        // center window
+        frame.setLocationRelativeTo(null);
         frame.setResizable(true);
 
         setLayout(new BorderLayout());
@@ -47,23 +48,6 @@ public class AdminPage extends UIComponent {
         applicationListPanel.removeAll();
 
         List<Application> apps = backend.getPendingApplications();
-
-        // sort applications
-        apps.sort((a, b) -> {
-            Pet petA = backend.getPetById(a.getPetId());
-            Pet petB = backend.getPetById(b.getPetId());
-
-            String nameA = petA != null ? petA.getName() : "";
-            String nameB = petB != null ? petB.getName() : "";
-
-            // 1. Sort alphabetically by pet name
-            int nameCompare = nameA.compareToIgnoreCase(nameB);
-            if (nameCompare != 0) return nameCompare;
-
-            // If same pet name → sort by date of application
-            return a.getDate().compareTo(b.getDate());
-        });
-
         System.out.println("Loaded apps: " + apps.size()); // Debug
 
         for (Application app : apps) {
@@ -86,7 +70,7 @@ public class AdminPage extends UIComponent {
         Pet pet = backend.getPetById(app.getPetId());
         String petName = pet.getName();
 
-        User user = backend.getUserById(app.getUserId());
+        User_k user = backend.getUserById(app.getUserId());
         String userName = user.getName();
 
         // Left panel: picture
@@ -155,56 +139,31 @@ public class AdminPage extends UIComponent {
 
         card.add(leftPanel, BorderLayout.CENTER);
 
-        // Right panel (Buttons)
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        // Buttons panel
+        final JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(245, 245, 245));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        final JButton approveBtn = new JButton("Approve");
+        final JButton rejectBtn  = new JButton("Reject");
 
-        JButton approveBtn = new JButton("Approve");
-        JButton rejectBtn  = new JButton("Reject");
-        JButton viewUserBtn = new JButton("View User Details");
-
-        approveBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        rejectBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        viewUserBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        approveBtn.setFocusPainted(false);
+        rejectBtn.setFocusPainted(false);
 
         buttonPanel.add(approveBtn);
-        buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(rejectBtn);
-        buttonPanel.add(Box.createVerticalGlue());
-        buttonPanel.add(viewUserBtn);
 
         // Button actions
         approveBtn.addActionListener(e -> {
             backend.approveApplication(app.getId());
-            JOptionPane.showMessageDialog(frame, "Application approved.");
+            JOptionPane.showMessageDialog(this, "Application approved.");
             loadApplicationCards(); // refresh UI
         });
 
         rejectBtn.addActionListener(e -> {
             backend.rejectApplication(app.getId());
-            JOptionPane.showMessageDialog(frame, "Application rejected.");
-            loadApplicationCards(); // refresh UI
+            JOptionPane.showMessageDialog(this, "Application rejected.");
+            loadApplicationCards();
+            // refresh UI
         });
-
-        // view user details popup
-        viewUserBtn.addActionListener(e -> {
-            JOptionPane.showMessageDialog(
-                    frame,
-                    "User Details:\n\n" +
-                            "ID: " + user.getId() + "\n" +
-                            "Name: " + user.getName() + "\n" +
-                            "Address: " + user.getAddress() + "\n" +
-                            "ID Type: " + user.getIdType() + "\n" +
-                            "Phone: " + user.getPhoneNumber() + "\n" +
-                            "Email: " + user.getEmail() + "\n" +
-                            "Username: " + user.getUsername(),
-                    "User Information",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
-        });
-
         card.add(picLabel, BorderLayout.WEST);
         card.add(detailsPanel, BorderLayout.CENTER);
         card.add(buttonPanel, BorderLayout.EAST);
