@@ -1,117 +1,98 @@
 package use_case.user_login;
 
 import entity.User;
+import entity.UserFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserLoginInteractorTest {
+/**
+ * Tests for UserLoginInteractor ensuring 100% branch coverage.
+ */
+public class LoginInteractorTest {
 
-    private FakeUserLoginDAO fakeDAO;
-    private FakeUserLoginPresenter fakePresenter;
     private UserLoginInteractor interactor;
+    private FakeUserLoginDAO dao;
+    private FakeUserLoginPresenter presenter;
 
     @BeforeEach
     void setUp() {
-        fakeDAO = new FakeUserLoginDAO();
-        fakePresenter = new FakeUserLoginPresenter();
-        interactor = new UserLoginInteractor(fakeDAO, fakePresenter);
+        dao = new FakeUserLoginDAO();
+        presenter = new FakeUserLoginPresenter();
+        interactor = new UserLoginInteractor(dao, presenter);
     }
 
+    // === 1. Account does NOT exist ===
     @Test
-    void testUserDoesNotExist() {
-        UserLoginInputData input = new UserLoginInputData("user", "unkonwn", "pwd");
+    void testAccountDoesNotExist() {
+        dao.exists = false;
+
+        UserLoginInputData input =
+                new UserLoginInputData("user", "Alice", "123");
+
         interactor.execute(input);
 
-        assertEquals("unkonwn: Account does not exist.", fakePresenter.errorMessage);
-        assertNull(fakePresenter.successUser);
+        assertEquals("Alice: Account does not exist.", presenter.failMessage);
     }
 
+    // === 2. Wrong user type ===
     @Test
-    void testIncorrectPassword() {
-        fakeDAO.save(new User("bob", "123", "user"));
+    void testWrongUserType() {
+        dao.exists = true;
 
-        UserLoginInputData input = new UserLoginInputData("user", "bob", "wrongPwd");
+        // DB says this is "admin"
+        dao.returnUser = new User(0, "Alice", "",
+                User.idType.PHOTO_CARD, 0, "", "Alice", "123", "admin");
+
+        // login page type = user, mismatch
+        UserLoginInputData input =
+                new UserLoginInputData("user", "Alice", "123");
+
         interactor.execute(input);
 
-        assertEquals("Incorrect password for \"bob\".", fakePresenter.errorMessage);
+        assertEquals("Its not user account.", presenter.failMessage);
     }
 
+    // === 3. Wrong password ===
     @Test
-    void testSuccessLogin() {
-        fakeDAO.save(new User("alice", "pass123", "admin"));
+    void testWrongPassword() {
+        dao.exists = true;
 
-        UserLoginInputData input = new UserLoginInputData("admin", "alice", "pass123");
+        // DB password = 999
+        dao.returnUser = new User(0, "Bob", "",
+                User.idType.PHOTO_CARD, 0, "", "Bob", "999", "user");
+
+        UserLoginInputData input =
+                new UserLoginInputData("user", "Bob", "123");
+
         interactor.execute(input);
 
-        assertEquals("alice", fakePresenter.successUser.getUsername());
-        assertEquals("admin", fakePresenter.successUser.getUserType());
-        assertEquals("alice", fakeDAO.currentUser);
+        assertEquals("Incorrect password for \"Bob\".", presenter.failMessage);
     }
 
+    // === 4. Login Success ===
+    @Test
+    void testLoginSuccess() {
+        dao.exists = true;
+
+        dao.returnUser = new User(0, "Chris", "",
+                User.idType.PHOTO_CARD, 0, "", "Chris", "abc", "user");
+
+        UserLoginInputData input =
+                new UserLoginInputData("user", "Chris", "abc");
+
+        interactor.execute(input);
+
+        assertEquals("Chris", presenter.successUsername);
+        assertEquals("user", presenter.successUserType);
+        assertEquals("Chris", dao.currentUserSet);
+    }
+
+    // === 5. goBack ===
     @Test
     void testGoBack() {
         interactor.goBack();
-        assertEquals("loginChoose", fakePresenter.goBackTarget);
-    }
-
-    // ====================================================
-    //                      Fake DAO
-    // ====================================================
-    static class FakeUserLoginDAO implements UserLoginUserDataAccessInterface {
-        private java.util.Map<String, User> users = new java.util.HashMap<>();
-        String currentUser = null;
-
-        @Override
-        public boolean existsByName(String username) {
-            return users.containsKey(username);
-        }
-
-        @Override
-        public User get(String username) {
-            return users.get(username);
-        }
-
-        @Override
-        public void save(User user) {
-            users.put(user.getUsername(), user);
-        }
-
-        @Override
-        public void setCurrentUsername(String username) {
-            this.currentUser = username;
-        }
-        @Override
-        public String getCurrentUsername() {
-            return currentUser;
-        }
-    }
-
-    // ====================================================
-    //                   Fake Presenter
-    // ====================================================
-    static class FakeUserLoginPresenter implements UserLoginOutputBoundary {
-
-        UserLoginOutputData successUser = null;
-        String errorMessage = null;
-        String goBackTarget = null;
-
-        @Override
-        public void prepareSuccessView(UserLoginOutputData data) {
-            this.successUser = data;
-        }
-
-        @Override
-        public void prepareFailView(String error) {
-            this.errorMessage = error;
-        }
-
-        @Override
-        public void prepareGoBackView(String viewName) {
-            this.goBackTarget = viewName;
-        }
+        assertEquals("loginChoose", presenter.goBackView);
     }
 }
-
-

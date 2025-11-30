@@ -8,122 +8,94 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test for SignupInteractor with full branch/line coverage.
+ * Tests for SignupInteractor ensuring 100% code coverage.
  */
-class SignupInteractorTest {
+public class SignupInteractorTest {
 
     private SignupInteractor interactor;
-    private FakeSignupDAO fakeDAO;
-    private FakeSignupPresenter fakePresenter;
-    private UserFactory userFactory;
+    private FakeSignupDAO dao;
+    private FakeSignupPresenter presenter;
+    private UserFactory factory;
 
     @BeforeEach
     void setUp() {
-        fakeDAO = new FakeSignupDAO();
-        fakePresenter = new FakeSignupPresenter();
-        userFactory = new UserFactory();
-
-        interactor = new SignupInteractor(fakeDAO, fakePresenter, userFactory);
+        dao = new FakeSignupDAO();
+        presenter = new FakeSignupPresenter();
+        factory = new UserFactory();
+        interactor = new SignupInteractor(dao, presenter, factory);
     }
 
+    // === 1. user already exists ===
     @Test
     void testUserAlreadyExists() {
-        fakeDAO.save(new User("john", "123", "user"));
+        dao.exists = true;
 
-        SignupInputData input = new SignupInputData("john", "123", "123");
+        SignupInputData input = new SignupInputData("Alice", "pass", "pass");
         interactor.execute(input);
 
-        assertEquals("User already exists.", fakePresenter.errorMessage);
-        assertNull(fakePresenter.successUsername);
+        assertEquals("User already exists.", presenter.failMessage);
     }
 
+    // === 2. passwords don't match ===
     @Test
-    void testPasswordsDontMatch() {
-        SignupInputData input = new SignupInputData("abc", "123", "456");
+    void testPasswordMismatch() {
+        dao.exists = false;
+
+        SignupInputData input = new SignupInputData("Bob", "123", "456");
         interactor.execute(input);
 
-        assertEquals("Passwords don't match.", fakePresenter.errorMessage);
+        assertEquals("Passwords don't match.", presenter.failMessage);
     }
 
+    // === 3. password empty ===
     @Test
-    void testPasswordEmpty() {
-        SignupInputData input = new SignupInputData("abc", "", "");
+    void testEmptyPassword() {
+        dao.exists = false;
+
+        SignupInputData input = new SignupInputData("Chris", "", "");
         interactor.execute(input);
 
-        assertEquals("New password cannot be empty", fakePresenter.errorMessage);
+        assertEquals("New password cannot be empty", presenter.failMessage);
     }
 
+    // === 4. username empty ===
     @Test
-    void testUsernameEmpty() {
+    void testEmptyUsername() {
+        dao.exists = false;
+
         SignupInputData input = new SignupInputData("", "123", "123");
         interactor.execute(input);
 
-        assertEquals("Username cannot be empty", fakePresenter.errorMessage);
+        assertEquals("Username cannot be empty", presenter.failMessage);
     }
 
+    // === 5. success signup ===
     @Test
     void testSuccessSignup() {
-        SignupInputData input = new SignupInputData("newUser", "123", "123");
+        dao.exists = false;
+
+        SignupInputData input = new SignupInputData("David", "abc", "abc");
         interactor.execute(input);
 
-        assertEquals("newUser", fakePresenter.successUsername);
-        assertTrue(fakeDAO.existsByName("newUser"));
+        assertEquals("David", presenter.successUsername);
+
+        assertNotNull(dao.savedUser);
+        assertEquals("David", dao.savedUser.getUsername());
+        assertEquals("abc", dao.savedUser.getPassword());
+        assertEquals("user", dao.savedUser.getUserType());
     }
 
+    // === 6. switchToLoginView() ===
     @Test
     void testSwitchToLoginView() {
         interactor.switchToLoginView();
-        assertTrue(fakePresenter.loginViewSwitched);
+        assertTrue(presenter.loginViewSwitched);
     }
 
+    // === 7. goBack() ===
     @Test
     void testGoBack() {
         interactor.goBack();
-        assertEquals("loginChoose", fakePresenter.goBackTarget);
-    }
-
-    // ====== FAKE DAO ======
-    static class FakeSignupDAO implements SignupUserDataAccessInterface {
-        private final java.util.Map<String, User> users = new java.util.HashMap<>();
-
-        @Override
-        public boolean existsByName(String username) {
-            return users.containsKey(username);
-        }
-
-        @Override
-        public void save(User user) {
-            users.put(user.getUsername(), user);
-        }
-    }
-
-    // ====== FAKE PRESENTER ======
-    static class FakeSignupPresenter implements SignupOutputBoundary {
-
-        String errorMessage = null;
-        String successUsername = null;
-
-        boolean loginViewSwitched = false;
-        String goBackTarget = null;
-
-        @Override
-        public void prepareFailView(String error) {
-            this.errorMessage = error;
-        }
-
-        @Override
-        public void prepareSuccessView(SignupOutputData data) {
-            this.successUsername = data.getUsername();
-        }
-
-        @Override
-        public void switchToLoginView() {
-            loginViewSwitched = true;
-        }
-
-        @Override
-        public void prepareGoBackView(String viewName) {
-            this.goBackTarget = viewName;
-        }
+        assertEquals("loginChoose", presenter.goBackView);
     }
 }
