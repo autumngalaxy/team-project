@@ -22,13 +22,10 @@ public class UserLoginPresenter implements UserLoginOutputBoundary {
     @Override
     public void prepareSuccessView(UserLoginOutputData response) {
     	System.out.println("[UserLoginPresenter] success userType = " + response.getUserType());
-        // 清空登录状态
+        // clear login state
         userLoginViewModel.setState(new UserLoginState());
 
-        // 跳转 Dashboard（Admin / Staff / User）
-//        frontend.showDashboard(response.getUserType());
-        // 显示 Dashboard
-        frontend.setVisible(true);  // ★ 关键！！！没有这行看不到任何变化
+        frontend.setVisible(true);
         frontend.showDashboard(response.getUserType());
 
         viewManagerModel.firePropertyChange();
@@ -36,7 +33,7 @@ public class UserLoginPresenter implements UserLoginOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-        UserLoginState loginState = userLoginViewModel.getState();
+        final UserLoginState loginState = userLoginViewModel.getState();
         loginState.setLoginError(error);
         userLoginViewModel.firePropertyChange();
     }

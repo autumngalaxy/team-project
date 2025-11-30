@@ -76,8 +76,8 @@ public class LoginChooseView extends JPanel implements ActionListener, PropertyC
     }
 
     @Override
-    public void actionPerformed(ActionEvent evt) {}
+    public void actionPerformed(ActionEvent evt) { }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {}
+    public void propertyChange(PropertyChangeEvent evt) { }
 }

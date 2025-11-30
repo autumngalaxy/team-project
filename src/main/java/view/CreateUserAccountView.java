@@ -24,17 +24,19 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
     private final String viewName = "CreateUserAccount";
 
     private final SignupViewModel signupViewModel;
-
+    // Input fields
     private final JTextField usernameField = new JTextField(15);
     private final JPasswordField passwordField = new JPasswordField(15);
     private final JPasswordField confirmPasswordField = new JPasswordField(15);
+    // Error labels under each input box
     private final JLabel usernameErrorField = new JLabel();
     private final JLabel passwordErrorField = new JLabel();
     private final JLabel confirmPasswordErrorField = new JLabel();
-
+    // Buttons
     private final JButton signUpButton;
     private final JButton cancelButton;
     private final JButton goBackButton;
+
     private SignupController signupController = null;
 
     private String userType = "user";
@@ -43,17 +45,17 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
     public CreateUserAccountView(SignupViewModel signupViewModel) {
         this.signupViewModel  = signupViewModel;
         this.signupViewModel.addPropertyChangeListener(this);
-
+        // View title label
         this.userType = userType;
         this.titleLabel = new JLabel("Create User Account");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setForeground(new Color(60, 60, 75));
 
-        // ====== 布局改动 ======
+        // ====== UI ======
         setBackground(new Color(0xF5F7FB));
-        setLayout(new GridBagLayout()); // 居中
-
+        setLayout(new GridBagLayout());
+        // White “card” container
         JPanel card = new JPanel();
         card.setBackground(Color.WHITE);
         card.setBorder(BorderFactory.createCompoundBorder(
@@ -72,12 +74,14 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
         final LabelTextPanel confirmPasswordInfo = new LabelTextPanel(
                 new JLabel("Confirm"), confirmPasswordField);
 
+        // apply visual style for fields
         UIFactory.styleTextField(usernameField);
         UIFactory.styleTextField(passwordField);
         UIFactory.styleTextField(confirmPasswordField);
         final JPanel buttons = new JPanel();
-        buttons.setOpaque(false); 
+        buttons.setOpaque(false);
 
+        // Buttons row
         signUpButton = UIFactory.createPrimaryButton("Sign up");
         cancelButton = UIFactory.createSecondaryButton("Cancel");
         goBackButton = UIFactory.createPrimaryButton("Go Back");
@@ -85,6 +89,7 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
         buttons.add(cancelButton);
         buttons.add(goBackButton);
 
+        // Build card contents
         card.add(Box.createVerticalStrut(15));
         card.add(titleLabel);
         card.add(Box.createVerticalStrut(20));
@@ -106,12 +111,14 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
 
         add(card);
 
+        // ====== Sign up button logic ======
         signUpButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(signUpButton)) {
                             final SignupState currentState = signupViewModel.getState();
 
+                            // Call use case → presenter → viewmodel
                             signupController.execute(
                                     currentState.getUsername(),
                                     currentState.getPassword(),
@@ -128,6 +135,7 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
             }
         });
 
+        // ====== Input listeners, update ViewModel on every typing ======
         usernameField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
@@ -175,6 +183,7 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
                 documentListenerHelper();
             }
         });
+
         // test same password
         confirmPasswordField.getDocument().addDocumentListener(new DocumentListener() {
             private void documentListenerHelper() {
@@ -200,14 +209,19 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
         });
     }
 
+    // Debug only
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
     }
 
+    /**
+     * Presenter pushed ViewModel changes → update UI fields
+     * */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final SignupState state = (SignupState) evt.getNewValue();
         setFields(state);
+        // Display username validation errors
         usernameErrorField.setText(state.getUsernameError());
     }
 
@@ -215,13 +229,16 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
         usernameField.setText(state.getUsername());
     }
 
-    /** Creates one row (label + textfield) */
+    /**
+     *  Helper: create one label + textfield row
+     *  */
     private JPanel createRow(String labelText, JComponent field) {
-        JPanel panel = new JPanel();
+        final JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        JLabel label = new JLabel(labelText);
-        label.setPreferredSize(new Dimension(140, 25)); // align nicely
+        final JLabel label = new JLabel(labelText);
+        label.setPreferredSize(new Dimension(140, 25));
+        // align nicely
 
         panel.add(label);
         panel.add(field);
@@ -237,14 +254,16 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
         this.signupController = signupController;
     }
 
-    /** Cancel clears fields */
+    /**
+     * Clear all input fields and error messages
+     * */
     private void clearFields() {
         usernameField.setText("");
         passwordField.setText("");
         confirmPasswordField.setText("");
-        usernameErrorField.setText(" ");
-        passwordErrorField.setText(" ");
-        confirmPasswordErrorField.setText(" ");
+        usernameErrorField.setText("");
+        passwordErrorField.setText("");
+        confirmPasswordErrorField.setText("");
     }
 
 }

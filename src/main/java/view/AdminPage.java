@@ -2,7 +2,6 @@ package view;
 
 import entity.Application;
 import entity.Pet;
-
 import entity.User_k;
 import service.Backend;
 
@@ -21,8 +20,8 @@ public class AdminPage extends JPanel {
     public AdminPage(JFrame frame, Backend backend) {
 
     	this.backend = backend;
-//        frame.setSize(1200, 800);   // wider default
-        frame.setLocationRelativeTo(null); // center window
+        // center window
+        frame.setLocationRelativeTo(null);
         frame.setResizable(true);
 
         setLayout(new BorderLayout());
@@ -141,10 +140,10 @@ public class AdminPage extends JPanel {
         card.add(leftPanel, BorderLayout.CENTER);
 
         // Buttons panel
-        JPanel buttonPanel = new JPanel();
+        final JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(245, 245, 245));
-        JButton approveBtn = new JButton("Approve");
-        JButton rejectBtn  = new JButton("Reject");
+        final JButton approveBtn = new JButton("Approve");
+        final JButton rejectBtn  = new JButton("Reject");
 
         approveBtn.setFocusPainted(false);
         rejectBtn.setFocusPainted(false);
@@ -162,7 +161,8 @@ public class AdminPage extends JPanel {
         rejectBtn.addActionListener(e -> {
             backend.rejectApplication(app.getId());
             JOptionPane.showMessageDialog(this, "Application rejected.");
-            loadApplicationCards(); // refresh UI
+            loadApplicationCards();
+            // refresh UI
         });
         card.add(picLabel, BorderLayout.WEST);
         card.add(detailsPanel, BorderLayout.CENTER);

@@ -19,15 +19,15 @@ public class UserLoginController {
      */
     public void execute(String userType, String username, String password) {
         final UserLoginInputData loginInputData = new UserLoginInputData(
-        		userType, username, password);
+                userType, username, password);
 
         loginUseCaseInteractor.execute(loginInputData);
     }
 
-	public void goBack() {
-		loginUseCaseInteractor.goBack();
-		
-//		this.viewManagerModel.setState("login choose");	
+    /**
+     * Executes the Login Use Case.
+     */
+    public void goBack() {
+        loginUseCaseInteractor.goBack();
 	}
-
 }

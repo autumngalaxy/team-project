@@ -45,11 +45,11 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setForeground(new Color(60, 60, 75));
 
-        // ====== 布局改动 ======
+        // ====== UI ======
         setBackground(new Color(0xF5F7FB));
         setLayout(new GridBagLayout()); // 居中
 
-        // 中央“卡片”容器，白底、有边框
+        // middle
         JPanel card = new JPanel();
         card.setBackground(Color.WHITE);
         card.setBorder(BorderFactory.createCompoundBorder(
@@ -66,19 +66,17 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
         final LabelTextPanel passwordInfo = new LabelTextPanel(
                 new JLabel("Password"), passwordInputField);
 
-        // 输入框简单美化一下边框（不影响逻辑）
         UIFactory.styleTextField(usernameInputField);
         UIFactory.styleTextField(passwordInputField);
 
         final JPanel buttons = new JPanel();
-        buttons.setOpaque(false); // 跟卡片底色一致
+        buttons.setOpaque(false);
 
         logIn = UIFactory.createPrimaryButton("Log in");
         cancel = UIFactory.createSecondaryButton("Cancel");
         buttons.add(logIn);
         buttons.add(cancel);
 
-        // ==== 把原来 add 的顺序，换成往 card 里 add ====
         card.add(Box.createVerticalStrut(10));
         card.add(titleLabel);
         card.add(Box.createVerticalStrut(20));

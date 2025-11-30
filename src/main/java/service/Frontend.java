@@ -1,6 +1,5 @@
 package service;
 
-import view.LoginChooseView;
 import interface_adapter.user_logout.UserLogoutController;
 
 import javax.swing.*;
@@ -10,17 +9,24 @@ public class Frontend extends JFrame {
 
     private final Backend backend;
 
-    // 保存 Logout controller
+    // The controller that handles logout use case from Clean Architecture.
     private UserLogoutController userLogoutController;
 
-    // 保存 AppBuilder 提供的 cardPanel（所有界面靠它切换）
+    // The card panel containing all login/signup views from the AppBuilder.
     private JPanel cardPanel;
 
+    /**
+     * Constructs the application frontend window.
+     *
+     * @param backend the backend instance used for saving/loading data
+     */
     public Frontend(Backend backend) {
         this.backend = backend;
+        final int frontendWidth = 600;
+        final int frontendHeight = 400;
 
         setTitle("Pet Adoption System");
-        setSize(600, 400);
+        setSize(frontendWidth, frontendHeight);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -34,18 +40,33 @@ public class Frontend extends JFrame {
         });
     }
 
-    /** AppBuilder 调用这个，把整个 CardPanel 注册进来 */
+    /**
+     * Registers the card panel (containing Login/Signup views) created by AppBuilder.
+     * This becomes the initial UI shown when the application starts.
+     *
+     * @param cardPanel the shared panel containing all card-based views
+     */
     public void setCardPanel(JPanel cardPanel) {
         this.cardPanel = cardPanel;
-        setContentPane(cardPanel);  // 初始显示 LoginChoose
+        setContentPane(cardPanel);
     }
 
-    /** 给 SideMenuPanel 用 */
+    /**
+     * Stores the logout controller so that the dashboard or navbar can call logout().
+     *
+     * @param controller the logout use case controller
+     */
     public void setUserLogoutController(UserLogoutController controller) {
         this.userLogoutController = controller;
     }
 
-    /** Dashboard 调用 */
+    /**
+     * Shows the dashboard for a specific user type.
+     * Dashboard views are not part of the cardPanel — they are standalone JPanel
+     * instances. This method replaces the main window content with the dashboard.
+     *
+     * @param userType the type of the logged-in user (admin/staff/user)
+     */
     public void showDashboard(String userType) {
         // Dashboard 也是一个 JPanel（在 cardPanel 外部）
         // 所以切换成 Dashboard 视图
@@ -54,13 +75,16 @@ public class Frontend extends JFrame {
         repaint();
     }
 
-    /** Logout 按钮调用 */
+    /**
+     * Logs the user out using Clean Architecture logic, then returns the UI
+     * back to the original cardPanel containing login/signup screens.
+     */
     public void logout() {
         if (userLogoutController != null) {
-            userLogoutController.execute();   // 触发 Clean Architecture 登出用例
+            userLogoutController.execute();
         }
 
-        // ★ 登出后恢复 cardPanel（所有登录、注册页面）
+        // restart cardPanel（login/signup）
         if (cardPanel != null) {
             setContentPane(cardPanel); 
             revalidate();

@@ -1,13 +1,12 @@
 package app;
 
-import data_access.FileUserDataAccessObject;
+import dataAccess.FileUserDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.homepage.LoginChoosePresenter;
 import interface_adapter.homepage.LoginChooseViewModel;
 import interface_adapter.sign_up.SignupController;
 import interface_adapter.sign_up.SignupPresenter;
-import interface_adapter.sign_up.SignupState;
 import interface_adapter.sign_up.SignupViewModel;
 import interface_adapter.user_login.UserLoginController;
 import interface_adapter.user_login.UserLoginPresenter;
@@ -19,7 +18,6 @@ import service.Frontend;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
-import use_case.signup.SignupUserDataAccessInterface;
 import use_case.user_login.UserLoginInputBoundary;
 import use_case.user_login.UserLoginInteractor;
 import use_case.user_login.UserLoginOutputBoundary;
@@ -30,7 +28,11 @@ import view.*;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * A builder class used to register all views, view models, controllers, and use cases
+ * for the application and attach them to the Frontend. This class uses the Builder pattern
+ * to allow chained configuration steps.
+ */
 public class AppBuilder {
 
     private final JPanel cardPanel = new JPanel();
@@ -54,6 +56,13 @@ public class AppBuilder {
     private CreateUserAccountView createUserAccountView;
     private UserLoginView userLoginView;
 
+    /**
+     * Constructs an AppBuilder that initializes all required managers and shared
+     * components for the application UI.
+     *
+     * @param frontend The frontend window where views will be displayed.
+     * @param dao      The DAO used for accessing user data.
+     */
     public AppBuilder(Frontend frontend, FileUserDataAccessObject dao) {
         this.frontend = frontend;
         this.userDataAccessObject = dao;
@@ -62,73 +71,103 @@ public class AppBuilder {
         cardPanel.setLayout(cardLayout);
     }
 
-    /** LoginChoose View */
+    /**
+     * Adds the LoginChoose view into the application.
+     *
+     * @return this AppBuilder instance for chaining.
+     */
     public AppBuilder addLoginChooseView() {
         loginChooseView = new LoginChooseView(loginChooseViewModel);
         cardPanel.add(loginChooseView, loginChooseView.getViewName());
         return this;
     }
 
-    /** LoginChoose Presenter */
+    /**
+     * Adds the presenter for the LoginChoose view.
+     *
+     * @return this AppBuilder instance for chaining.
+     */
     public AppBuilder addLoginChoosePresenter() {
 
         LoginChoosePresenter presenter =
-                new LoginChoosePresenter(viewManagerModel, userLoginView); // ← 还原
+                new LoginChoosePresenter(viewManagerModel, userLoginView);
 
         loginChooseViewModel.addPropertyChangeListener(presenter);
 
         return this;
     }
 
-    /** CreateUserAccountView */
+    /**
+     * Adds the CreateUserAccountView to the application.
+     *
+     * @return this AppBuilder instance for chaining.
+     */
     public AppBuilder addCreateUserAccountView() {
         createUserAccountView = new CreateUserAccountView(signupViewModel);
         cardPanel.add(createUserAccountView, createUserAccountView.getViewName());
         return this;
     }
 
-    /** UserLogin View */
+    /**
+     * Adds the UserLogin view and registers it with the ViewManager.
+     *
+     * @return this AppBuilder instance for chaining.
+     */
     public AppBuilder addUserLoginView() {
         userLoginView = new UserLoginView(userLoginViewModel, "user");
         cardPanel.add(userLoginView, userLoginView.getViewName());
         return this;
     }
 
-    /** UserLogin UseCase */
+    /**
+     * Registers the UserLogin use case (controller, interactor, presenter).
+     *
+     * @return this AppBuilder instance for chaining.
+     */
     public AppBuilder addUserLoginUseCase() {
 
-        UserLoginOutputBoundary presenter =
+        final UserLoginOutputBoundary presenter =
                 new UserLoginPresenter(viewManagerModel, userLoginViewModel, frontend);
 
-        UserLoginInputBoundary interactor =
+        final UserLoginInputBoundary interactor =
                 new UserLoginInteractor(userDataAccessObject, presenter);
 
-        UserLoginController controller = new UserLoginController(interactor);
+        final UserLoginController controller = new UserLoginController(interactor);
         userLoginView.setLoginController(controller);
 
         return this;
     }
 
-    /** Logout UseCase */
+    /**
+     * Registers the UserLogout use case (controller, interactor, presenter).
+     *
+     * @return this AppBuilder instance for chaining.
+     */
     public AppBuilder addUserLogoutUseCase() {
 
-        UserLogoutOutputBoundary presenter =
+        final UserLogoutOutputBoundary presenter =
                 new UserLogoutPresenter(viewManagerModel, userLoginViewModel, frontend);
 
-        UserLogoutInputBoundary interactor =
+        final UserLogoutInputBoundary interactor =
                 new UserLogoutInteractor(userDataAccessObject, presenter);
 
-        UserLogoutController controller = new UserLogoutController(interactor);
+        final UserLogoutController controller = new UserLogoutController(interactor);
         frontend.setUserLogoutController(controller);
 
         return this;
     }
 
+    /**
+     * Adds dashboard views for admin, staff, and user, based on role.
+     *
+     * @param backend The backend instance providing data access.
+     * @return this AppBuilder instance for chaining.
+     */
     public AppBuilder addDashboardViews(Backend backend) {
 
-        JPanel admin = new MainDashboardView(frontend, backend, "admin");
-        JPanel staff = new MainDashboardView(frontend, backend, "staff");
-        JPanel user  = new MainDashboardView(frontend, backend, "user");
+        final JPanel admin = new MainDashboardView(frontend, backend, "admin");
+        final JPanel staff = new MainDashboardView(frontend, backend, "staff");
+        final JPanel user = new MainDashboardView(frontend, backend, "user");
         
         cardPanel.add(admin, "adminDashboard");
         cardPanel.add(staff, "staffDashboard");
@@ -137,17 +176,26 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Registers the Signup use case.
+     *
+     * @return this AppBuilder instance for chaining.
+     */
     public AppBuilder addSignupUseCase() {
         final SignupOutputBoundary signupOutputBoundary = new SignupPresenter(viewManagerModel,
                 signupViewModel, userLoginViewModel);
         final SignupInputBoundary userSignupInteractor = new SignupInteractor(
                 userDataAccessObject, signupOutputBoundary, userFactory);
 
-        SignupController controller = new SignupController(userSignupInteractor);
+        final SignupController controller = new SignupController(userSignupInteractor);
         createUserAccountView.setSignupController(controller);
         return this;
     }
 
+    /**
+     * Finalizes the building of the app by attaching the card panel to the frontend
+     * and refreshing the UI.
+     */
     public void build() {
         frontend.setCardPanel(cardPanel);
         frontend.revalidate();

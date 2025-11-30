@@ -2,6 +2,11 @@ package entity;
 
 import org.json.JSONObject;
 
+/**
+ * Represents an administrator account in the system.
+ * This class stores basic admin information such as name, email,
+ * username, and password, and supports JSON serialization/deserialization.
+ */
 public class Admin_k {
     private int id;
     private String firstName;
@@ -10,6 +15,16 @@ public class Admin_k {
     private String username;
     private String password;
 
+    /**
+     * Constructs an Admin_k object using explicit field values.
+     *
+     * @param id        the admin's unique ID
+     * @param firstName the admin's first name
+     * @param lastName  the admin's last name
+     * @param email     the admin's email address
+     * @param username  the admin's login username
+     * @param password  the admin's login password
+     */
     public Admin_k(int id, String firstName, String lastName, String email, String username, String password) {
         this.id = id;
         this.firstName = firstName;
@@ -17,6 +32,22 @@ public class Admin_k {
         this.email = email;
         this.username = username;
         this.password = password;
+    }
+
+    /**
+     * Constructs an Admin_k object from a JSON representation.
+     *
+     * @param adminJson a JSONObject containing admin information,
+     *                  expected to include id, firstName, lastName,
+     *                  email, username, and password
+     */
+    public Admin_k(JSONObject adminJson) {
+        id = adminJson.getInt("id");
+        firstName = adminJson.getString("firstName");
+        lastName = adminJson.getString("lastName");
+        email = adminJson.getString("email");
+        username = adminJson.getString("username");
+        password = adminJson.getString("password");
     }
 
     public int getId() {
@@ -39,17 +70,13 @@ public class Admin_k {
         return password;
     }
 
-    public Admin_k(JSONObject adminJson) {
-        id = adminJson.getInt("id");
-        firstName = adminJson.getString("firstName");
-        lastName = adminJson.getString("lastName");
-        email = adminJson.getString("email");
-        username = adminJson.getString("username");
-        password = adminJson.getString("password");
-    }
-
+    /**
+     * Converts this admin object into a JSON representation.
+     *
+     * @return a JSONObject containing all admin fields
+     */
     public JSONObject toJson() {
-        JSONObject adminJson = new JSONObject();
+        final JSONObject adminJson = new JSONObject();
 
         adminJson.put("id", id);
         adminJson.put("firstName", firstName);

@@ -1,7 +1,6 @@
-package data_access;
+package dataAccess;
 
 import entity.User;
-import use_case.signup.SignupUserDataAccessInterface;
 import use_case.user_login.UserLoginUserDataAccessInterface;
 import use_case.user_logout.UserLogoutUserDataAccessInterface;
 

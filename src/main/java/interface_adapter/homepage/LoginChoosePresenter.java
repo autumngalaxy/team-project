@@ -23,25 +23,22 @@ public class LoginChoosePresenter implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
-        String property = evt.getPropertyName();
+        final String property = evt.getPropertyName();
 
-        // 获取窗口
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(loginView);
+        // get window
+        final JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(loginView);
 
         if ("login".equals(property)) {
 
-            // ★ 接收到 userType: user/staff/admin
-            String userType = (String) evt.getNewValue();
+            // userType: user/staff/admin
+            final String userType = (String) evt.getNewValue();
 
-            // ★ 必须先更新 LoginView 的 userType
+            // update userType in LoginView
             loginView.setUserType(userType);
-
-            // ★ 然后才能更新窗口标题（顺序非常重要）
             if (frame != null) {
                 frame.setTitle(loginView.getTitleText());
             }
 
-            // ★ 切换到 login 页面
             viewManagerModel.setState(loginView.getViewName());
             viewManagerModel.firePropertyChange();
         }
@@ -55,7 +52,6 @@ public class LoginChoosePresenter implements PropertyChangeListener {
         }
 
         else {
-            // 返回 loginChoose
             if (frame != null) {
                 frame.setTitle("loginChoose");
             }

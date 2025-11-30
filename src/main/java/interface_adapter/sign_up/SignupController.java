@@ -34,8 +34,10 @@ public class SignupController {
         userSignupUseCaseInteractor.switchToLoginView();
     }
 
+    /**
+     *  Use Case.
+     */
     public void goBack() {
         userSignupUseCaseInteractor.goBack();
-//		this.viewManagerModel.setState("login choose");
     }
 }

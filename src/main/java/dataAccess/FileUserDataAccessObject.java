@@ -1,11 +1,10 @@
-package data_access;
+package dataAccess;
 
 import entity.User;
 import entity.UserFactory;
 import use_case.signup.SignupUserDataAccessInterface;
 import use_case.user_login.UserLoginUserDataAccessInterface;
 import use_case.user_logout.UserLogoutUserDataAccessInterface;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -15,10 +14,7 @@ import java.util.Map;
  * DAO for user data implemented using a File to persist the data.
  */
 public class FileUserDataAccessObject implements UserLoginUserDataAccessInterface,
-												 UserLogoutUserDataAccessInterface,
-                                                SignupUserDataAccessInterface{
-
-    private static final String HEADER = "username,password";
+        UserLogoutUserDataAccessInterface, SignupUserDataAccessInterface {
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();

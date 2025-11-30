@@ -1,8 +1,6 @@
 package interface_adapter.user_logout;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.homepage.HomepageState;
-import interface_adapter.homepage.HomepageViewModel;
 import interface_adapter.user_login.UserLoginState;
 import interface_adapter.user_login.UserLoginViewModel;
 import service.Frontend;
@@ -33,21 +31,12 @@ public class UserLogoutPresenter implements UserLogoutOutputBoundary {
 
         // We also need to set the username in the LoggedInState to
         // the empty string.
-    	
-        // 清除登录信息
-//        final UserLoginState loginState = userLoginViewModel.getState();
-//        loginState.setUsername(response.getUsername());
+
         userLoginViewModel.setState(new UserLoginState());
         userLoginViewModel.firePropertyChange();
-        
-        // 回到 LoginChoose 页面
-//        frontend.showLoginChoose();
-
         // This code tells the View Manager to switch to the LoginView.
         this.viewManagerModel.setState("loginChoose");
         this.viewManagerModel.setWindowTitle("Pet Adoption System");
         this.viewManagerModel.firePropertyChange();
     }
-    
-
 }

@@ -1,7 +1,6 @@
 package use_case.logout;
 
-import data_access.InMemoryUserDataAccessObject;
-import entity.User;
+import dataAccess.InMemoryUserDataAccessObject;
 import org.junit.jupiter.api.Test;
 import use_case.user_logout.UserLogoutInteractor;
 import use_case.user_logout.UserLogoutOutputBoundary;

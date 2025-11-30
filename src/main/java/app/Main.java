@@ -1,18 +1,23 @@
 package app;
 
-import javax.swing.*;
-
-import data_access.FileUserDataAccessObject;
+import dataAccess.FileUserDataAccessObject;
 import entity.UserFactory;
 import service.Backend;
 import service.Frontend;
 
 public class Main {
+    /**
+     * The entry point of the application.
+     *
+     * @param args the input arguments
+     */
 
     public static void main(String[] args) {
+        final int frontendWidth = 1200;
+        final int frontendHeight = 800;
 
         // 1 Backend Data Loading
-        Backend backend = new Backend();
+        final Backend backend = new Backend();
         backend.fromJsonFiles(
                 "users.json",
                 "pets.json",
@@ -21,16 +26,15 @@ public class Main {
         );
 
         // 2 Create a single window Frontend
-        Frontend frontend = new Frontend(backend);
+        final Frontend frontend = new Frontend(backend);
 
         // 3 User DAO
-        UserFactory userFactory = new UserFactory();
-        FileUserDataAccessObject userDao =
+        final UserFactory userFactory = new UserFactory();
+        final FileUserDataAccessObject userDao =
                 new FileUserDataAccessObject("users.csv", userFactory);
 
         // 4 Use AppBuilder to deploy LoginChoose/Login/Signup, and other screens to the frontend.
-//        AppBuilder appBuilder = new AppBuilder(frontend, userDao);
-        AppBuilder appBuilder = new AppBuilder(frontend, userDao);
+        final AppBuilder appBuilder = new AppBuilder(frontend, userDao);
 
         appBuilder
                 .addLoginChooseView()
@@ -47,7 +51,7 @@ public class Main {
         frontend.pack();
         frontend.setLocationRelativeTo(null);
         frontend.setVisible(true);
-        frontend.setSize(1200, 800);
+        frontend.setSize(frontendWidth, frontendHeight);
 
     }
 }

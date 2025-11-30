@@ -21,10 +21,6 @@ public class MainMenu extends JFrame {
         add(userLoginBtn);
         add(adminLoginBtn);
 
-//        registerBtn.addActionListener(e -> new UserRegister());
-//        userLoginBtn.addActionListener(e -> new UserLogin());
-//        adminLoginBtn.addActionListener(e -> new AdminLogin());
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
