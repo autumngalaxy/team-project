@@ -19,9 +19,9 @@ public class DummyDataGenerator {
         // Users
         JSONArray users = new JSONArray();
 
-        final User_k.idType[] idTypes = User_k.idType.values();
+        final User_pet.idType[] idTypes = User_pet.idType.values();
         for (int i = 1; i <= num_users; i++) {
-            User_k userK = new User_k(
+            User_pet userK = new User_pet(
                     i,
                     "User " + i,
                     "Address " + i,
@@ -48,7 +48,7 @@ public class DummyDataGenerator {
         JSONArray admins = new JSONArray();
 
         for (int i = 1; i <= num_admins; i++) {
-            Admin_k adminK = new Admin_k(
+            Admin adminK = new Admin(
                     i,
                     "Admin First" + i,
                     "Admin Last" + i,

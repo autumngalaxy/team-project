@@ -1,46 +1,29 @@
 package entity;
-/*
-Add an attribute: user_type: String, its equal to user or admin,
-input data depend on the page its login, access to different DB, and show different logged in view.
 
- */
 public class User {
 
-    private final String name;
+    private final String username;
     private final String password;
-    private final String userType;
+    private final String userType; // "user", "admin", "staff"
 
-    /**
-     * Creates a new user with the given non-empty name and non-empty password.
-     * @param name the username
-     * @param password the password
-     * @throws IllegalArgumentException if the password or name are empty
-     */
-    public User(String name, String password, String userType) {
-        if ("".equals(name)) {
-            throw new IllegalArgumentException("Username cannot be empty");
+    public User(String username, String password, String userType) {
+        if (username == null || username.isEmpty()) {
+            throw new IllegalArgumentException("Username cannot be empty.");
         }
-        if ("".equals(password)) {
-            throw new IllegalArgumentException("Password cannot be empty");
+        if (password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("Password cannot be empty.");
         }
-        if ("".equals(userType)) {
-            throw new IllegalArgumentException("userType cannot be empty");
+        if (userType == null || userType.isEmpty()) {
+            throw new IllegalArgumentException("User type cannot be empty.");
         }
-        this.name = name;
+        this.username = username;
         this.password = password;
         this.userType = userType;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getUsername() { return username; }
 
-    public String getPassword() {
-        return password;
-    }
-    
-    public String getUserType() { 
-    	return userType; 
-    }
+    public String getPassword() { return password; }
 
+    public String getUserType() { return userType; }
 }

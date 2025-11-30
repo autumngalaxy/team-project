@@ -6,7 +6,7 @@ package entity;
  * when only a name and password are available, assigning default
  * values to the remaining fields.
  */
-public class UserFactory_k {
+public class UserFactory_pet {
 
     /**
      * Creates a new User_k object with minimal required information.
@@ -17,8 +17,8 @@ public class UserFactory_k {
      * @param password the user's account password
      * @return a newly created User_k instance with defaulted fields
      */
-    public User_k create(String name, String password) {
-        return new User_k(0, name, "",
-                User_k.idType.PHOTO_CARD, 0, "", "", password);
+    public User_pet create(String name, String password) {
+        return new User_pet(0, name, "",
+                User_pet.idType.PHOTO_CARD, 0, "", "", password);
     }
 }

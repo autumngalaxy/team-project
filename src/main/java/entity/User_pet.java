@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User_k {
+public class User_pet {
     public enum idType { PHOTO_CARD, DRIVERS_LICENSE, PASSPORT }
 
     private final int id;
@@ -20,8 +20,8 @@ public class User_k {
     private final List<Integer> applications = new ArrayList<>();
     private final List<Integer> wishlist = new ArrayList<>();
 
-    public User_k(int id, String name, String address, idType idType,
-                  int phoneNumber, String email, String username, String password) {
+    public User_pet(int id, String name, String address, idType idType,
+                    int phoneNumber, String email, String username, String password) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -32,7 +32,7 @@ public class User_k {
         this.password = password;
     }
 
-    public User_k(JSONObject userJson) {
+    public User_pet(JSONObject userJson) {
         this.id = userJson.getInt("id");
         this.name = userJson.getString("name");
         this.address = userJson.getString("address");

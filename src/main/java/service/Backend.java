@@ -26,9 +26,9 @@ public class Backend {
     private int adminIdCounter = 0;
     private int applicationIdCounter = 0;
 
-    private final Map<Integer, User_k> users = new HashMap<>();
+    private final Map<Integer, User_pet> users = new HashMap<>();
     public final Map<Integer, Pet> pets = new HashMap<>();
-    private final Map<Integer, Admin_k> admins = new HashMap<>();
+    private final Map<Integer, Admin> admins = new HashMap<>();
     private final Map<Integer, Application> applications = new HashMap<>();
 
     public int newUserId() {
@@ -47,12 +47,12 @@ public class Backend {
         return ++applicationIdCounter;
     }
 
-    public void addUser(User_k userK) {
+    public void addUser(User_pet userK) {
         assert(!users.containsKey(userK.getId()));
         users.put(userK.getId(), userK);
     }
 
-    public User_k getUserById(int userId) {
+    public User_pet getUserById(int userId) {
         assert(!users.containsKey(userId));
         return users.get(userId);
     }
@@ -72,7 +72,7 @@ public class Backend {
         return pets.get(petId);
     }
 
-    public void addAdmin(Admin_k adminK) {
+    public void addAdmin(Admin adminK) {
         assert(!admins.containsKey(adminK.getId()));
         admins.put(adminK.getId(), adminK);
     }
@@ -204,7 +204,7 @@ public class Backend {
     private JSONArray usersToJson() {
         final JSONArray usersJson = new JSONArray();
 
-        for (User_k userK : users.values()) {
+        for (User_pet userK : users.values()) {
             usersJson.put(userK.toJson());
         }
 
@@ -220,7 +220,7 @@ public class Backend {
         // Get an iterator over the keys
         for (int i = 0; i < usersJson.length(); i++) {
             // Get each JSONObject
-            final User_k userK = new User_k(usersJson.getJSONObject(i));
+            final User_pet userK = new User_pet(usersJson.getJSONObject(i));
             addUser(userK);
         }
     }
@@ -245,7 +245,7 @@ public class Backend {
     private JSONArray adminsToJson() {
         final JSONArray adminsJson = new JSONArray();
 
-        for (Admin_k adminK : admins.values()) {
+        for (Admin adminK : admins.values()) {
             adminsJson.put(adminK.toJson());
         }
 
@@ -254,7 +254,7 @@ public class Backend {
 
     private void loadAdminsFromJson(JSONArray adminsJson) {
         for (int i = 0; i < adminsJson.length(); i++) {
-            final Admin_k adminK = new Admin_k(adminsJson.getJSONObject(i));
+            final Admin adminK = new Admin(adminsJson.getJSONObject(i));
             addAdmin(adminK);
         }
     }

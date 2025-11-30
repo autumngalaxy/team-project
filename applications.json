@@ -25,7 +25,7 @@
         "petId": 79516314,
         "id": 4,
         "userId": 4,
-        "status": "PENDING"
+        "status": "APPROVED"
     },
     {
         "date": "2025-11-28",
@@ -74,7 +74,7 @@
         "petId": 79703035,
         "id": 11,
         "userId": 11,
-        "status": "PENDING"
+        "status": "REJECTED"
     },
     {
         "date": "2025-11-28",
@@ -123,7 +123,7 @@
         "petId": 79703184,
         "id": 18,
         "userId": 18,
-        "status": "PENDING"
+        "status": "APPROVED"
     },
     {
         "date": "2025-11-28",
