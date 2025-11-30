@@ -1,4 +1,4 @@
-package dummy;
+package service;
 
 import api.APIInterface;
 import entity.*;
