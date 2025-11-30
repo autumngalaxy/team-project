@@ -47,6 +47,23 @@ public class AdminPage extends UIComponent {
         applicationListPanel.removeAll();
 
         List<Application> apps = backend.getPendingApplications();
+
+        // sort applications
+        apps.sort((a, b) -> {
+            Pet petA = backend.getPetById(a.getPetId());
+            Pet petB = backend.getPetById(b.getPetId());
+
+            String nameA = petA != null ? petA.getName() : "";
+            String nameB = petB != null ? petB.getName() : "";
+
+            // 1. Sort alphabetically by pet name
+            int nameCompare = nameA.compareToIgnoreCase(nameB);
+            if (nameCompare != 0) return nameCompare;
+
+            // If same pet name → sort by date of application
+            return a.getDate().compareTo(b.getDate());
+        });
+
         System.out.println("Loaded apps: " + apps.size()); // Debug
 
         for (Application app : apps) {
@@ -138,17 +155,25 @@ public class AdminPage extends UIComponent {
 
         card.add(leftPanel, BorderLayout.CENTER);
 
-        // Buttons panel
+        // Right panel (Buttons)
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setBackground(new Color(245, 245, 245));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
         JButton approveBtn = new JButton("Approve");
         JButton rejectBtn  = new JButton("Reject");
+        JButton viewUserBtn = new JButton("View User Details");
 
-        approveBtn.setFocusPainted(false);
-        rejectBtn.setFocusPainted(false);
+        approveBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        rejectBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        viewUserBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         buttonPanel.add(approveBtn);
+        buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(rejectBtn);
+        buttonPanel.add(Box.createVerticalGlue());
+        buttonPanel.add(viewUserBtn);
 
         // Button actions
         approveBtn.addActionListener(e -> {
@@ -162,6 +187,24 @@ public class AdminPage extends UIComponent {
             JOptionPane.showMessageDialog(frame, "Application rejected.");
             loadApplicationCards(); // refresh UI
         });
+
+        // view user details popup
+        viewUserBtn.addActionListener(e -> {
+            JOptionPane.showMessageDialog(
+                    frame,
+                    "User Details:\n\n" +
+                            "ID: " + user.getId() + "\n" +
+                            "Name: " + user.getName() + "\n" +
+                            "Address: " + user.getAddress() + "\n" +
+                            "ID Type: " + user.getIdType() + "\n" +
+                            "Phone: " + user.getPhoneNumber() + "\n" +
+                            "Email: " + user.getEmail() + "\n" +
+                            "Username: " + user.getUsername(),
+                    "User Information",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        });
+
         card.add(picLabel, BorderLayout.WEST);
         card.add(detailsPanel, BorderLayout.CENTER);
         card.add(buttonPanel, BorderLayout.EAST);
