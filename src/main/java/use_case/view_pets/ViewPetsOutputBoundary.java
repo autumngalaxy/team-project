@@ -1,4 +1,4 @@
 package use_case.view_pets;
 
-public class ViewPetsOutputBoundary {
+public interface ViewPetsOutputBoundary {
 }

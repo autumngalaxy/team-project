@@ -1,5 +1,6 @@
 package api;
 
+import data_access.PetDataAccessInterface;
 import entity.Pet;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,7 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class APIInterface {
+public class APIInterface implements PetDataAccessInterface {
     final String API_KEY = "OsGIgKJNugsIPURr6oRDaTIe5ViaXvz3cFF6fihxgdCuwHQ4pM";
     final String API_SECRET = "o11EweL12UhdW7M11gCXoCKBPQGEphTy8FBwBT9x";
 
@@ -70,6 +71,7 @@ public class APIInterface {
         return pets;
     }
 
+    @Override
     public List<Pet> getPets() throws Exception {
         JSONArray petsFromApi = getPetsFromApi();
         List<Pet> pets = new ArrayList<>();

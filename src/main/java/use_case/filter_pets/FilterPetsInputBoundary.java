@@ -1,4 +1,4 @@
 package use_case.filter_pets;
 
-public class FilterPetsInputBoundary {
+public interface FilterPetsInputBoundary {
 }
