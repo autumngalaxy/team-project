@@ -34,7 +34,6 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
     private final JLabel confirmPasswordErrorField = new JLabel();
     // Buttons
     private final JButton signUpButton;
-    private final JButton cancelButton;
     private final JButton goBackButton;
 
     private SignupController signupController = null;
@@ -83,10 +82,8 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
 
         // Buttons row
         signUpButton = UIFactory.createPrimaryButton("Sign up");
-        cancelButton = UIFactory.createSecondaryButton("Cancel");
-        goBackButton = UIFactory.createPrimaryButton("Go Back");
+        goBackButton = UIFactory.createSecondaryButton("Go Back");
         buttons.add(signUpButton);
-        buttons.add(cancelButton);
         buttons.add(goBackButton);
 
         // Build card contents
@@ -129,7 +126,7 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
                 }
         );
 
-        cancelButton.addActionListener(e -> {
+        goBackButton.addActionListener(e -> {
             if (signupController != null) {
                 signupController.goBack();
             }

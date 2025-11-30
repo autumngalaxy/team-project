@@ -12,16 +12,16 @@ public class DummyDataGenerator {
     public static void main(String[] args) throws Exception {
         final Random random = new Random();
 
-        final int num_users = 100;
+        final int num_users = 20;
         final int num_admins = 30;
         final int num_applications = 20;
 
         // Users
         JSONArray users = new JSONArray();
 
-        final User_k.idType[] idTypes = User_k.idType.values();
-        for (int i = 1; i <= num_users; i++) {
-            User_k userK = new User_k(
+        final User.idType[] idTypes = User.idType.values();
+        for (int i = 0; i <= num_users; i++) {
+            User userK = new User(
                     i,
                     "User " + i,
                     "Address " + i,
@@ -29,7 +29,8 @@ public class DummyDataGenerator {
                     i,
                     "user"+i+"@example.com",
                     "user" + i,
-                    "pass" + i
+                    "pass" + i,
+                    i == 0 ? "admin" :  "user"
             );
 
             users.put(userK.toJson());
@@ -48,7 +49,7 @@ public class DummyDataGenerator {
         JSONArray admins = new JSONArray();
 
         for (int i = 1; i <= num_admins; i++) {
-            Admin_k adminK = new Admin_k(
+            Admin adminK = new Admin(
                     i,
                     "Admin First" + i,
                     "Admin Last" + i,

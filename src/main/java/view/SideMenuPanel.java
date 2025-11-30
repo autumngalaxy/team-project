@@ -21,18 +21,18 @@ public class SideMenuPanel extends JPanel {
         setBackground(new Color(0xF5F7FB));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // 显示标题
+        // show title
         JLabel title = new JLabel("Hello, " + capitalize(userType));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font("Arial", Font.BOLD, 20));
         add(title);
         add(Box.createRigidArea(new Dimension(0, 20)));
 
-        // 加载菜单配置
+        // Load Menu Configuration
         Map<String, String[]> config = MenuConfig.getMenuItems();
         String[] items = config.getOrDefault(userType, new String[]{"Log Out"});
 
-        // 依据配置自动生成按钮
+        // Automatically generate buttons based on configuration
         for (String item : items) {
             add(createMenuButton(item));
             add(Box.createRigidArea(new Dimension(0, 10)));
@@ -48,7 +48,6 @@ public class SideMenuPanel extends JPanel {
         btn.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)));
         btn.setFocusPainted(false);
 
-        // 点击回调（你可以根据需要扩展）
         btn.addActionListener(e -> handleMenuClick(text));
 
         return btn;

@@ -21,15 +21,21 @@ public class ViewManager implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("state")) {
+   
+        String prop = evt.getPropertyName();
+
+        if (prop.equals("state")) {
             final String viewModelName = (String) evt.getNewValue();
             cardLayout.show(views, viewModelName);
         }
-        else if ("title".equals(evt.getPropertyName())) {
+
+        if (prop.equals("title")) {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(views);
             if (frame != null) {
                 frame.setTitle((String) evt.getNewValue());
             }
         }
     }
+    
+    
 }

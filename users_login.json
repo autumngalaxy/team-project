@@ -1,0 +1,32 @@
+[
+    {
+        "password": "111",
+        "userType": "user",
+        "username": "111"
+    },
+    {
+        "password": "321",
+        "userType": "admin",
+        "username": "123"
+    },
+    {
+        "password": "1004",
+        "userType": "user",
+        "username": "Izzy"
+    },
+    {
+        "password": "333",
+        "userType": "user",
+        "username": "444"
+    },
+    {
+        "password": "222",
+        "userType": "staff",
+        "username": "s01"
+    },
+    {
+        "password": "236",
+        "userType": "user",
+        "username": "258"
+    }
+]

@@ -62,13 +62,13 @@ public class LoginChooseView extends JPanel implements ActionListener, PropertyC
 
         // addActionListener
         userLoginBtn.addActionListener(e ->
-                loginChooseViewModel.firePropertyChange("login", "user"));
+                loginChooseViewModel.firePropertyChange("login", null,  "user"));
         staffLoginBtn.addActionListener(e ->
-                loginChooseViewModel.firePropertyChange("login", "staff"));
+                loginChooseViewModel.firePropertyChange("login", null, "staff"));
         adminLoginBtn.addActionListener(e ->
-                loginChooseViewModel.firePropertyChange("login", "admin"));
+                loginChooseViewModel.firePropertyChange("login", null, "admin"));
         createAccountBtn.addActionListener(e ->
-                loginChooseViewModel.firePropertyChange("createAccount"));
+                loginChooseViewModel.firePropertyChange("createAccount", null, null));
     }
 
     public String getViewName() {

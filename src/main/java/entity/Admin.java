@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * This class stores basic admin information such as name, email,
  * username, and password, and supports JSON serialization/deserialization.
  */
-public class Admin_k {
+public class Admin {
     private int id;
     private String firstName;
     private String lastName;
@@ -25,7 +25,7 @@ public class Admin_k {
      * @param username  the admin's login username
      * @param password  the admin's login password
      */
-    public Admin_k(int id, String firstName, String lastName, String email, String username, String password) {
+    public Admin(int id, String firstName, String lastName, String email, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,7 +41,7 @@ public class Admin_k {
      *                  expected to include id, firstName, lastName,
      *                  email, username, and password
      */
-    public Admin_k(JSONObject adminJson) {
+    public Admin(JSONObject adminJson) {
         id = adminJson.getInt("id");
         firstName = adminJson.getString("firstName");
         lastName = adminJson.getString("lastName");

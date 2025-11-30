@@ -29,17 +29,17 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
     private final JLabel passwordErrorField = new JLabel();
 
     private final JButton logIn;
-    private final JButton cancel;
+    private final JButton goBack;
     private UserLoginController userLoginController = null;
 
     private String userType = "user";
     private JLabel titleLabel;
 
-    public UserLoginView(UserLoginViewModel userloginViewModel, String userType) {
+    public UserLoginView(UserLoginViewModel userloginViewModel) {
         this.UserloginViewModel  = userloginViewModel;
         this.UserloginViewModel.addPropertyChangeListener(this);
+        userType = userloginViewModel.getState().getUserType();
 
-        this.userType = userType;
         this.titleLabel = new JLabel(formatTitle(userType));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -73,9 +73,9 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
         buttons.setOpaque(false);
 
         logIn = UIFactory.createPrimaryButton("Log in");
-        cancel = UIFactory.createSecondaryButton("Cancel");
+        goBack = UIFactory.createSecondaryButton("Go Back");
         buttons.add(logIn);
-        buttons.add(cancel);
+        buttons.add(goBack);
 
         card.add(Box.createVerticalStrut(10));
         card.add(titleLabel);
@@ -110,7 +110,7 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
                 }
         );
 
-        cancel.addActionListener(e -> {
+        goBack.addActionListener(e -> {
             if (userLoginController != null) {
                 userLoginController.goBack();
             }
@@ -174,6 +174,26 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
         final UserLoginState state = (UserLoginState) evt.getNewValue();
         setFields(state);
         usernameErrorField.setText(state.getLoginError());
+        
+        String userType = state.getUserType();
+        this.userType = userType;
+
+        switch (userType) {
+	        case "user":
+	            titleLabel.setText("User Login");
+	            break;
+
+            case "admin":
+                titleLabel.setText("Admin Login");
+                break;
+
+            case "staff":
+                titleLabel.setText("Staff Login");
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void setFields(UserLoginState state) {
@@ -200,6 +220,7 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
         if (frame != null) {
             frame.setTitle(getTitleText());
         }
+        titleLabel.setText(getTitleText());
 
         revalidate();
         repaint();

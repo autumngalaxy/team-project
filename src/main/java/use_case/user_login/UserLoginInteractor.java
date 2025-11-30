@@ -22,6 +22,13 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
             userLoginPresenter.prepareFailView(username + ": Account does not exist.");
         }
         else {
+            final String loginPageUserType = userDataAccessObject.get(username).getUserType();
+            if (!userType.equals(loginPageUserType)) {
+                userLoginPresenter.prepareFailView(
+                        "Its not " + userType + " account.");
+                return;
+            }
+            // check password
             final String pwd = userDataAccessObject.get(username).getPassword();
             if (!password.equals(pwd)) {
                 userLoginPresenter.prepareFailView("Incorrect password for \"" + username + "\".");
@@ -32,7 +39,8 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
 
                 userDataAccessObject.setCurrentUsername(username);
 
-                final UserLoginOutputData userLoginOutputData = new UserLoginOutputData(user.getName(), user.getUserType());
+                final UserLoginOutputData userLoginOutputData = new UserLoginOutputData
+                        (user.getUsername(), user.getUserType());
                 userLoginPresenter.prepareSuccessView(userLoginOutputData);
             }
         }
@@ -40,6 +48,6 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
 
 	@Override
 	public void goBack() {
-		userLoginPresenter.prepareGoBackView("loginChoose");		
+		userLoginPresenter.prepareGoBackView("loginChoose");
 	}
 }

@@ -48,12 +48,14 @@ public class LoginBuilder {
         cardPanel.add(chooseView, chooseView.getViewName());
 
         // UserLogin view
-        UserLoginView loginView = new UserLoginView(userLoginViewModel, "user");
+        UserLoginView loginView = new UserLoginView(userLoginViewModel);
         cardPanel.add(loginView, loginView.getViewName());
 
         // Presenter for choose
+//        LoginChoosePresenter choosePresenter =
+//                new LoginChoosePresenter(viewManagerModel, loginView);
         LoginChoosePresenter choosePresenter =
-                new LoginChoosePresenter(viewManagerModel, loginView);
+                new LoginChoosePresenter(viewManagerModel, userLoginViewModel);
         loginChooseViewModel.addPropertyChangeListener(choosePresenter);
 
         // Login Presenter

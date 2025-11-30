@@ -56,7 +56,7 @@ public class DBUserDataAccessObject implements UserLoginUserDataAccessInterface 
         // POST METHOD
         final MediaType mediaType = MediaType.parse(CONTENT_TYPE_JSON);
         final JSONObject requestBody = new JSONObject();
-        requestBody.put(USERNAME, user.getName());
+        requestBody.put(USERNAME, user.getUsername());
         requestBody.put(PASSWORD, user.getPassword());
         requestBody.put(USERTYPE, user.getUserType());
         

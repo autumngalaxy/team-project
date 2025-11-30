@@ -2,7 +2,7 @@ package view;
 
 import entity.Application;
 import entity.Pet;
-import entity.User_k;
+import entity.User;
 import service.Backend;
 
 import javax.imageio.ImageIO;
@@ -83,7 +83,7 @@ public class AdminPage extends JPanel {
         card.setMaximumSize(new Dimension(700, 185));
 
         Pet pet = backend.getPetById(app.getPetId());
-        User_k user = backend.getUserById(app.getUserId());
+        User user = backend.getUserById(app.getUserId());
 
         // Left: picture
         JLabel picLabel = new JLabel();

@@ -35,10 +35,13 @@ public class SignupPresenter implements SignupOutputBoundary {
                 "Success",
                 JOptionPane.INFORMATION_MESSAGE
         );
-        SwingUtilities.invokeLater(() -> {
-	        final UserLoginState loginState = loginViewModel.getState();
+        SwingUtilities.invokeLater(() -> {	        
+	        UserLoginState loginState = new UserLoginState();
+	        loginState.setUserType("user"); 
 	        loginState.setUsername(response.getUsername());
+	        loginViewModel.setState(loginState);
 	        loginViewModel.firePropertyChange();
+	        
 	
 	        viewManagerModel.setState("login"); 
 	        viewManagerModel.setWindowTitle("User Login");

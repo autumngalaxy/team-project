@@ -2,94 +2,104 @@ package dataAccess;
 
 import entity.User;
 import entity.UserFactory;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import use_case.signup.SignupUserDataAccessInterface;
 import use_case.user_login.UserLoginUserDataAccessInterface;
 import use_case.user_logout.UserLogoutUserDataAccessInterface;
-import java.io.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * DAO for user data implemented using a File to persist the data.
+ * JSON-based implementation of the User Data Access Object.
  */
-public class FileUserDataAccessObject implements UserLoginUserDataAccessInterface,
-        UserLogoutUserDataAccessInterface, SignupUserDataAccessInterface {
+public class FileUserDataAccessObject implements
+        UserLoginUserDataAccessInterface,
+        UserLogoutUserDataAccessInterface,
+        SignupUserDataAccessInterface {
 
-    private final File csvFile;
-    private final Map<String, Integer> headers = new LinkedHashMap<>();
+    private final String jsonPath;
+    private final UserFactory userFactory;
     private final Map<String, User> accounts = new HashMap<>();
 
     private String currentUsername;
 
-    /**
-     * Construct this DAO for saving to and reading from a local file.
-     * @param csvPath the path of the file to save to
-     * @param userFactory factory for creating user objects
-     * @throws RuntimeException if there is an IOException when accessing the file
-     */
-    public FileUserDataAccessObject(String csvPath, UserFactory userFactory) {
+    public FileUserDataAccessObject(String jsonPath, UserFactory userFactory) {
+        this.jsonPath = jsonPath;
+        this.userFactory = userFactory;
 
-        csvFile = new File(csvPath);
-        headers.put("username", 0);
-        headers.put("password", 1);
-        headers.put("userType", 2);
+        File f = new File(jsonPath);
 
-        if (csvFile.length() == 0) {
-            save();
-        }
-        else {
-
-            try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
-                final String header = reader.readLine();
-
-                if (!header.startsWith("username,password")) {
-                    throw new RuntimeException(String.format(
-                        "CSV header should start with: %s, but was: %s", "username,password", header));
-                }
-
-                String row;
-                while ((row = reader.readLine()) != null) {
-                    final String[] col = row.split(",");
-                    final String username = String.valueOf(col[headers.get("username")]);
-                    final String password = String.valueOf(col[headers.get("password")]);
-                    final String userType = String.valueOf(col[headers.get("userType")]);
-                    final User user = userFactory.create(username, password, userType);
-                    accounts.put(username, user);
-                }
-            }
-            catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+        if (!f.exists()) {
+            saveToDisk();  // create empty file
+        } else {
+            loadFromDisk();
         }
     }
 
-    private void save() {
-        final BufferedWriter writer;
+    /**
+     * Load all users from JSON file
+     */
+    private void loadFromDisk() {
         try {
-            writer = new BufferedWriter(new FileWriter(csvFile));
-            writer.write(String.join(",", headers.keySet()));
-            writer.newLine();
+            String text = new String(Files.readAllBytes(Paths.get(jsonPath)));
+
+            JSONArray arr = new JSONArray(text);
+
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject o = arr.getJSONObject(i);
+
+                User user = new User(
+                        o.getInt("id"),
+                        o.getString("name"),
+                        o.optString("address", ""),
+                        User.idType.valueOf(o.getString("idType")),
+                        o.optInt("phoneNumber", 0),
+                        o.optString("email", ""),
+                        o.getString("username"),
+                        o.getString("password"),
+                        o.getString("userType")
+                );
+
+                accounts.put(user.getUsername(), user);
+            }
+
+            System.out.println("Loaded users: " + accounts.size());
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load JSON users", e);
+        }
+    }
+
+    /**
+     * Writes all users to disk
+     */
+    private void saveToDisk() {
+        try (FileWriter writer = new FileWriter(jsonPath)) {
+
+            JSONArray arr = new JSONArray();
 
             for (User user : accounts.values()) {
-                final String line = String.format("%s,%s,%s",
-                        user.getName(), user.getPassword(), user.getUserType());
-                writer.write(line);
-                writer.newLine();
+                arr.put(user.toJson()); // use your User.toJson()
             }
 
-            writer.close();
+            writer.write(arr.toString(4)); // pretty print
 
-        }
-        catch (IOException ex) {
-            throw new RuntimeException(ex);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to save JSON users", e);
         }
     }
 
+    // ---------------- Interface Methods ----------------
+
     @Override
-    public void save(User user) {
-        accounts.put(user.getName(), user);
-        this.save();
+    public boolean existsByName(String username) {
+        return accounts.containsKey(username);
     }
 
     @Override
@@ -98,18 +108,39 @@ public class FileUserDataAccessObject implements UserLoginUserDataAccessInterfac
     }
 
     @Override
+    public void save(User user) {
+        // auto-generate ID if missing or 0
+        if (user.getId() == 0) {
+            int maxId = accounts.values().stream()
+                    .mapToInt(User::getId)
+                    .max()
+                    .orElse(0);
+            int newId = maxId + 1;
+
+            user = new User(
+                    newId,
+                    user.getName(),
+                    user.getAddress(),
+                    user.getIdType(),
+                    user.getPhoneNumber(),
+                    user.getEmail(),
+                    user.getUsername(),
+                    user.getPassword(),
+                    user.getUserType()
+            );
+        }
+
+        accounts.put(user.getUsername(), user);
+        saveToDisk();
+    }
+
+    @Override
     public void setCurrentUsername(String name) {
-        currentUsername = name;
+        this.currentUsername = name;
     }
 
     @Override
     public String getCurrentUsername() {
         return currentUsername;
     }
-
-    @Override
-    public boolean existsByName(String identifier) {
-        return accounts.containsKey(identifier);
-    }
-
 }
