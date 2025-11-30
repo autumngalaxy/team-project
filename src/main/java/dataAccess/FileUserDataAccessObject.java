@@ -17,10 +17,11 @@ import java.util.Map;
 
 /**
  * JSON-based implementation of the User Data Access Object.
- * This replaces CSV storage and provides persistent JSON storage.
  */
-public class FileUserDataAccessObject implements UserLoginUserDataAccessInterface,
-        UserLogoutUserDataAccessInterface, SignupUserDataAccessInterface {
+public class FileUserDataAccessObject implements
+        UserLoginUserDataAccessInterface,
+        UserLogoutUserDataAccessInterface,
+        SignupUserDataAccessInterface {
 
     private final String jsonPath;
     private final UserFactory userFactory;
@@ -28,12 +29,6 @@ public class FileUserDataAccessObject implements UserLoginUserDataAccessInterfac
 
     private String currentUsername;
 
-    /**
-     * Constructs a JSON DAO that loads and saves users from/to a JSON file.
-     *
-     * @param jsonPath    path to the users.json file
-     * @param userFactory factory for creating User objects
-     */
     public FileUserDataAccessObject(String jsonPath, UserFactory userFactory) {
         this.jsonPath = jsonPath;
         this.userFactory = userFactory;
@@ -41,57 +36,66 @@ public class FileUserDataAccessObject implements UserLoginUserDataAccessInterfac
         File f = new File(jsonPath);
 
         if (!f.exists()) {
-            save(); // Create an empty JSON file
+            saveToDisk();  // create empty file
         } else {
-            load();
+            loadFromDisk();
         }
     }
 
     /**
-     * Loads all users from the JSON file into memory.
+     * Load all users from JSON file
      */
-    private void load() {
+    private void loadFromDisk() {
         try {
-            String data = new String(Files.readAllBytes(Paths.get(jsonPath)));
-            JSONArray jsonArray = new JSONArray(data);
+            String text = new String(Files.readAllBytes(Paths.get(jsonPath)));
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject o = jsonArray.getJSONObject(i);
-                String username = o.getString("username");
-                String password = o.getString("password");
-                String userType = o.getString("userType");
+            JSONArray arr = new JSONArray(text);
 
-                User user = userFactory.create(username, password, userType);
-                accounts.put(username, user);
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject o = arr.getJSONObject(i);
+
+                User user = new User(
+                        o.getInt("id"),
+                        o.getString("name"),
+                        o.optString("address", ""),
+                        User.idType.valueOf(o.getString("idType")),
+                        o.optInt("phoneNumber", 0),
+                        o.optString("email", ""),
+                        o.getString("username"),
+                        o.getString("password"),
+                        o.getString("userType")
+                );
+
+                accounts.put(user.getUsername(), user);
             }
 
+            System.out.println("Loaded users: " + accounts.size());
+
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load JSON: " + jsonPath, e);
+            throw new RuntimeException("Failed to load JSON users", e);
         }
     }
 
     /**
-     * Saves all user data into the JSON file (pretty formatted).
+     * Writes all users to disk
      */
-    private void save() {
+    private void saveToDisk() {
         try (FileWriter writer = new FileWriter(jsonPath)) {
+
             JSONArray arr = new JSONArray();
 
             for (User user : accounts.values()) {
-                JSONObject obj = new JSONObject();
-                obj.put("username", user.getUsername());
-                obj.put("password", user.getPassword());
-                obj.put("userType", user.getUserType());
-                arr.put(obj);
+                arr.put(user.toJson()); // use your User.toJson()
             }
 
-            writer.write(arr.toString(4)); // 4-space pretty print
+            writer.write(arr.toString(4)); // pretty print
+
         } catch (Exception e) {
-            throw new RuntimeException("Failed to write JSON: " + jsonPath, e);
+            throw new RuntimeException("Failed to save JSON users", e);
         }
     }
 
-    // ---------- Interface Methods ----------
+    // ---------------- Interface Methods ----------------
 
     @Override
     public boolean existsByName(String username) {
@@ -105,8 +109,29 @@ public class FileUserDataAccessObject implements UserLoginUserDataAccessInterfac
 
     @Override
     public void save(User user) {
+        // auto-generate ID if missing or 0
+        if (user.getId() == 0) {
+            int maxId = accounts.values().stream()
+                    .mapToInt(User::getId)
+                    .max()
+                    .orElse(0);
+            int newId = maxId + 1;
+
+            user = new User(
+                    newId,
+                    user.getName(),
+                    user.getAddress(),
+                    user.getIdType(),
+                    user.getPhoneNumber(),
+                    user.getEmail(),
+                    user.getUsername(),
+                    user.getPassword(),
+                    user.getUserType()
+            );
+        }
+
         accounts.put(user.getUsername(), user);
-        save(); // Persist immediately
+        saveToDisk();
     }
 
     @Override

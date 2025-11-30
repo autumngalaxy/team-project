@@ -16,7 +16,6 @@ public class ViewModel<T> {
     private final String viewName;
 
     private T state;
-    private String windowTitle;
     
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
@@ -34,20 +33,6 @@ public class ViewModel<T> {
 
     public T getState() {
         return this.state;
-    }
-
-    /**
-     * Sets the window title and notifies listeners of the change.
-     *
-     * @param title the new window title
-     */
-    public void setWindowTitle(String title) {
-        this.windowTitle = title;
-        support.firePropertyChange("title", null, this.windowTitle);
-    }
-
-    public String getWindowTitle() {
-        return windowTitle;
     }
 
     /**
@@ -73,12 +58,12 @@ public class ViewModel<T> {
      * Useful for event notifications such as login, logout, navigation, etc.
      *
      * @param propertyName the name of the event or property
+     * @param oldValue     the old value associated with the event
      * @param newValue     the new value associated with the event
      */
-    public void firePropertyChange(String propertyName, Object newValue) {
-        support.firePropertyChange(propertyName, null, newValue);
+    public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+        this.support.firePropertyChange(propertyName, oldValue, newValue);
     }
-
     /**
      * Adds a listener that will be notified when any property change event occurs.
      *

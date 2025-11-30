@@ -10,6 +10,11 @@
         "username": "123"
     },
     {
+        "password": "1004",
+        "userType": "user",
+        "username": "Izzy"
+    },
+    {
         "password": "333",
         "userType": "user",
         "username": "444"

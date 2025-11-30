@@ -4,6 +4,7 @@ public class UserLoginState {
     private String username = "";
     private String loginError;
     private String userpassword = "";
+    private String userType = "user"; 
 
     public String getUsername() {
         return username;
@@ -27,6 +28,14 @@ public class UserLoginState {
 
     public void setUserPassword(String userpassword) {
         this.userpassword = userpassword;
+    }
+    
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
 }

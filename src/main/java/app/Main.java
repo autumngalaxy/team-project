@@ -31,7 +31,7 @@ public class Main {
         // 3 User DAO
         final UserFactory userFactory = new UserFactory();
         final FileUserDataAccessObject userDao =
-                new FileUserDataAccessObject("users_login.json", userFactory);
+                new FileUserDataAccessObject("users.json", userFactory);
 
         // 4 Use AppBuilder to deploy LoginChoose/Login/Signup, and other screens to the frontend.
         final AppBuilder appBuilder = new AppBuilder(frontend, userDao);

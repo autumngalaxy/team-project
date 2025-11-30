@@ -26,7 +26,7 @@ public class Backend {
     private int adminIdCounter = 0;
     private int applicationIdCounter = 0;
 
-    private final Map<Integer, User_pet> users = new HashMap<>();
+    private final Map<Integer, User> users = new HashMap<>();
     public final Map<Integer, Pet> pets = new HashMap<>();
     private final Map<Integer, Admin> admins = new HashMap<>();
     private final Map<Integer, Application> applications = new HashMap<>();
@@ -47,12 +47,12 @@ public class Backend {
         return ++applicationIdCounter;
     }
 
-    public void addUser(User_pet userK) {
-        assert(!users.containsKey(userK.getId()));
-        users.put(userK.getId(), userK);
+    public void addUser(User user) {
+        assert(!users.containsKey(user.getId()));
+        users.put(user.getId(), user);
     }
 
-    public User_pet getUserById(int userId) {
+    public User getUserById(int userId) {
         assert(!users.containsKey(userId));
         return users.get(userId);
     }
@@ -204,8 +204,8 @@ public class Backend {
     private JSONArray usersToJson() {
         final JSONArray usersJson = new JSONArray();
 
-        for (User_pet userK : users.values()) {
-            usersJson.put(userK.toJson());
+        for (User user : users.values()) {
+            usersJson.put(user.toJson());
         }
 
         return usersJson;
@@ -220,8 +220,8 @@ public class Backend {
         // Get an iterator over the keys
         for (int i = 0; i < usersJson.length(); i++) {
             // Get each JSONObject
-            final User_pet userK = new User_pet(usersJson.getJSONObject(i));
-            addUser(userK);
+            final User user = new User(usersJson.getJSONObject(i));
+            addUser(user);
         }
     }
 

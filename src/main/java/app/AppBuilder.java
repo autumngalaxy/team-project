@@ -89,9 +89,11 @@ public class AppBuilder {
      */
     public AppBuilder addLoginChoosePresenter() {
 
-        LoginChoosePresenter presenter =
-                new LoginChoosePresenter(viewManagerModel, userLoginView);
+//        LoginChoosePresenter presenter =
+//                new LoginChoosePresenter(viewManagerModel, userLoginView);
 
+        LoginChoosePresenter presenter =
+                new LoginChoosePresenter(viewManagerModel, userLoginViewModel);
         loginChooseViewModel.addPropertyChangeListener(presenter);
 
         return this;
@@ -114,7 +116,7 @@ public class AppBuilder {
      * @return this AppBuilder instance for chaining.
      */
     public AppBuilder addUserLoginView() {
-        userLoginView = new UserLoginView(userLoginViewModel, "user");
+        userLoginView = new UserLoginView(userLoginViewModel);
         cardPanel.add(userLoginView, userLoginView.getViewName());
         return this;
     }
