@@ -1,8 +1,9 @@
-package view;
+package view.auth;
 
 import interface_adapter.user_login.UserLoginController;
 import interface_adapter.user_login.UserLoginState;
 import interface_adapter.user_login.UserLoginViewModel;
+import view.common.UIFactory;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

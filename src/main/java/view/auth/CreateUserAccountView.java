@@ -1,4 +1,4 @@
-package view;
+package view.auth;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -10,6 +10,7 @@ import interface_adapter.sign_up.SignupState;
 import interface_adapter.sign_up.SignupViewModel;
 import interface_adapter.user_login.UserLoginController;
 import interface_adapter.user_login.UserLoginState;
+import view.common.UIFactory;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

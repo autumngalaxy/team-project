@@ -2,24 +2,22 @@ package use_case.user_login;
 
 public class FakeUserLoginPresenter implements UserLoginOutputBoundary {
 
-    public String failMessage = null;
-    public String successUsername = null;
-    public String successUserType = null;
-    public String goBackView = null;
+    public String failMessage;
+    public UserLoginOutputData successData;
+    public String goBackViewName;
 
     @Override
     public void prepareFailView(String error) {
-        failMessage = error;
+        this.failMessage = error;
     }
 
     @Override
     public void prepareSuccessView(UserLoginOutputData data) {
-        successUsername = data.getUsername();
-        successUserType = data.getUserType();
+        this.successData = data;
     }
 
     @Override
     public void prepareGoBackView(String viewName) {
-        goBackView = viewName;
+        this.goBackViewName = viewName;
     }
 }

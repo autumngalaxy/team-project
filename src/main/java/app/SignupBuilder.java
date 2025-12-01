@@ -10,7 +10,7 @@ import interface_adapter.sign_up.SignupPresenter;
 import interface_adapter.sign_up.SignupViewModel;
 import interface_adapter.user_login.UserLoginViewModel;
 import use_case.signup.*;
-import view.CreateUserAccountView;
+import view.auth.CreateUserAccountView;
 
 /**
  * Builds the signup view, presenter, controller and interactor.

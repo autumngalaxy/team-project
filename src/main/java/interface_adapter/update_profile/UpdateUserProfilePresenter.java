@@ -37,13 +37,13 @@ public class UpdateUserProfilePresenter implements UpdateUserProfileOutputBounda
         });
     }
     
-//    @Override
-//    public void prepareFailView(String message) {
-//        javax.swing.JOptionPane.showMessageDialog(
-//                null,
-//                message,
-//                "Error",
-//                javax.swing.JOptionPane.ERROR_MESSAGE
-//        );
-//    }
+    @Override
+    public void showProfileUpdateFailure(String message) {
+        javax.swing.JOptionPane.showMessageDialog(
+                null,
+                message,
+                "Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+    }
 }

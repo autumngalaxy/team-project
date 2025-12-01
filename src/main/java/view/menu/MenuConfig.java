@@ -1,4 +1,4 @@
-package view;
+package view.menu;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -22,31 +22,34 @@ public class MenuConfig {
 
         // Menu for Admin
         map.put("admin", new String[]{
+                "My Profile",
+                "Edit Profile",
+                "My Applications",
                 "Manage Applications",
                 "View Pets",
                 "Add Pet",
                 "Modify Pet",
                 "Delete Pet",
-                "My Profile",
-                "Edit Profile",
                 "Log Out"
         });
 
         // Menu for Staff
         map.put("staff", new String[]{
+                "My Profile",
+                "Edit Profile",
                 "View Pets",
                 "Add Pet",
                 "Modify Pet",
-                "My Profile",
-                "Edit Profile",
+                "Delete Pet",
                 "Log Out"
         });
 
         // Menu for Regular User
         map.put("user", new String[]{
-                "View Pets",
                 "My Profile",
                 "Edit Profile",
+                "My Applications",
+                "View Pets",
                 "Log Out"
         });
 

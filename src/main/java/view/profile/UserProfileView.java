@@ -1,7 +1,8 @@
-package view;
+package view.profile;
 
 import entity.User;
 import service.Backend;
+import view.common.RightContentTemplate;
 
 import javax.swing.*;
 import java.awt.*;

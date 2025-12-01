@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import service.Backend;
 import service.Frontend;
+import view.menu.SideMenuPanel;
 
 /**
  * MainDashboardView is the top-level panel used after login.

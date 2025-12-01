@@ -22,7 +22,7 @@ public class DummyDataGenerator {
         JSONArray users = new JSONArray();
 
         final User.idType[] idTypes = User.idType.values();
-        for (int i = 0; i <= num_users; i++) {
+        for (int i = 1; i <= num_users; i++) {
             User userK = new User(
                     i,
                     "User " + i,
@@ -32,7 +32,7 @@ public class DummyDataGenerator {
                     "user"+i+"@example.com",
                     "user" + i,
                     "pass" + i,
-                    i == 0 ? "admin" :  "user"
+                    i == 1 ? "admin" :  "user"
             );
 
             users.put(userK.toJson());
@@ -80,9 +80,8 @@ public class DummyDataGenerator {
         }
 
         // Save files
-        try (FileWriter fw = new FileWriter("users.json")) { fw.write(users.toString(4)); }
+        // try (FileWriter fw = new FileWriter("users.json")) { fw.write(users.toString(4)); }
         try (FileWriter fw = new FileWriter("pets.json")) { fw.write(pets.toString(4)); }
-        try (FileWriter fw = new FileWriter("admins.json")) { fw.write(admins.toString(4)); }
         try (FileWriter fw = new FileWriter("applications.json")) { fw.write(applications.toString(4)); }
 
         System.out.println("Dummy JSON files generated!");

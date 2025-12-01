@@ -3,7 +3,7 @@ package interface_adapter.homepage;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.user_login.UserLoginState;
 import interface_adapter.user_login.UserLoginViewModel;
-import view.UserLoginView;
+import view.auth.UserLoginView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

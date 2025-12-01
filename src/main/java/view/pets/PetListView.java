@@ -1,7 +1,8 @@
-package view;
+package view.pets;
 
 import entity.Pet;
 import interface_adapter.ViewPets.ViewPetsController;
+import view.common.RightContentTemplate;
 import interface_adapter.FilterPets.PetListViewModel;
 
 import javax.swing.*;
