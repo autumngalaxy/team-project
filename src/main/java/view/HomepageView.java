@@ -1,5 +1,6 @@
 package view;
 
+import entity.Pet;
 import interface_adapter.homepage.HomepageState;
 import interface_adapter.homepage.HomepageViewModel;
 
@@ -9,6 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+//Angelica's imports for linking the "Pet" button on the homepage to the list of pets
+
+import api.APIInterface;
+import data_access.PetDataAccessInterface;
+import view.PetListView;
+import interface_adapter.controllers4ViewFilterPets.ViewPetsController;
+import interface_adapter.presenters4ViewFilterPets.ViewPetsPresenter;
+import interface_adapter.ViewModel4ViewFilterPets.PetListViewModel;
+import use_case.view_pets.ViewPetsInputBoundary;
+import use_case.view_pets.ViewPetsInteractor;
+import use_case.view_pets.ViewPetsOutputBoundary;
 
 //public class HomepageView extends JPanel {
 public class HomepageView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -99,6 +111,24 @@ public class HomepageView extends JPanel implements ActionListener, PropertyChan
 
         petpending = new JButton("Pet");
         homepage = new JButton("Homepage");
+
+        /**
+         *linking the list of pets to the Pet button on the homepage
+         */
+        petpending.addActionListener(e -> {
+            PetDataAccessInterface gateway = new APIInterface();
+            PetListViewModel viewModel = new PetListViewModel();
+            ViewPetsOutputBoundary presenter = new ViewPetsPresenter(viewModel);
+            ViewPetsInputBoundary interactor =
+                    new ViewPetsInteractor(gateway, presenter);
+            ViewPetsController controller = new ViewPetsController(interactor);
+            new PetListView(viewModel, controller);
+        });
+
+
+
+
+
 
         bottomNav.add(petpending);
         bottomNav.add(homepage);
