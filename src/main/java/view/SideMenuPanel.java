@@ -73,13 +73,13 @@ public class SideMenuPanel extends JPanel {
                 }
                 break;
             case "Add Pet":
-//                frontend.showAddPetPage();
+                frontend.showAddPetPage();
                 break;
             case "Modify Pet":
-//                frontend.showModifyPetPage();
+                frontend.showModifyPetPage();
                 break;
             case "Delete Pet":
-//                frontend.showDeletePetPage();
+                frontend.showDeletePetPage();
                 break;
             case "My Profile":
             	dashboard.setContent(new UserProfileView(backend));

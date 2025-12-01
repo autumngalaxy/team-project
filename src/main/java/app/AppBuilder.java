@@ -1,7 +1,7 @@
 package app;
 
 import dataAccess.FileUserDataAccessObject;
-import dataAccess.PetDataAccessInterface;
+import dataAccess.InMemoryPetDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.FilterPets.PetListViewModel;
@@ -19,6 +19,9 @@ import interface_adapter.user_login.UserLoginPresenter;
 import interface_adapter.user_login.UserLoginViewModel;
 import interface_adapter.user_logout.UserLogoutController;
 import interface_adapter.user_logout.UserLogoutPresenter;
+import interface_adapter.pet_management.PetManagementController;
+import interface_adapter.pet_management.PetManagementPresenter;
+import interface_adapter.pet_management.PetManagementViewModel;
 import service.Backend;
 import service.Frontend;
 import use_case.signup.SignupInputBoundary;
@@ -36,6 +39,14 @@ import use_case.user_logout.UserLogoutOutputBoundary;
 import use_case.view_pets.ViewPetsInputBoundary;
 import use_case.view_pets.ViewPetsInteractor;
 import use_case.view_pets.ViewPetsOutputBoundary;
+import use_case.pet_management.AddPetInputBoundary;
+import use_case.pet_management.AddPetInteractor;
+import use_case.pet_management.DeletePetInputBoundary;
+import use_case.pet_management.DeletePetInteractor;
+import use_case.pet_management.PetDataAccessInterface;
+import use_case.pet_management.PetManagementOutputBoundary;
+import use_case.pet_management.UpdatePetInputBoundary;
+import use_case.pet_management.UpdatePetInteractor;
 import view.*;
 
 import javax.swing.*;
@@ -66,11 +77,14 @@ public class AppBuilder {
     private final SignupViewModel signupViewModel= new SignupViewModel();
     private final PetListViewModel petListViewModel = new PetListViewModel();
     private ViewPetsController viewPetsController;
-    
+
+    private final PetManagementViewModel petManagementViewModel = new PetManagementViewModel();
+
     // Views
     private LoginChooseView loginChooseView;
     private CreateUserAccountView createUserAccountView;
     private UserLoginView userLoginView;
+    private AdminPetManagementView adminPetManagementView;
 
 
     /**
@@ -212,7 +226,7 @@ public class AppBuilder {
         createUserAccountView.setSignupController(controller);
         return this;
     }
-    
+
 
     public AppBuilder addUpdateProfileUseCase() {
 
@@ -229,6 +243,38 @@ public class AppBuilder {
 
         return this;
     }
+
+    /**
+     * Registers the Pet Management use case (controller, interactors, presenter, view).
+     *
+     * @return this AppBuilder instance for chaining.
+     */
+    public AppBuilder addPetManagementUseCase() {
+
+        // DAO implementing PetDataAccessInterface
+        PetDataAccessInterface petGateway = new InMemoryPetDataAccessObject();
+
+        // Presenter & Interactors
+        PetManagementOutputBoundary presenter = new PetManagementPresenter(petManagementViewModel);
+
+        AddPetInputBoundary addUC = new AddPetInteractor(petGateway, presenter);
+        UpdatePetInputBoundary updateUC = new UpdatePetInteractor(petGateway, presenter);
+        DeletePetInputBoundary deleteUC = new DeletePetInteractor(petGateway, presenter);
+
+        // Controller
+        PetManagementController controller =
+                new PetManagementController(addUC, updateUC, deleteUC);
+
+        // View
+        adminPetManagementView = new AdminPetManagementView(petManagementViewModel);
+        adminPetManagementView.setController(controller);
+
+        // Register view in the main CardLayout
+        cardPanel.add(adminPetManagementView, adminPetManagementView.getViewName());
+
+        return this;
+    }
+
 
 
     public AppBuilder addViewPetsUseCase(Backend backend) {
@@ -247,7 +293,7 @@ public class AppBuilder {
         return this;
     }
 
-    
+
     /**
      * Finalizes the building of the app by attaching the card panel to the frontend
      * and refreshing the UI.
