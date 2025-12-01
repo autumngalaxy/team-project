@@ -10,6 +10,6 @@ public class ViewPetsController {
         this.interactor = interactor;
     }
     public void onViewPets() {
-        ViewPetsInputData inputData = new ViewPetsInputData();
+        interactor.execute(new ViewPetsInputData());
     }
 }

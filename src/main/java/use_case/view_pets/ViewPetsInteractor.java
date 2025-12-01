@@ -15,6 +15,7 @@ public class ViewPetsInteractor implements ViewPetsInputBoundary {
     @Override
     public void execute(ViewPetsInputData inputData) {
         try {
+            System.out.println("Debug: ViewPetsInteractor executing");
             List<Pet> pets = petDataAccess.getPets();
             ViewPetsOutputData outputData =
                     new ViewPetsOutputData(pets, null);
