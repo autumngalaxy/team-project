@@ -21,7 +21,6 @@ public class Main {
         backend.fromJsonFiles(
                 "users.json",
                 "pets.json",
-                "admins.json",
                 "applications.json"
         );
 
@@ -36,14 +35,16 @@ public class Main {
                 new FileUserDataAccessObject("users.json", userFactory);
 
         // 4 Use AppBuilder to deploy LoginChoose/Login/Signup, and other screens to the frontend.
-        final AppBuilder appBuilder = new AppBuilder(frontend, userDao);
+        final AppBuilder appBuilder = new AppBuilder(frontend, backend, userDao);
 
         appBuilder
                 .addLoginChooseView()
                 .addUserLoginView()
-                .addLoginChoosePresenter()
                 .addCreateUserAccountView()
+                .addLoginChoosePresenter()
                 .addDashboardViews(backend)
+                .addUpdateProfileUseCase()
+                .addViewPetsUseCase(backend)
                 .addUserLoginUseCase()
                 .addUserLogoutUseCase()
                 .addSignupUseCase()

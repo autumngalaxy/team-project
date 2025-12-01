@@ -1,19 +1,8 @@
 [
     {
-        "password": "pass0",
-        "address": "Address 0",
-        "idType": "PHOTO_CARD",
-        "phoneNumber": 0,
-        "name": "User 0",
-        "id": 0,
-        "userType": "admin",
-        "email": "user0@example.com",
-        "username": "user0"
-    },
-    {
         "password": "pass1",
-        "address": "Address 1",
-        "idType": "DRIVERS_LICENSE",
+        "address": "Address",
+        "idType": "PASSPORT",
         "phoneNumber": 1,
         "name": "User 1",
         "id": 1,
@@ -24,7 +13,7 @@
     {
         "password": "pass2",
         "address": "Address 2",
-        "idType": "PHOTO_CARD",
+        "idType": "PASSPORT",
         "phoneNumber": 2,
         "name": "User 2",
         "id": 2,
@@ -35,7 +24,7 @@
     {
         "password": "pass3",
         "address": "Address 3",
-        "idType": "DRIVERS_LICENSE",
+        "idType": "PHOTO_CARD",
         "phoneNumber": 3,
         "name": "User 3",
         "id": 3,
@@ -68,7 +57,7 @@
     {
         "password": "pass6",
         "address": "Address 6",
-        "idType": "DRIVERS_LICENSE",
+        "idType": "PASSPORT",
         "phoneNumber": 6,
         "name": "User 6",
         "id": 6,
@@ -90,7 +79,7 @@
     {
         "password": "pass8",
         "address": "Address 8",
-        "idType": "PASSPORT",
+        "idType": "PHOTO_CARD",
         "phoneNumber": 8,
         "name": "User 8",
         "id": 8,
@@ -101,7 +90,7 @@
     {
         "password": "pass9",
         "address": "Address 9",
-        "idType": "DRIVERS_LICENSE",
+        "idType": "PASSPORT",
         "phoneNumber": 9,
         "name": "User 9",
         "id": 9,
@@ -123,7 +112,7 @@
     {
         "password": "pass11",
         "address": "Address 11",
-        "idType": "PASSPORT",
+        "idType": "DRIVERS_LICENSE",
         "phoneNumber": 11,
         "name": "User 11",
         "id": 11,
@@ -134,7 +123,7 @@
     {
         "password": "pass12",
         "address": "Address 12",
-        "idType": "PHOTO_CARD",
+        "idType": "DRIVERS_LICENSE",
         "phoneNumber": 12,
         "name": "User 12",
         "id": 12,
@@ -156,7 +145,7 @@
     {
         "password": "pass14",
         "address": "Address 14",
-        "idType": "DRIVERS_LICENSE",
+        "idType": "PHOTO_CARD",
         "phoneNumber": 14,
         "name": "User 14",
         "id": 14,
@@ -167,7 +156,7 @@
     {
         "password": "pass15",
         "address": "Address 15",
-        "idType": "PASSPORT",
+        "idType": "PHOTO_CARD",
         "phoneNumber": 15,
         "name": "User 15",
         "id": 15,
@@ -189,7 +178,7 @@
     {
         "password": "pass17",
         "address": "Address 17",
-        "idType": "PASSPORT",
+        "idType": "DRIVERS_LICENSE",
         "phoneNumber": 17,
         "name": "User 17",
         "id": 17,
@@ -200,7 +189,7 @@
     {
         "password": "pass18",
         "address": "Address 18",
-        "idType": "PASSPORT",
+        "idType": "PHOTO_CARD",
         "phoneNumber": 18,
         "name": "User 18",
         "id": 18,
@@ -211,7 +200,7 @@
     {
         "password": "pass19",
         "address": "Address 19",
-        "idType": "PASSPORT",
+        "idType": "PHOTO_CARD",
         "phoneNumber": 19,
         "name": "User 19",
         "id": 19,
@@ -231,14 +220,14 @@
         "username": "user20"
     },
     {
-        "password": "321",
-        "address": "",
+        "password": "pass0",
+        "address": "Address 011111111",
         "idType": "PHOTO_CARD",
         "phoneNumber": 0,
-        "name": "123",
+        "name": "User 01111",
         "id": 21,
-        "userType": "user",
-        "email": "",
-        "username": "123"
+        "userType": "admin",
+        "email": "user011111@example.com",
+        "username": "user0"
     }
 ]

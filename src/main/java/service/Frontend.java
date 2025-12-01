@@ -1,8 +1,20 @@
 package service;
 
+import interface_adapter.ViewPets.ViewPetsController;
+import interface_adapter.update_profile.UpdateUserProfileController;
 import interface_adapter.user_logout.UserLogoutController;
+import view.EditProfileView;
+import view.MainDashboardView;
+import view.PetListView;
+import view.SideMenuPanel;
+import view.UserProfileView;
 
 import javax.swing.*;
+
+import entity.User;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.event.*;
 
 import dataAccess.InMemoryPetDataAccessObject;
@@ -32,6 +44,11 @@ public class Frontend extends JFrame {
 
     // The card panel containing all login/signup views from the AppBuilder.
     private JPanel cardPanel;
+	private CardLayout cardLayout;
+
+    private UpdateUserProfileController updateProfileController;
+    private ViewPetsController viewPetsController;
+    private MainDashboardView currentDashboard;
 
     /**
      * Constructs the application frontend window.
@@ -51,7 +68,7 @@ public class Frontend extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                backend.toJsonFiles("users.json", "pets.json", "admins.json", "applications.json");
+                backend.toJsonFiles("users.json", "pets.json", "applications.json");
                 dispose();
                 System.exit(0);
             }
@@ -63,12 +80,15 @@ public class Frontend extends JFrame {
      * This becomes the initial UI shown when the application starts.
      *
      * @param cardPanel the shared panel containing all card-based views
+     * @param cardLayout
      */
-    public void setCardPanel(JPanel cardPanel) {
+    public void setCardPanel(JPanel cardPanel, CardLayout cardLayout) {
         this.cardPanel = cardPanel;
+        this.cardLayout = cardLayout;
         setContentPane(cardPanel);
     }
 
+    //---------------------------by YZ----------------------------------
     /**
      * Stores the logout controller so that the dashboard or navbar can call logout().
      *
@@ -86,12 +106,31 @@ public class Frontend extends JFrame {
      * @param userType the type of the logged-in user (admin/staff/user)
      */
     public void showDashboard(String userType) {
-        // Dashboard 也是一个 JPanel（在 cardPanel 外部）
-        // 所以切换成 Dashboard 视图
-        setContentPane(new view.MainDashboardView(this, backend, userType));
+    	currentDashboard = new MainDashboardView(this, backend, userType);
+        setContentPane(currentDashboard);
         revalidate();
         repaint();
     }
+
+    public void setUpdateProfileController(UpdateUserProfileController controller) {
+        this.updateProfileController = controller;
+    }
+
+    public UpdateUserProfileController getUpdateProfileController() {
+        return updateProfileController;
+    }
+
+    public void showMyProfile() {
+    	currentDashboard.setContent(new UserProfileView(backend));
+    }
+
+    public void setViewPetsController(ViewPetsController controller) {
+        this.viewPetsController = controller;
+    }
+
+	public ViewPetsController getViewPetsController() {
+		return viewPetsController;
+	}
 
     /**
      * Logs the user out using Clean Architecture logic, then returns the UI
@@ -164,6 +203,5 @@ public class Frontend extends JFrame {
 
         return view;
     }
-
 
 }

@@ -60,11 +60,11 @@ public class LoginBuilder {
 
         // Login Presenter
         UserLoginOutputBoundary presenter =
-                new UserLoginPresenter(viewManagerModel, userLoginViewModel, frontend);
+                new UserLoginPresenter(viewManagerModel, userLoginViewModel, frontend, null);
 
         // Login Interactor
         UserLoginInputBoundary interactor =
-                new UserLoginInteractor(userDao, presenter);
+                new UserLoginInteractor(userDao, presenter, null);
 
         // Login Controller
         UserLoginController controller = new UserLoginController(interactor);

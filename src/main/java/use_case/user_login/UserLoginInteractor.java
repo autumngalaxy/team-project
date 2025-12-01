@@ -1,15 +1,20 @@
 package use_case.user_login;
 
 import entity.User;
+import service.Backend;
 
 public class UserLoginInteractor implements UserLoginInputBoundary {
     private final UserLoginUserDataAccessInterface userDataAccessObject;
     private final UserLoginOutputBoundary userLoginPresenter;
 
-    public UserLoginInteractor(UserLoginUserDataAccessInterface userDataAccessInterface,
-                           UserLoginOutputBoundary loginOutputBoundary) {
-        this.userDataAccessObject = userDataAccessInterface;
-        this.userLoginPresenter = loginOutputBoundary;
+    private final Backend backend;
+
+    public UserLoginInteractor(UserLoginUserDataAccessInterface userDataAccessObject,
+                               UserLoginOutputBoundary userLoginPresenter,
+                               Backend backend) {
+        this.userDataAccessObject = userDataAccessObject;
+        this.userLoginPresenter = userLoginPresenter;
+        this.backend = backend;
     }
 
     @Override
@@ -32,17 +37,20 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
             final String pwd = userDataAccessObject.get(username).getPassword();
             if (!password.equals(pwd)) {
                 userLoginPresenter.prepareFailView("Incorrect password for \"" + username + "\".");
+                return;
             }
-            else {
 
-                final User user = userDataAccessObject.get(loginInputData.getUsername());
 
-                userDataAccessObject.setCurrentUsername(username);
+            final User user = userDataAccessObject.get(loginInputData.getUsername());
+            
+            backend.setCurrentUser(user);
+            userDataAccessObject.setCurrentUsername(username);
 
-                final UserLoginOutputData userLoginOutputData = new UserLoginOutputData
-                        (user.getUsername(), user.getUserType());
-                userLoginPresenter.prepareSuccessView(userLoginOutputData);
-            }
+            final UserLoginOutputData userLoginOutputData = new UserLoginOutputData
+                    (user.getUsername(), user.getUserType(), user);
+            
+            userLoginPresenter.prepareSuccessView(userLoginOutputData);
+
         }
     }
 
