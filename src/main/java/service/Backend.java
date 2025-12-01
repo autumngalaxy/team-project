@@ -21,9 +21,10 @@ import java.io.FileWriter;
  * application status and importing/exporting JSON data files.
  */
 public class Backend {
+	private User currentUser = null; 
+	
     private int userIdCounter = 0;
     private int petIdCounter = 0;
-    private int adminIdCounter = 0;
     private int applicationIdCounter = 0;
 
     private final Map<Integer, User> users = new HashMap<>();
@@ -37,10 +38,6 @@ public class Backend {
 
     public int newPetId() {
         return ++petIdCounter;
-    }
-
-    public int newAdminId() {
-        return ++adminIdCounter;
     }
 
     public int newApplicationId() {
@@ -72,10 +69,10 @@ public class Backend {
         return pets.get(petId);
     }
 
-    public void addAdmin(Admin adminK) {
-        assert(!admins.containsKey(adminK.getId()));
-        admins.put(adminK.getId(), adminK);
-    }
+//    public void addAdmin(Admin adminK) {
+//        assert(!admins.containsKey(adminK.getId()));
+//        admins.put(adminK.getId(), adminK);
+//    }
 
     public void addApplication(Application application) {
         assert(!applications.containsKey(application.getId()));
@@ -252,12 +249,12 @@ public class Backend {
         return adminsJson;
     }
 
-    private void loadAdminsFromJson(JSONArray adminsJson) {
-        for (int i = 0; i < adminsJson.length(); i++) {
-            final Admin adminK = new Admin(adminsJson.getJSONObject(i));
-            addAdmin(adminK);
-        }
-    }
+//    private void loadAdminsFromJson(JSONArray adminsJson) {
+//        for (int i = 0; i < adminsJson.length(); i++) {
+//            final Admin adminK = new Admin(adminsJson.getJSONObject(i));
+//            addAdmin(adminK);
+//        }
+//    }
 
     private JSONArray applicationsToJson() {
         final JSONArray applicationsJson = new JSONArray();
@@ -282,10 +279,9 @@ public class Backend {
      *
      * @param usersPath        path to users.json
      * @param petsPath         path to pets.json
-     * @param adminsPath       path to admins.json
      * @param applicationsPath path to applications.json
      */
-    public void fromJsonFiles(String usersPath, String petsPath, String adminsPath, String applicationsPath) {
+    public void fromJsonFiles(String usersPath, String petsPath, String applicationsPath) {
         try {
             final String usersData = new String(Files.readAllBytes(Paths.get(usersPath)));
             final JSONArray usersJson = new JSONArray(usersData);
@@ -305,16 +301,16 @@ public class Backend {
             System.err.println("Error while reading pets file");
             throw new RuntimeException(ex);
         }
-
-        try {
-            final String adminsData = new String(Files.readAllBytes(Paths.get(adminsPath)));
-            final JSONArray adminsJson = new JSONArray(adminsData);
-            loadAdminsFromJson(adminsJson);
-        }
-        catch (IOException ex) {
-            System.err.println("Error while reading admins file");
-            throw new RuntimeException(ex);
-        }
+//
+//        try {
+//            final String adminsData = new String(Files.readAllBytes(Paths.get(adminsPath)));
+//            final JSONArray adminsJson = new JSONArray(adminsData);
+//            loadAdminsFromJson(adminsJson);
+//        }
+//        catch (IOException ex) {
+//            System.err.println("Error while reading admins file");
+//            throw new RuntimeException(ex);
+//        }
 
         try {
             final String applicationsData = new String(Files.readAllBytes(Paths.get(applicationsPath)));
@@ -332,10 +328,9 @@ public class Backend {
      *
      * @param usersPath        output file for users
      * @param petsPath         output file for pets
-     * @param adminsPath       output file for admins
      * @param applicationsPath output file for applications
      */
-    public void toJsonFiles(String usersPath, String petsPath, String adminsPath, String applicationsPath) {
+    public void toJsonFiles(String usersPath, String petsPath, String applicationsPath) {
         try (FileWriter usersFile = new FileWriter(usersPath)) {
             usersFile.write(usersToJson().toString(4));
             usersFile.flush();
@@ -355,16 +350,15 @@ public class Backend {
             System.err.println("Error while writing pets file");
             throw new RuntimeException(ex);
         }
-
-        try (FileWriter adminsFile = new FileWriter(adminsPath)) {
-            adminsFile.write(adminsToJson().toString(4));
-            adminsFile.flush();
-            System.out.println("Admins written to file successfully");
-        }
-        catch (IOException ex) {
-            System.err.println("Error while writing admins file");
-            throw new RuntimeException(ex);
-        }
+//        try (FileWriter adminsFile = new FileWriter(adminsPath)) {
+//            adminsFile.write(adminsToJson().toString(4));
+//            adminsFile.flush();
+//            System.out.println("Admins written to file successfully");
+//        }
+//        catch (IOException ex) {
+//            System.err.println("Error while writing admins file");
+//            throw new RuntimeException(ex);
+//        }
 
         try (FileWriter applicationsFile = new FileWriter(applicationsPath)) {
             applicationsFile.write(applicationsToJson().toString(4));
@@ -375,5 +369,13 @@ public class Backend {
             System.err.println("Error while writing applications file");
             throw new RuntimeException(ex);
         }
+    }
+    
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
+    public User getCurrentUser() {
+        return this.currentUser;
     }
 }

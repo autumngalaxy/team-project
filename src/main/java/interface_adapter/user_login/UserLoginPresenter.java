@@ -1,6 +1,7 @@
 package interface_adapter.user_login;
 
 import interface_adapter.ViewManagerModel;
+import service.Backend;
 import service.Frontend;
 import use_case.user_login.UserLoginOutputBoundary;
 import use_case.user_login.UserLoginOutputData;
@@ -10,13 +11,16 @@ public class UserLoginPresenter implements UserLoginOutputBoundary {
     private final UserLoginViewModel userLoginViewModel;
     private final ViewManagerModel viewManagerModel;
     private final Frontend frontend;
-
+    private final Backend backend;
+    
     public UserLoginPresenter(ViewManagerModel viewManagerModel,
                               UserLoginViewModel userLoginViewModel,
-                              Frontend frontend) {
+                              Frontend frontend,
+                              Backend backend) {
         this.viewManagerModel = viewManagerModel;
         this.userLoginViewModel = userLoginViewModel;
         this.frontend = frontend;
+        this.backend = backend;
     }
 
     @Override
@@ -27,6 +31,7 @@ public class UserLoginPresenter implements UserLoginOutputBoundary {
 
         frontend.setVisible(true);
         frontend.showDashboard(response.getUserType());
+        backend.setCurrentUser(response.getUser());
 
         viewManagerModel.firePropertyChange();
     }

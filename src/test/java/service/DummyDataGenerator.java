@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static entity.User.idType.PHOTO_CARD;
+
 public class DummyDataGenerator {
     public static void main(String[] args) throws Exception {
         final Random random = new Random();
@@ -49,13 +51,16 @@ public class DummyDataGenerator {
         JSONArray admins = new JSONArray();
 
         for (int i = 1; i <= num_admins; i++) {
-            Admin adminK = new Admin(
+            User adminK = new User(
                     i,
-                    "Admin First" + i,
-                    "Admin Last" + i,
+                    "Admin" + i,
+                    "address" + i,
+                    PHOTO_CARD,
+                    i,
                     "admin"+i+"@pet.com",
                     "admin" + i,
-                    "adminpass" + i
+                    "pass" + i,
+                    "admin"
             );
 
             admins.put(adminK.toJson());
