@@ -14,12 +14,12 @@ public class DummyDataGenerator {
     public static void main(String[] args) throws Exception {
         final Random random = new Random();
 
-        final int num_users = 20;
-        final int num_admins = 30;
+        final int num_users = 5;
+        final int num_admins = 10;
         final int num_applications = 20;
 
         // Users
-        JSONArray users = new JSONArray();
+        JSONArray allusers = new JSONArray();
 
         final User.idType[] idTypes = User.idType.values();
         for (int i = 0; i <= num_users; i++) {
@@ -35,22 +35,11 @@ public class DummyDataGenerator {
                     i == 0 ? "admin" :  "user"
             );
 
-            users.put(userK.toJson());
-        }
-
-        // Pets
-        JSONArray pets = new JSONArray();
-        APIInterface api = new APIInterface();
-        List<Integer> seenPetIds = new ArrayList<>();
-        for (Pet pet : api.getPets()) {
-            pets.put(pet.toJson());
-            seenPetIds.add(pet.getId());
+            allusers.put(userK.toJson());
         }
 
         // Admins
-        JSONArray admins = new JSONArray();
-
-        for (int i = 1; i <= num_admins; i++) {
+        for (int i = 6; i <= num_admins; i++) {
             User adminK = new User(
                     i,
                     "Admin" + i,
@@ -63,7 +52,16 @@ public class DummyDataGenerator {
                     "admin"
             );
 
-            admins.put(adminK.toJson());
+            allusers.put(adminK.toJson());
+        }
+
+        // Pets
+        JSONArray pets = new JSONArray();
+        APIInterface api = new APIInterface();
+        List<Integer> seenPetIds = new ArrayList<>();
+        for (Pet pet : api.getPets()) {
+            pets.put(pet.toJson());
+            seenPetIds.add(pet.getId());
         }
 
         // Applications
@@ -80,9 +78,8 @@ public class DummyDataGenerator {
         }
 
         // Save files
-        try (FileWriter fw = new FileWriter("users.json")) { fw.write(users.toString(4)); }
+        // try (FileWriter fw = new FileWriter("users.json")) { fw.write(allusers.toString(4)); }
         try (FileWriter fw = new FileWriter("pets.json")) { fw.write(pets.toString(4)); }
-        try (FileWriter fw = new FileWriter("admins.json")) { fw.write(admins.toString(4)); }
         try (FileWriter fw = new FileWriter("applications.json")) { fw.write(applications.toString(4)); }
 
         System.out.println("Dummy JSON files generated!");

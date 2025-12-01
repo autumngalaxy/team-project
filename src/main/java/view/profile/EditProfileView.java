@@ -1,8 +1,9 @@
-package view;
+package view.profile;
 
 import entity.User;
 import interface_adapter.update_profile.UpdateUserProfileController;
 import service.Backend;
+import view.common.RightContentTemplate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,7 +75,7 @@ public class EditProfileView extends RightContentTemplate implements PropertyCha
                 nameField.getText(),
                 emailField.getText(),
                 addressField.getText(),
-                phoneField.getText() 
+                Integer.parseInt(phoneField.getText())
         ));
 
         card.add(saveBtn);

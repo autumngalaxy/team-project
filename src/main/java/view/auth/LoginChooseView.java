@@ -1,7 +1,8 @@
-package view;
+package view.auth;
 
 import javax.swing.*;
 import interface_adapter.homepage.LoginChooseViewModel;
+import view.common.UIFactory;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

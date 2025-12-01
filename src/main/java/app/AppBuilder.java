@@ -37,6 +37,9 @@ import use_case.view_pets.ViewPetsInputBoundary;
 import use_case.view_pets.ViewPetsInteractor;
 import use_case.view_pets.ViewPetsOutputBoundary;
 import view.*;
+import view.auth.CreateUserAccountView;
+import view.auth.LoginChooseView;
+import view.auth.UserLoginView;
 
 import javax.swing.*;
 import java.awt.*;

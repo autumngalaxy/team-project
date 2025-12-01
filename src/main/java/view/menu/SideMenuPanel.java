@@ -1,4 +1,4 @@
-package view;
+package view.menu;
 
 import javax.swing.*;
 
@@ -9,6 +9,11 @@ import java.awt.*;
 import java.util.Map;
 import service.Backend;
 import service.Frontend;
+import view.AdminPage;
+import view.MainDashboardView;
+import view.pets.PetListView;
+import view.profile.EditProfileView;
+import view.profile.UserProfileView;
 
 public class SideMenuPanel extends JPanel {
 

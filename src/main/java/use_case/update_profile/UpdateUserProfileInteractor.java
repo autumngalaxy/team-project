@@ -28,7 +28,7 @@ public class UpdateUserProfileInteractor implements UpdateUserProfileInputBounda
                     data.name,
                     data.address,
                     u.getIdType(),
-                    u.getPhoneNumber(),
+                    data.phoneNumber,
                     data.email,
                     u.getUsername(),
                     u.getPassword(),
@@ -40,7 +40,7 @@ public class UpdateUserProfileInteractor implements UpdateUserProfileInputBounda
     }
     
     @Override
-    public void save(String name, String email, String address, String phone) {
+    public void save(String name, String email, String address, int phoneNumber) {
 
         User user = userDAO.getCurrentUser();
 
@@ -49,7 +49,7 @@ public class UpdateUserProfileInteractor implements UpdateUserProfileInputBounda
                 name,
                 address,
                 user.getIdType(),
-                Integer.parseInt(phone),
+                phoneNumber,
                 email,
                 user.getUsername(),
                 user.getPassword(),

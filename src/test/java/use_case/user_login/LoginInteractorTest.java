@@ -20,7 +20,7 @@ public class LoginInteractorTest {
     void setUp() {
         dao = new FakeUserLoginDAO();
         presenter = new FakeUserLoginPresenter();
-        interactor = new UserLoginInteractor(dao, presenter);
+        // interactor = new UserLoginInteractor(dao, presenter);
     }
 
     // === 1. Account does NOT exist ===

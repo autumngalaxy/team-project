@@ -11,8 +11,8 @@ import interface_adapter.user_login.UserLoginPresenter;
 import interface_adapter.user_login.UserLoginViewModel;
 import service.Frontend;
 import use_case.user_login.*;
-import view.LoginChooseView;
-import view.UserLoginView;
+import view.auth.LoginChooseView;
+import view.auth.UserLoginView;
 
 /**
  * Builds all login-related views, view models, presenters,

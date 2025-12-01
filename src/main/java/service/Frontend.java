@@ -3,11 +3,11 @@ package service;
 import interface_adapter.ViewPets.ViewPetsController;
 import interface_adapter.update_profile.UpdateUserProfileController;
 import interface_adapter.user_logout.UserLogoutController;
-import view.EditProfileView;
 import view.MainDashboardView;
-import view.PetListView;
-import view.SideMenuPanel;
-import view.UserProfileView;
+import view.menu.SideMenuPanel;
+import view.pets.PetListView;
+import view.profile.EditProfileView;
+import view.profile.UserProfileView;
 
 import javax.swing.*;
 
