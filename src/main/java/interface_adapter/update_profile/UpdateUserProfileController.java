@@ -15,7 +15,17 @@ public class UpdateUserProfileController {
         interactor.openEditPage();
     }
 
-    public void save(String name, String email, String address, int phoneNumber) {
+    public void save(String name, String email, String address, String phoneNumberStr) {
+
+        int phoneNumber;
+        try {
+            phoneNumber = Integer.parseInt(phoneNumberStr);
+        } catch (NumberFormatException e) {
+            interactor.phoneNumberInvalid("Phone number should be a number.");
+            return;
+        }
+
         interactor.saveProfile(new UpdateUserProfileInputData(name, email, address, phoneNumber));
     }
+
 }

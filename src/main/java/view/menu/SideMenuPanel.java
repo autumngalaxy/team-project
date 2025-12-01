@@ -66,6 +66,15 @@ public class SideMenuPanel extends JPanel {
 
     private void handleMenuClick(String item) {
         switch (item) {
+	        case "My Profile":
+	        	dashboard.setContent(new UserProfileView(backend));
+	            break;
+	        case "Edit Profile":
+	        	dashboard.setContent(new EditProfileView(backend, frontend.getUpdateProfileController()));
+	            break;
+            case "My Applications":
+//              frontend.showAddPetPage();
+              break;
             case "Manage Applications":
                 dashboard.setContent(new AdminPage(frontend, backend));
                 break;
@@ -78,19 +87,13 @@ public class SideMenuPanel extends JPanel {
                 }
                 break;
             case "Add Pet":
-//                frontend.showAddPetPage();
-                break;
+//              frontend.showAddPetPage();
+              break;
             case "Modify Pet":
 //                frontend.showModifyPetPage();
                 break;
             case "Delete Pet":
 //                frontend.showDeletePetPage();
-                break;
-            case "My Profile":
-            	dashboard.setContent(new UserProfileView(backend));
-                break;
-            case "Edit Profile":
-            	dashboard.setContent(new EditProfileView(backend, frontend.getUpdateProfileController()));
                 break;
             case "Log Out":
                 frontend.logout();

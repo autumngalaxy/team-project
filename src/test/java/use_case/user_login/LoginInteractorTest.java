@@ -1,98 +1,97 @@
 package use_case.user_login;
 
 import entity.User;
-import entity.UserFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import service.Backend;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Tests for UserLoginInteractor ensuring 100% branch coverage.
- */
-public class LoginInteractorTest {
+class LoginInteractorTest {
 
     private UserLoginInteractor interactor;
-    private FakeUserLoginDAO dao;
+    private FakeUserLoginDAO userDAO;
     private FakeUserLoginPresenter presenter;
+    private Backend backend;
 
     @BeforeEach
     void setUp() {
-        dao = new FakeUserLoginDAO();
+        userDAO = new FakeUserLoginDAO();
         presenter = new FakeUserLoginPresenter();
-        // interactor = new UserLoginInteractor(dao, presenter);
+        backend = new Backend();
+
+        interactor = new UserLoginInteractor(userDAO, presenter, backend);
     }
 
-    // === 1. Account does NOT exist ===
+    /** ----------- Test 1: user does not exist ----------- */
     @Test
-    void testAccountDoesNotExist() {
-        dao.exists = false;
-
-        UserLoginInputData input =
-                new UserLoginInputData("user", "Alice", "123");
+    void testUserDoesNotExist() {
+        UserLoginInputData input = new UserLoginInputData("user", "abc", "123");
 
         interactor.execute(input);
 
-        assertEquals("Alice: Account does not exist.", presenter.failMessage);
+        assertEquals("abc: Account does not exist.", presenter.failMessage);
+        assertNull(presenter.successData);
     }
 
-    // === 2. Wrong user type ===
+    /** ----------- Test 2: userType mismatch ----------- */
     @Test
-    void testWrongUserType() {
-        dao.exists = true;
+    void testUserTypeMismatch() {
+        // dao mock contains "user1" with userType = "admin"
+        User mockUser = new User(1, "user1", "", User.idType.PHOTO_CARD,
+                0, "", "user1", "pass", "admin");
+        userDAO.saveUser(mockUser);
 
-        // DB says this is "admin"
-        dao.returnUser = new User(0, "Alice", "",
-                User.idType.PHOTO_CARD, 0, "", "Alice", "123", "admin");
-
-        // login page type = user, mismatch
-        UserLoginInputData input =
-                new UserLoginInputData("user", "Alice", "123");
+        UserLoginInputData input = new UserLoginInputData("user", "user1", "pass");
 
         interactor.execute(input);
 
         assertEquals("Its not user account.", presenter.failMessage);
+        assertNull(presenter.successData);
     }
 
-    // === 3. Wrong password ===
+    /** ----------- Test 3: wrong password ----------- */
     @Test
     void testWrongPassword() {
-        dao.exists = true;
+        User mockUser = new User(1, "user1", "", User.idType.PHOTO_CARD,
+                0, "", "user1", "correctpwd", "user");
+        userDAO.saveUser(mockUser);
 
-        // DB password = 999
-        dao.returnUser = new User(0, "Bob", "",
-                User.idType.PHOTO_CARD, 0, "", "Bob", "999", "user");
-
-        UserLoginInputData input =
-                new UserLoginInputData("user", "Bob", "123");
+        UserLoginInputData input = new UserLoginInputData("user", "user1", "wrong");
 
         interactor.execute(input);
 
-        assertEquals("Incorrect password for \"Bob\".", presenter.failMessage);
+        assertEquals("Incorrect password for \"user1\".", presenter.failMessage);
     }
 
-    // === 4. Login Success ===
+    /** ----------- Test 4: successful login ----------- */
     @Test
-    void testLoginSuccess() {
-        dao.exists = true;
+    void testSuccessfulLogin() {
+        User mockUser = new User(1, "user1", "", User.idType.PHOTO_CARD,
+                0, "", "user1", "123", "user");
+        userDAO.saveUser(mockUser);
 
-        dao.returnUser = new User(0, "Chris", "",
-                User.idType.PHOTO_CARD, 0, "", "Chris", "abc", "user");
-
-        UserLoginInputData input =
-                new UserLoginInputData("user", "Chris", "abc");
+        UserLoginInputData input = new UserLoginInputData("user", "user1", "123");
 
         interactor.execute(input);
 
-        assertEquals("Chris", presenter.successUsername);
-        assertEquals("user", presenter.successUserType);
-        assertEquals("Chris", dao.currentUserSet);
+        assertNull(presenter.failMessage);
+        assertNotNull(presenter.successData);
+
+        assertEquals("user1", presenter.successData.getUsername());
+        assertEquals("user", presenter.successData.getUserType());
+
+        // confirm backend receives current user
+        assertEquals(mockUser.getUsername(), backend.getCurrentUser().getUsername());
+
+        // confirm DAO sets current username
+        assertEquals("user1", userDAO.currentUsername);
     }
 
-    // === 5. goBack ===
+    /** ----------- Test 5: goBack() ----------- */
     @Test
     void testGoBack() {
         interactor.goBack();
-        assertEquals("loginChoose", presenter.goBackView);
+        assertEquals("loginChoose", presenter.goBackViewName);
     }
 }

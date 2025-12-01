@@ -14,15 +14,15 @@ public class DummyDataGenerator {
     public static void main(String[] args) throws Exception {
         final Random random = new Random();
 
-        final int num_users = 5;
-        final int num_admins = 10;
+        final int num_users = 20;
+        final int num_admins = 30;
         final int num_applications = 20;
 
         // Users
-        JSONArray allusers = new JSONArray();
+        JSONArray users = new JSONArray();
 
         final User.idType[] idTypes = User.idType.values();
-        for (int i = 0; i <= num_users; i++) {
+        for (int i = 1; i <= num_users; i++) {
             User userK = new User(
                     i,
                     "User " + i,
@@ -32,14 +32,25 @@ public class DummyDataGenerator {
                     "user"+i+"@example.com",
                     "user" + i,
                     "pass" + i,
-                    i == 0 ? "admin" :  "user"
+                    i == 1 ? "admin" :  "user"
             );
 
-            allusers.put(userK.toJson());
+            users.put(userK.toJson());
+        }
+
+        // Pets
+        JSONArray pets = new JSONArray();
+        APIInterface api = new APIInterface();
+        List<Integer> seenPetIds = new ArrayList<>();
+        for (Pet pet : api.getPets()) {
+            pets.put(pet.toJson());
+            seenPetIds.add(pet.getId());
         }
 
         // Admins
-        for (int i = 6; i <= num_admins; i++) {
+        JSONArray admins = new JSONArray();
+
+        for (int i = 1; i <= num_admins; i++) {
             User adminK = new User(
                     i,
                     "Admin" + i,
@@ -52,16 +63,7 @@ public class DummyDataGenerator {
                     "admin"
             );
 
-            allusers.put(adminK.toJson());
-        }
-
-        // Pets
-        JSONArray pets = new JSONArray();
-        APIInterface api = new APIInterface();
-        List<Integer> seenPetIds = new ArrayList<>();
-        for (Pet pet : api.getPets()) {
-            pets.put(pet.toJson());
-            seenPetIds.add(pet.getId());
+            admins.put(adminK.toJson());
         }
 
         // Applications
@@ -78,7 +80,7 @@ public class DummyDataGenerator {
         }
 
         // Save files
-        // try (FileWriter fw = new FileWriter("users.json")) { fw.write(allusers.toString(4)); }
+        // try (FileWriter fw = new FileWriter("users.json")) { fw.write(users.toString(4)); }
         try (FileWriter fw = new FileWriter("pets.json")) { fw.write(pets.toString(4)); }
         try (FileWriter fw = new FileWriter("applications.json")) { fw.write(applications.toString(4)); }
 

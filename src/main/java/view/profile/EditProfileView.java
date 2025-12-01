@@ -66,7 +66,7 @@ public class EditProfileView extends RightContentTemplate implements PropertyCha
         // Save Button
         JButton saveBtn = new JButton("Save");
         saveBtn.setBackground(new Color(90, 140, 255));
-        saveBtn.setForeground(Color.WHITE);
+        saveBtn.setForeground(Color.BLACK);
         saveBtn.setFocusPainted(false);
         saveBtn.setPreferredSize(new Dimension(120, 40));
         saveBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -75,7 +75,7 @@ public class EditProfileView extends RightContentTemplate implements PropertyCha
                 nameField.getText(),
                 emailField.getText(),
                 addressField.getText(),
-                Integer.parseInt(phoneField.getText())
+                phoneField.getText()
         ));
 
         card.add(saveBtn);

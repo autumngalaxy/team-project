@@ -83,7 +83,6 @@ public class AppBuilder {
      * @param frontend The frontend window where views will be displayed.
      * @param dao      The DAO used for accessing user data.
      */
-//    public AppBuilder(Frontend frontend, Backend backend, FileUserDataAccessObject dao, PetDataAccessInterface petDataAccess) {
     public AppBuilder(Frontend frontend, Backend backend, FileUserDataAccessObject dao) {
         this.frontend = frontend;
         this.backend = backend;
@@ -223,7 +222,7 @@ public class AppBuilder {
                 new UpdateUserProfilePresenter(viewManagerModel, frontend);
 
     	final UpdateUserProfileInputBoundary interactor =
-                new UpdateUserProfileInteractor(userDataAccessObject, output);
+                new UpdateUserProfileInteractor(userDataAccessObject, backend, output);
 
         UpdateUserProfileController controller =
                 new UpdateUserProfileController(interactor);
