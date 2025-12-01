@@ -1,18 +1,7 @@
 [
     {
-        "password": "pass0",
-        "address": "Address 0",
-        "idType": "PHOTO_CARD",
-        "phoneNumber": 0,
-        "name": "User 0",
-        "id": 0,
-        "userType": "admin",
-        "email": "user0@example.com",
-        "username": "user0"
-    },
-    {
         "password": "pass1",
-        "address": "Address 1",
+        "address": "Address",
         "idType": "PASSPORT",
         "phoneNumber": 1,
         "name": "User 1",
@@ -229,5 +218,16 @@
         "userType": "user",
         "email": "user20@example.com",
         "username": "user20"
+    },
+    {
+        "password": "pass0",
+        "address": "Address 011111111",
+        "idType": "PHOTO_CARD",
+        "phoneNumber": 0,
+        "name": "User 01111",
+        "id": 21,
+        "userType": "admin",
+        "email": "user011111@example.com",
+        "username": "user0"
     }
 ]

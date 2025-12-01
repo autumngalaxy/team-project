@@ -9,34 +9,31 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class EditProfileView extends JPanel implements PropertyChangeListener {
+public class EditProfileView extends RightContentTemplate implements PropertyChangeListener {
 
-    private final UpdateUserProfileController controller;
     private final String viewName = "editProfile";
 
     private JTextField nameField;
     private JTextField emailField;
     private JTextArea addressField;
+    private JTextField phoneField;
+    private JTextField idTypeField;
+    private JTextField usernameField;
+    private JTextField userTypeField;
 
     public EditProfileView(Backend backend, UpdateUserProfileController controller) {
-        this.controller = controller;
+        super("Edit Profile");
 
-        setLayout(new BorderLayout());
-        setBackground(new Color(0xF5F7FB));
-
-        // ====== USER DATA ======
+        // Load Current User
         User user = backend.getCurrentUser();
         if (user == null) {
             user = new User(0, "", "", User.idType.PHOTO_CARD, 0, "",
                     "", "", "user");
         }
 
-        // ====== RIGHT CONTENT AREA ======
-        JPanel contentWrapper = new JPanel(new GridBagLayout());
-        contentWrapper.setBackground(new Color(0xF5F7FB));
-
+        // Main card
         JPanel card = new JPanel();
-        card.setPreferredSize(new Dimension(850, 500));
+        card.setPreferredSize(new Dimension(850, 600));
         card.setBackground(Color.WHITE);
         card.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(210, 210, 210)),
@@ -44,56 +41,63 @@ public class EditProfileView extends JPanel implements PropertyChangeListener {
         ));
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
 
-        // ====== TITLE ======
-        JLabel title = new JLabel("Edit Profile");
-        title.setFont(new Font("Arial", Font.BOLD, 24));
-        title.setForeground(new Color(60, 60, 75));
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        card.add(title);
-        card.add(Box.createVerticalStrut(30));
-
-        // ====== FORM FIELDS ======
+        // Form fields
         nameField = createField(card, "Name:", user.getName());
         emailField = createField(card, "Email:", user.getEmail());
+        phoneField = createField(card, "Phone:", String.valueOf(user.getPhoneNumber()));
         addressField = createTextArea(card, "Address:", user.getAddress());
 
-        // ====== SAVE BUTTON ======
+        // Non-editable fields
+        usernameField = createField(card, "Username:", user.getUsername());
+        usernameField.setEditable(false);
+        usernameField.setBackground(new Color(240, 240, 240));
+
+        userTypeField = createField(card, "User Type:", user.getUserType());
+        userTypeField.setEditable(false);
+        userTypeField.setBackground(new Color(240, 240, 240));
+
+        idTypeField = createField(card, "ID Type:", user.getIdType().toString());
+        idTypeField.setEditable(false);
+        idTypeField.setBackground(new Color(240, 240, 240));
+
+        card.add(Box.createVerticalStrut(20));
+
+        // Save Button
         JButton saveBtn = new JButton("Save");
-        saveBtn.setBackground(new Color(110, 150, 255));
+        saveBtn.setBackground(new Color(90, 140, 255));
         saveBtn.setForeground(Color.WHITE);
         saveBtn.setFocusPainted(false);
-        saveBtn.setPreferredSize(new Dimension(100, 36));
+        saveBtn.setPreferredSize(new Dimension(120, 40));
         saveBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        saveBtn.addActionListener(e ->
-                controller.save(
-                        nameField.getText(),
-                        emailField.getText(),
-                        addressField.getText()
-                )
-        );
+        saveBtn.addActionListener(e -> controller.save(
+                nameField.getText(),
+                emailField.getText(),
+                addressField.getText(),
+                phoneField.getText() 
+        ));
 
-        card.add(Box.createVerticalStrut(30));
         card.add(saveBtn);
 
-        contentWrapper.add(card);
-
-        add(contentWrapper, BorderLayout.CENTER);
+        // Put card into RightContentTemplate bodyPanel 
+        bodyPanel.setLayout(new GridBagLayout());
+        bodyPanel.add(card);
     }
 
-    /** Create an aligned label + textbox line */
+
+    /** Create label + single-line text field */
     private JTextField createField(JPanel card, String label, String value) {
 
         JPanel row = new JPanel(new BorderLayout());
         row.setOpaque(false);
         row.setMaximumSize(new Dimension(700, 50));
 
-        JLabel lbl = new JLabel("  " + label);
-        lbl.setPreferredSize(new Dimension(120, 40));
-        lbl.setFont(new Font("Arial", Font.PLAIN, 14));
+        JLabel lbl = new JLabel(label);
+        lbl.setPreferredSize(new Dimension(130, 40));
+        lbl.setFont(new Font("Arial", Font.PLAIN, 15));
 
         JTextField field = new JTextField(value);
-        field.setPreferredSize(new Dimension(400, 30));
+        field.setPreferredSize(new Dimension(450, 30));
 
         row.add(lbl, BorderLayout.WEST);
         row.add(field, BorderLayout.CENTER);
@@ -103,24 +107,24 @@ public class EditProfileView extends JPanel implements PropertyChangeListener {
         return field;
     }
 
-    /** Create multi-line Address field */
+    /** Create multi-line text field */
     private JTextArea createTextArea(JPanel card, String label, String value) {
 
         JPanel row = new JPanel(new BorderLayout());
         row.setOpaque(false);
         row.setMaximumSize(new Dimension(700, 120));
 
-        JLabel lbl = new JLabel("  " + label);
-        lbl.setPreferredSize(new Dimension(120, 40));
-        lbl.setFont(new Font("Arial", Font.PLAIN, 14));
+        JLabel lbl = new JLabel(label);
+        lbl.setPreferredSize(new Dimension(130, 40));
+        lbl.setFont(new Font("Arial", Font.PLAIN, 15));
 
         JTextArea area = new JTextArea(value);
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
-        area.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220)));
+        area.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210)));
 
         JScrollPane scroll = new JScrollPane(area);
-        scroll.setPreferredSize(new Dimension(400, 100));
+        scroll.setPreferredSize(new Dimension(450, 100));
 
         row.add(lbl, BorderLayout.WEST);
         row.add(scroll, BorderLayout.CENTER);
@@ -130,10 +134,6 @@ public class EditProfileView extends JPanel implements PropertyChangeListener {
 
         return area;
     }
-
-//    public void setController(UpdateUserProfileController controller) {
-//        this.controller = controller;
-//    }
 
     public String getViewName() {
         return viewName;

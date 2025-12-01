@@ -15,7 +15,7 @@ public class UpdateUserProfileController {
         interactor.openEditPage();
     }
 
-    public void save(String name, String email, String address) {
-        interactor.saveProfile(new UpdateUserProfileInputData(name, email, address));
+    public void save(String name, String email, String address, String phoneNumber) {
+        interactor.saveProfile(new UpdateUserProfileInputData(name, email, address, phoneNumber));
     }
 }

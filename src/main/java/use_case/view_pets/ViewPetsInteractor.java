@@ -1,29 +1,34 @@
 package use_case.view_pets;
-import dataAccess.PetDataAccessInterface;
-import java.util.List;
+
 import entity.Pet;
+import service.Backend;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewPetsInteractor implements ViewPetsInputBoundary {
-    private final PetDataAccessInterface petDataAccess;
+
+    private final Backend backend;
     private final ViewPetsOutputBoundary presenter;
 
-    public ViewPetsInteractor(PetDataAccessInterface petDataAccess,
+    public ViewPetsInteractor(Backend backend,
                               ViewPetsOutputBoundary presenter) {
-        this.petDataAccess = petDataAccess;
+        this.backend = backend;
         this.presenter = presenter;
     }
+
     @Override
     public void execute(ViewPetsInputData inputData) {
         try {
-            System.out.println("Debug: ViewPetsInteractor executing");
-            List<Pet> pets = petDataAccess.getPets();
-            ViewPetsOutputData outputData =
-                    new ViewPetsOutputData(pets, null);
-            presenter.present(outputData);
+            List<Pet> list = new ArrayList<>(backend.pets.values());
+
+            ViewPetsOutputData out =
+                    new ViewPetsOutputData(list, null);
+            presenter.present(out);
         } catch (Exception e) {
-            ViewPetsOutputData outputData =
-                    new ViewPetsOutputData(List.of(), "Could not load pets.");
-            presenter.present(outputData);
+            ViewPetsOutputData out =
+                    new ViewPetsOutputData(new ArrayList<>(), e.getMessage());
+            presenter.present(out);
         }
     }
 }

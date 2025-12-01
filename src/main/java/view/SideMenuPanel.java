@@ -1,6 +1,10 @@
 package view;
 
 import javax.swing.*;
+
+import interface_adapter.FilterPets.PetListViewModel;
+import interface_adapter.ViewPets.ViewPetsController;
+
 import java.awt.*;
 import java.util.Map;
 import service.Backend;
@@ -60,8 +64,13 @@ public class SideMenuPanel extends JPanel {
             case "Manage Applications":
                 dashboard.setContent(new AdminPage(frontend, backend));
                 break;
-            case "View Pets":
-//                frontend.showPetListPage();
+            case "View Pets": 
+                ViewPetsController c = frontend.getViewPetsController();
+
+                if (c != null) {
+                    c.onViewPets();
+                    dashboard.setContent(new PetListView(c.getViewModel(), c));
+                }
                 break;
             case "Add Pet":
 //                frontend.showAddPetPage();
@@ -71,6 +80,9 @@ public class SideMenuPanel extends JPanel {
                 break;
             case "Delete Pet":
 //                frontend.showDeletePetPage();
+                break;
+            case "My Profile":
+            	dashboard.setContent(new UserProfileView(backend));
                 break;
             case "Edit Profile":
             	dashboard.setContent(new EditProfileView(backend, frontend.getUpdateProfileController()));

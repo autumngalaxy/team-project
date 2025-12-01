@@ -1,8 +1,12 @@
 package app;
 
 import dataAccess.FileUserDataAccessObject;
+import dataAccess.PetDataAccessInterface;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.FilterPets.PetListViewModel;
+import interface_adapter.ViewPets.ViewPetsController;
+import interface_adapter.ViewPets.ViewPetsPresenter;
 import interface_adapter.homepage.LoginChoosePresenter;
 import interface_adapter.homepage.LoginChooseViewModel;
 import interface_adapter.sign_up.SignupController;
@@ -29,6 +33,9 @@ import use_case.user_login.UserLoginOutputBoundary;
 import use_case.user_logout.UserLogoutInputBoundary;
 import use_case.user_logout.UserLogoutInteractor;
 import use_case.user_logout.UserLogoutOutputBoundary;
+import use_case.view_pets.ViewPetsInputBoundary;
+import use_case.view_pets.ViewPetsInteractor;
+import use_case.view_pets.ViewPetsOutputBoundary;
 import view.*;
 
 import javax.swing.*;
@@ -48,6 +55,7 @@ public class AppBuilder {
     private final ViewManager viewManager;
 
     private final FileUserDataAccessObject userDataAccessObject;
+//    private final PetDataAccessInterface petDataAccess;
 
     private final Frontend frontend;
     private final Backend backend;
@@ -56,12 +64,14 @@ public class AppBuilder {
     private final LoginChooseViewModel loginChooseViewModel = new LoginChooseViewModel();
     private final UserLoginViewModel userLoginViewModel = new UserLoginViewModel();
     private final SignupViewModel signupViewModel= new SignupViewModel();
-
+    private final PetListViewModel petListViewModel = new PetListViewModel();
+    private ViewPetsController viewPetsController;
+    
     // Views
     private LoginChooseView loginChooseView;
     private CreateUserAccountView createUserAccountView;
     private UserLoginView userLoginView;
-    private EditProfileView editProfileView;
+
 
     /**
      * Constructs an AppBuilder that initializes all required managers and shared
@@ -70,7 +80,7 @@ public class AppBuilder {
      * @param frontend The frontend window where views will be displayed.
      * @param dao      The DAO used for accessing user data.
      */
-//    public AppBuilder(Frontend frontend, FileUserDataAccessObject dao) {
+//    public AppBuilder(Frontend frontend, Backend backend, FileUserDataAccessObject dao, PetDataAccessInterface petDataAccess) {
     public AppBuilder(Frontend frontend, Backend backend, FileUserDataAccessObject dao) {
         this.frontend = frontend;
         this.backend = backend;
@@ -207,7 +217,7 @@ public class AppBuilder {
     public AppBuilder addUpdateProfileUseCase() {
 
     	final UpdateUserProfileOutputBoundary output =
-                new UpdateUserProfilePresenter(viewManagerModel);
+                new UpdateUserProfilePresenter(viewManagerModel, frontend);
 
     	final UpdateUserProfileInputBoundary interactor =
                 new UpdateUserProfileInteractor(userDataAccessObject, output);
@@ -216,6 +226,23 @@ public class AppBuilder {
                 new UpdateUserProfileController(interactor);
 
         frontend.setUpdateProfileController(controller);
+
+        return this;
+    }
+
+
+    public AppBuilder addViewPetsUseCase(Backend backend) {
+
+        ViewPetsOutputBoundary presenter =
+                new ViewPetsPresenter(petListViewModel);
+
+        ViewPetsInputBoundary interactor =
+                new ViewPetsInteractor(backend, presenter);
+
+        viewPetsController =
+                new ViewPetsController(interactor, petListViewModel);
+
+        frontend.setViewPetsController(viewPetsController);
 
         return this;
     }

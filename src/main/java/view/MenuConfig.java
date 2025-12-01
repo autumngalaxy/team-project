@@ -27,6 +27,7 @@ public class MenuConfig {
                 "Add Pet",
                 "Modify Pet",
                 "Delete Pet",
+                "My Profile",
                 "Edit Profile",
                 "Log Out"
         });
@@ -36,6 +37,7 @@ public class MenuConfig {
                 "View Pets",
                 "Add Pet",
                 "Modify Pet",
+                "My Profile",
                 "Edit Profile",
                 "Log Out"
         });
@@ -43,6 +45,7 @@ public class MenuConfig {
         // Menu for Regular User
         map.put("user", new String[]{
                 "View Pets",
+                "My Profile",
                 "Edit Profile",
                 "Log Out"
         });
