@@ -87,13 +87,13 @@ public class SideMenuPanel extends JPanel {
                 }
                 break;
             case "Add Pet":
-//              frontend.showAddPetPage();
-              break;
+                frontend.showAddPetPage();
+                break;
             case "Modify Pet":
-//                frontend.showModifyPetPage();
+                frontend.showModifyPetPage();
                 break;
             case "Delete Pet":
-//                frontend.showDeletePetPage();
+                frontend.showDeletePetPage();
                 break;
             case "Log Out":
                 frontend.logout();

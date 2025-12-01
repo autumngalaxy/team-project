@@ -85,6 +85,36 @@ public class AdminPage extends JPanel {
         Pet pet = backend.getPetById(app.getPetId());
         User user = backend.getUserById(app.getUserId());
 
+        // Defensive: if data is inconsistent, don't crash the whole app
+        if (pet == null) {
+            System.err.println(
+                    "WARNING: Pet id " + app.getPetId() +
+                            " not found for application " + app.getId()
+            );
+            // Show a minimal card instead of blowing up
+            card.add(new JLabel(
+                            "Application " + app.getId() +
+                                    " refers to missing pet " + app.getPetId(),
+                            SwingConstants.CENTER),
+                    BorderLayout.CENTER
+            );
+            return card;
+        }
+
+        if (user == null) {
+            System.err.println(
+                    "WARNING: User id " + app.getUserId() +
+                            " not found for application " + app.getId()
+            );
+            card.add(new JLabel(
+                            "Application " + app.getId() +
+                                    " refers to missing user " + app.getUserId(),
+                            SwingConstants.CENTER),
+                    BorderLayout.CENTER
+            );
+            return card;
+        }
+
         // Left: picture
         JLabel picLabel = new JLabel();
         picLabel.setPreferredSize(new Dimension(200, 185));

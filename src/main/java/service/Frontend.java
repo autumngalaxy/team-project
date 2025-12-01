@@ -17,6 +17,24 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.*;
 
+import dataAccess.InMemoryPetDataAccessObject;
+import dataAccess.BackendPetDataAccessObject;
+
+import interface_adapter.pet_management.PetManagementController;
+import interface_adapter.pet_management.PetManagementPresenter;
+import interface_adapter.pet_management.PetManagementViewModel;
+
+import use_case.pet_management.AddPetInputBoundary;
+import use_case.pet_management.AddPetInteractor;
+import use_case.pet_management.DeletePetInputBoundary;
+import use_case.pet_management.DeletePetInteractor;
+import use_case.pet_management.PetDataAccessInterface;
+import use_case.pet_management.PetManagementOutputBoundary;
+import use_case.pet_management.UpdatePetInputBoundary;
+import use_case.pet_management.UpdatePetInteractor;
+
+import view.AdminPetManagementView;
+
 public class Frontend extends JFrame {
 
     private final Backend backend;
@@ -31,7 +49,7 @@ public class Frontend extends JFrame {
     private UpdateUserProfileController updateProfileController;
     private ViewPetsController viewPetsController;
     private MainDashboardView currentDashboard;
-    
+
     /**
      * Constructs the application frontend window.
      *
@@ -62,10 +80,10 @@ public class Frontend extends JFrame {
      * This becomes the initial UI shown when the application starts.
      *
      * @param cardPanel the shared panel containing all card-based views
-     * @param cardLayout 
+     * @param cardLayout
      */
     public void setCardPanel(JPanel cardPanel, CardLayout cardLayout) {
-        this.cardPanel = cardPanel;        
+        this.cardPanel = cardPanel;
         this.cardLayout = cardLayout;
         setContentPane(cardPanel);
     }
@@ -97,23 +115,23 @@ public class Frontend extends JFrame {
     public void setUpdateProfileController(UpdateUserProfileController controller) {
         this.updateProfileController = controller;
     }
-    
+
     public UpdateUserProfileController getUpdateProfileController() {
         return updateProfileController;
     }
- 
+
     public void showMyProfile() {
     	currentDashboard.setContent(new UserProfileView(backend));
     }
-   
+
     public void setViewPetsController(ViewPetsController controller) {
         this.viewPetsController = controller;
     }
-   
+
 	public ViewPetsController getViewPetsController() {
 		return viewPetsController;
 	}
-    
+
     /**
      * Logs the user out using Clean Architecture logic, then returns the UI
      * back to the original cardPanel containing login/signup screens.
@@ -131,5 +149,59 @@ public class Frontend extends JFrame {
         }
     }
 
+    // ===== Admin: Pet Management windows =====
+
+    /** Open the pet management screen from "Add Pet" menu item. */
+    public void showAddPetPage() {
+        showPetManagementDialog("Add Pet", AdminPetManagementView.Mode.ADD);
+    }
+
+    /** Open the  pet management screen from "Modify Pet". */
+    public void showModifyPetPage() {
+        showPetManagementDialog("Modify Pet", AdminPetManagementView.Mode.MODIFY);
+    }
+
+    /** Open the same pet management screen from "Delete Pet". */
+    public void showDeletePetPage() {
+        showPetManagementDialog("Delete Pet", AdminPetManagementView.Mode.DELETE);
+    }
+
+    /** Common helper: show the AdminPetManagementView in a modal dialog. */
+    private void showPetManagementDialog(String title, AdminPetManagementView.Mode mode) {
+        JPanel panel = buildPetManagementPanel(mode);
+
+        JDialog dialog = new JDialog(this, title, true); // modal dialog
+        dialog.setContentPane(panel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }
+
+
+    /** Builds AdminPetManagementView wired up to the Clean Architecture stack. */
+    private JPanel buildPetManagementPanel(AdminPetManagementView.Mode mode) {
+        // ViewModel
+        PetManagementViewModel vm = new PetManagementViewModel();
+
+        // DAO implementing PetDataAccessInterface
+        PetDataAccessInterface petGateway = new BackendPetDataAccessObject(backend);
+
+        // Presenter & use cases
+        PetManagementOutputBoundary presenter = new PetManagementPresenter(vm);
+
+        AddPetInputBoundary addUC = new AddPetInteractor(petGateway, presenter);
+        UpdatePetInputBoundary updateUC = new UpdatePetInteractor(petGateway, presenter);
+        DeletePetInputBoundary deleteUC = new DeletePetInteractor(petGateway, presenter);
+
+        // Controller
+        PetManagementController controller =
+                new PetManagementController(addUC, updateUC, deleteUC);
+
+        // View in the right mode
+        AdminPetManagementView view = new AdminPetManagementView(vm, mode);
+        view.setController(controller);
+
+        return view;
+    }
 
 }
