@@ -10,11 +10,13 @@ public class SideMenuPanel extends JPanel {
 
     private final Frontend frontend;
     private final Backend backend;
+    private final MainDashboardView dashboard; 
     private String userType;
 
-    public SideMenuPanel(Frontend frontend, Backend backend, String userType) {
+    public SideMenuPanel(Frontend frontend, Backend backend, MainDashboardView dashboard, String userType) {
         this.frontend = frontend;
         this.backend = backend;
+        this.dashboard = dashboard;
         this.userType = userType;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -27,7 +29,7 @@ public class SideMenuPanel extends JPanel {
         title.setFont(new Font("Arial", Font.BOLD, 20));
         add(title);
         add(Box.createRigidArea(new Dimension(0, 20)));
-
+        
         // Load Menu Configuration
         Map<String, String[]> config = MenuConfig.getMenuItems();
         String[] items = config.getOrDefault(userType, new String[]{"Log Out"});
@@ -56,7 +58,7 @@ public class SideMenuPanel extends JPanel {
     private void handleMenuClick(String item) {
         switch (item) {
             case "Manage Applications":
-                frontend.showDashboard("admin");
+                dashboard.setContent(new AdminPage(frontend, backend));
                 break;
             case "View Pets":
 //                frontend.showPetListPage();
@@ -69,6 +71,9 @@ public class SideMenuPanel extends JPanel {
                 break;
             case "Delete Pet":
 //                frontend.showDeletePetPage();
+                break;
+            case "Edit Profile":
+            	dashboard.setContent(new EditProfileView(backend, frontend.getUpdateProfileController()));
                 break;
             case "Log Out":
                 frontend.logout();

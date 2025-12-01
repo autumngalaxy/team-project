@@ -143,4 +143,13 @@ public class FileUserDataAccessObject implements
     public String getCurrentUsername() {
         return currentUsername;
     }
+    
+    public void updateUser(User user) {
+        accounts.put(user.getUsername(), user);
+        save(user);
+    }
+
+	public User getCurrentUser() {
+		return accounts.get(currentUsername);
+	}
 }

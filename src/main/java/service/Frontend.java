@@ -1,8 +1,16 @@
 package service;
 
+import interface_adapter.update_profile.UpdateUserProfileController;
 import interface_adapter.user_logout.UserLogoutController;
+import view.EditProfileView;
+import view.SideMenuPanel;
 
 import javax.swing.*;
+
+import entity.User;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.event.*;
 
 public class Frontend extends JFrame {
@@ -15,6 +23,10 @@ public class Frontend extends JFrame {
     // The card panel containing all login/signup views from the AppBuilder.
     private JPanel cardPanel;
 
+    private UpdateUserProfileController updateProfileController;
+
+	private CardLayout cardLayout;
+    
     /**
      * Constructs the application frontend window.
      *
@@ -33,7 +45,7 @@ public class Frontend extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                backend.toJsonFiles("users.json", "pets.json", "admins.json", "applications.json");
+                backend.toJsonFiles("users.json", "pets.json", "applications.json");
                 dispose();
                 System.exit(0);
             }
@@ -45,9 +57,11 @@ public class Frontend extends JFrame {
      * This becomes the initial UI shown when the application starts.
      *
      * @param cardPanel the shared panel containing all card-based views
+     * @param cardLayout 
      */
-    public void setCardPanel(JPanel cardPanel) {
-        this.cardPanel = cardPanel;
+    public void setCardPanel(JPanel cardPanel, CardLayout cardLayout) {
+        this.cardPanel = cardPanel;        
+        this.cardLayout = cardLayout;
         setContentPane(cardPanel);
     }
 
@@ -68,12 +82,19 @@ public class Frontend extends JFrame {
      * @param userType the type of the logged-in user (admin/staff/user)
      */
     public void showDashboard(String userType) {
-        // Dashboard 也是一个 JPanel（在 cardPanel 外部）
-        // 所以切换成 Dashboard 视图
         setContentPane(new view.MainDashboardView(this, backend, userType));
         revalidate();
         repaint();
     }
+
+    public void setUpdateProfileController(UpdateUserProfileController controller) {
+        this.updateProfileController = controller;
+    }
+    
+    public UpdateUserProfileController getUpdateProfileController() {
+        return updateProfileController;
+    }
+    
 
     /**
      * Logs the user out using Clean Architecture logic, then returns the UI
@@ -91,4 +112,5 @@ public class Frontend extends JFrame {
             repaint();
         }
     }
+
 }
