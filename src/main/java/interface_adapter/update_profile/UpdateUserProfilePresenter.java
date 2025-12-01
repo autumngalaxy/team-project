@@ -1,14 +1,20 @@
 package interface_adapter.update_profile;
 
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 import interface_adapter.ViewManagerModel;
+import service.Frontend;
 import use_case.update_profile.UpdateUserProfileOutputBoundary;
 
 public class UpdateUserProfilePresenter implements UpdateUserProfileOutputBoundary {
 
     private final ViewManagerModel viewManagerModel;
+    private final Frontend frontend;
 
-    public UpdateUserProfilePresenter(ViewManagerModel viewManagerModel2) {
-        this.viewManagerModel = viewManagerModel2;
+    public UpdateUserProfilePresenter(ViewManagerModel viewManagerModel, Frontend frontend) {
+        this.viewManagerModel = viewManagerModel;
+        this.frontend = frontend;
     }
 
 	@Override
@@ -20,8 +26,24 @@ public class UpdateUserProfilePresenter implements UpdateUserProfileOutputBounda
 
     @Override
     public void showProfileUpdateSuccess() {
-        viewManagerModel.setState("userDashboard");
-        viewManagerModel.setWindowTitle("Dashboard");
-        viewManagerModel.firePropertyChange();
+        JOptionPane.showMessageDialog(
+                null,
+                "Profile updated successfully!",
+                "Success",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+        SwingUtilities.invokeLater(() -> {
+        	frontend.showMyProfile();        	
+        });
     }
+    
+//    @Override
+//    public void prepareFailView(String message) {
+//        javax.swing.JOptionPane.showMessageDialog(
+//                null,
+//                message,
+//                "Error",
+//                javax.swing.JOptionPane.ERROR_MESSAGE
+//        );
+//    }
 }

@@ -38,4 +38,27 @@ public class UpdateUserProfileInteractor implements UpdateUserProfileInputBounda
         }
         presenter.showProfileUpdateSuccess();
     }
+    
+    @Override
+    public void save(String name, String email, String address, String phone) {
+
+        User user = userDAO.getCurrentUser();
+
+        User updated = new User(
+                user.getId(),
+                name,
+                address,
+                user.getIdType(),
+                Integer.parseInt(phone),
+                email,
+                user.getUsername(),
+                user.getPassword(),
+                user.getUserType()
+        );
+
+        userDAO.updateUser(updated);
+
+//        presenter.prepareSuccessView(updated);
+    }
+
 }

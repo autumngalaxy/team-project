@@ -1,9 +1,13 @@
 package service;
 
+import interface_adapter.ViewPets.ViewPetsController;
 import interface_adapter.update_profile.UpdateUserProfileController;
 import interface_adapter.user_logout.UserLogoutController;
 import view.EditProfileView;
+import view.MainDashboardView;
+import view.PetListView;
 import view.SideMenuPanel;
+import view.UserProfileView;
 
 import javax.swing.*;
 
@@ -22,10 +26,11 @@ public class Frontend extends JFrame {
 
     // The card panel containing all login/signup views from the AppBuilder.
     private JPanel cardPanel;
+	private CardLayout cardLayout;
 
     private UpdateUserProfileController updateProfileController;
-
-	private CardLayout cardLayout;
+    private ViewPetsController viewPetsController;
+    private MainDashboardView currentDashboard;
     
     /**
      * Constructs the application frontend window.
@@ -65,6 +70,7 @@ public class Frontend extends JFrame {
         setContentPane(cardPanel);
     }
 
+    //---------------------------by YZ----------------------------------
     /**
      * Stores the logout controller so that the dashboard or navbar can call logout().
      *
@@ -82,7 +88,8 @@ public class Frontend extends JFrame {
      * @param userType the type of the logged-in user (admin/staff/user)
      */
     public void showDashboard(String userType) {
-        setContentPane(new view.MainDashboardView(this, backend, userType));
+    	currentDashboard = new MainDashboardView(this, backend, userType);
+        setContentPane(currentDashboard);
         revalidate();
         repaint();
     }
@@ -94,8 +101,19 @@ public class Frontend extends JFrame {
     public UpdateUserProfileController getUpdateProfileController() {
         return updateProfileController;
     }
+ 
+    public void showMyProfile() {
+    	currentDashboard.setContent(new UserProfileView(backend));
+    }
+   
+    public void setViewPetsController(ViewPetsController controller) {
+        this.viewPetsController = controller;
+    }
+   
+	public ViewPetsController getViewPetsController() {
+		return viewPetsController;
+	}
     
-
     /**
      * Logs the user out using Clean Architecture logic, then returns the UI
      * back to the original cardPanel containing login/signup screens.
@@ -112,5 +130,6 @@ public class Frontend extends JFrame {
             repaint();
         }
     }
+
 
 }
