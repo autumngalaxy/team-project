@@ -15,6 +15,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.FileWriter;
 
+import api.APIInterface;
+
+
 /**
  * The Backend service class stores all core domain data for users, pets,
  * admins and adoption applications. It also provides methods for updating
@@ -376,4 +379,28 @@ public class Backend {
             throw new RuntimeException(ex);
         }
     }
+
+    /**
+     * Fetches pets from the Petfinder API and merges them into the in-memory pets map.
+     * Only adds pets whose IDs do not already exist locally (to avoid collisions).
+     */
+    public void importPetsFromApi() {
+        APIInterface api = new APIInterface();
+        try {
+            List<Pet> apiPets = api.getPets();
+
+            int added = 0;
+            for (Pet pet : apiPets) {
+                if (!pets.containsKey(pet.getId())) {
+                    addPet(pet);
+                    added++;
+                }
+            }
+            System.out.println("Imported " + added + " pets from Petfinder API.");
+        } catch (Exception e) {
+            System.err.println("Failed to import pets from Petfinder API");
+            e.printStackTrace();
+        }
+    }
+
 }

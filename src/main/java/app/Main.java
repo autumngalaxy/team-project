@@ -25,6 +25,8 @@ public class Main {
                 "applications.json"
         );
 
+        backend.importPetsFromApi();
+
         // 2 Create a single window Frontend
         final Frontend frontend = new Frontend(backend);
 
@@ -45,6 +47,7 @@ public class Main {
                 .addUserLoginUseCase()
                 .addUserLogoutUseCase()
                 .addSignupUseCase()
+                .addPetManagementUseCase()
                 .build();
 
         // 5 show Frontend

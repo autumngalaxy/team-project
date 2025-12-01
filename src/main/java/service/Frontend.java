@@ -5,6 +5,24 @@ import interface_adapter.user_logout.UserLogoutController;
 import javax.swing.*;
 import java.awt.event.*;
 
+import dataAccess.InMemoryPetDataAccessObject;
+import dataAccess.BackendPetDataAccessObject;
+
+import interface_adapter.pet_management.PetManagementController;
+import interface_adapter.pet_management.PetManagementPresenter;
+import interface_adapter.pet_management.PetManagementViewModel;
+
+import use_case.pet_management.AddPetInputBoundary;
+import use_case.pet_management.AddPetInteractor;
+import use_case.pet_management.DeletePetInputBoundary;
+import use_case.pet_management.DeletePetInteractor;
+import use_case.pet_management.PetDataAccessInterface;
+import use_case.pet_management.PetManagementOutputBoundary;
+import use_case.pet_management.UpdatePetInputBoundary;
+import use_case.pet_management.UpdatePetInteractor;
+
+import view.AdminPetManagementView;
+
 public class Frontend extends JFrame {
 
     private final Backend backend;
@@ -91,4 +109,61 @@ public class Frontend extends JFrame {
             repaint();
         }
     }
+
+    // ===== Admin: Pet Management windows =====
+
+    /** Open the pet management screen from "Add Pet" menu item. */
+    public void showAddPetPage() {
+        showPetManagementDialog("Add Pet", AdminPetManagementView.Mode.ADD);
+    }
+
+    /** Open the  pet management screen from "Modify Pet". */
+    public void showModifyPetPage() {
+        showPetManagementDialog("Modify Pet", AdminPetManagementView.Mode.MODIFY);
+    }
+
+    /** Open the same pet management screen from "Delete Pet". */
+    public void showDeletePetPage() {
+        showPetManagementDialog("Delete Pet", AdminPetManagementView.Mode.DELETE);
+    }
+
+    /** Common helper: show the AdminPetManagementView in a modal dialog. */
+    private void showPetManagementDialog(String title, AdminPetManagementView.Mode mode) {
+        JPanel panel = buildPetManagementPanel(mode);
+
+        JDialog dialog = new JDialog(this, title, true); // modal dialog
+        dialog.setContentPane(panel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }
+
+
+    /** Builds AdminPetManagementView wired up to the Clean Architecture stack. */
+    private JPanel buildPetManagementPanel(AdminPetManagementView.Mode mode) {
+        // ViewModel
+        PetManagementViewModel vm = new PetManagementViewModel();
+
+        // DAO implementing PetDataAccessInterface
+        PetDataAccessInterface petGateway = new BackendPetDataAccessObject(backend);
+
+        // Presenter & use cases
+        PetManagementOutputBoundary presenter = new PetManagementPresenter(vm);
+
+        AddPetInputBoundary addUC = new AddPetInteractor(petGateway, presenter);
+        UpdatePetInputBoundary updateUC = new UpdatePetInteractor(petGateway, presenter);
+        DeletePetInputBoundary deleteUC = new DeletePetInteractor(petGateway, presenter);
+
+        // Controller
+        PetManagementController controller =
+                new PetManagementController(addUC, updateUC, deleteUC);
+
+        // View in the right mode
+        AdminPetManagementView view = new AdminPetManagementView(vm, mode);
+        view.setController(controller);
+
+        return view;
+    }
+
+
 }
