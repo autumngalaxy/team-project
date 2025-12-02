@@ -61,8 +61,8 @@ public class AdminPage extends JPanel {
 
             return a.getDate().compareTo(b.getDate());
         });
-
-        System.out.println("Loaded apps: " + apps.size()); // Debug
+        // Debug
+        System.out.println("Loaded apps: " + apps.size());
 
         for (Application app : apps) {
             JPanel card = createApplicationCard(app);

@@ -38,7 +38,7 @@ public class MyApplicationsView extends RightContentTemplate {
         listPanel.removeAll();
 
         if (backend.getCurrentUser() == null) {
-            JLabel empty = new JLabel("No user logged in.");
+            final JLabel empty = new JLabel("No user logged in.");
             empty.setFont(new Font("Arial", Font.PLAIN, 16));
             empty.setAlignmentX(Component.CENTER_ALIGNMENT);
             listPanel.add(empty);
@@ -46,18 +46,19 @@ public class MyApplicationsView extends RightContentTemplate {
             return;
         }
 
-        int uid = backend.getCurrentUser().getId();
+        final int uid = backend.getCurrentUser().getId();
 
-        List<Application> apps = backend.getApplicationsForUser(uid);
+        final List<Application> apps = backend.getApplicationsForUser(uid);
 
         if (apps.isEmpty()) {
-            JLabel empty = new JLabel("You have no applications.");
+            final JLabel empty = new JLabel("You have no applications.");
             empty.setFont(new Font("Arial", Font.PLAIN, 16));
             empty.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
             empty.setAlignmentX(Component.CENTER_ALIGNMENT);
             listPanel.add(empty);
 
-        } else {
+        }
+        else {
             for (Application app : apps) {
                 listPanel.add(createApplicationCard(app));
                 listPanel.add(Box.createVerticalStrut(15));
@@ -69,7 +70,7 @@ public class MyApplicationsView extends RightContentTemplate {
 
     private JPanel createApplicationCard(Application app) {
 
-        JPanel card = new JPanel();
+        final JPanel card = new JPanel();
         card.setLayout(new BorderLayout());
         card.setBackground(Color.WHITE);
         card.setBorder(BorderFactory.createCompoundBorder(
@@ -80,29 +81,32 @@ public class MyApplicationsView extends RightContentTemplate {
         card.setMaximumSize(new Dimension(900, 150)); 
         card.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        Pet pet = backend.getPetById(app.getPetId());
+        final Pet pet = backend.getPetById(app.getPetId());
 
         // info
-        JPanel info = new JPanel();
+        final JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
         info.setBackground(Color.WHITE);
 
         info.add(new JLabel("Pet Name: " + (pet != null ? pet.getName() : "Unknown")));
         info.add(new JLabel("Species: " + (pet != null ? pet.getSpecies() : "-")));
         info.add(new JLabel("Date: " + app.getDate()));
-        
-        JLabel statusLabel = new JLabel("Status: " + app.getStatus());
+
+        final JLabel statusLabel = new JLabel("Status: " + app.getStatus());
         statusLabel.setFont(new Font("Arial", Font.BOLD, 14));
 
         switch (app.getStatus()) {
             case PENDING:
-                statusLabel.setForeground(new Color(255, 140, 0)); // orange
+                // orange
+                statusLabel.setForeground(new Color(255, 140, 0));
                 break;
             case APPROVED:
-                statusLabel.setForeground(new Color(0, 160, 0));  // green
+                // green
+                statusLabel.setForeground(new Color(0, 160, 0));
                 break;
             case REJECTED:
-                statusLabel.setForeground(new Color(200, 0, 0));  // red
+                // red
+                statusLabel.setForeground(new Color(200, 0, 0));
                 break;
             default:
                 statusLabel.setForeground(Color.DARK_GRAY);
@@ -114,18 +118,18 @@ public class MyApplicationsView extends RightContentTemplate {
         card.add(info, BorderLayout.CENTER);
 
         // button
-        JPanel btnArea = new JPanel();
+        final JPanel btnArea = new JPanel();
         btnArea.setLayout(new BoxLayout(btnArea, BoxLayout.Y_AXIS));
         btnArea.setBackground(Color.WHITE);
 
         if (app.getStatus() == Application.Status.PENDING) {
-            JButton cancelBtn = new JButton("Cancel Application");
+            final JButton cancelBtn = new JButton("Cancel Application");
             cancelBtn.setBackground(new Color(220, 80, 80));
             cancelBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
             cancelBtn.setForeground(Color.WHITE);
 
             cancelBtn.addActionListener(e -> {
-                int choice = JOptionPane.showConfirmDialog(
+                final int choice = JOptionPane.showConfirmDialog(
                         this,
                         "Are you sure you want to cancel this application?",
                         "Confirm Cancel",

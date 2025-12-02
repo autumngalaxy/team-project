@@ -27,11 +27,11 @@ public class UserLoginPresenter implements UserLoginOutputBoundary {
 
     @Override
     public void prepareSuccessView(UserLoginOutputData response) {
-    	System.out.println("[UserLoginPresenter] success userType = " + response.getUserType());
+        System.out.println("[UserLoginPresenter] success userType = " + response.getUserType());
         // clear login state
         userLoginViewModel.setState(new UserLoginState());
         
-        String userType = response.getUserType();
+        final String userType = response.getUserType();
 
         backend.setCurrentUser(response.getUser());
         frontend.showDashboard(userType);

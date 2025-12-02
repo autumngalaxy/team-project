@@ -1,31 +1,5 @@
 [
     {
-        "colour": "",
-        "gender": "FEMALE",
-        "size": "MEDIUM",
-        "species": "Dog",
-        "isAdopted": false,
-        "imageURL": "https://dbw3zep4prcju.cloudfront.net/animal/ae9d4c3d-00b8-4db9-9913-ae706f2a0338/image/90e874a7-d74c-43ca-8d7f-2defed9a129c.jpg?versionId=5n2pNUd9qSgKo28WT80JZfWzCSiPnoDs&bust=1764650526&width=300",
-        "name": "Chi",
-        "description": "Chi / Female / 12 Weeks / Northern Mix / Dogs: Yes / Cats: Yes / Kids: Yes / Location:...",
-        "id": 79755361,
-        "age": "BABY",
-        "breed": "German Shepherd Dog"
-    },
-    {
-        "colour": "Black",
-        "gender": "MALE",
-        "size": "SMALL",
-        "species": "Dog",
-        "isAdopted": false,
-        "imageURL": "https://dbw3zep4prcju.cloudfront.net/animal/b0d129d5-3531-41f5-980b-25dc430a7f55/image/32aba286-d01c-4afc-8765-1704f340e596.jpg?versionId=siS_EeNwAp_wQYW_rfU08m_23XK8HzV_&bust=1764649982&width=300",
-        "name": "Bandit",
-        "description": "Meet Bandit, the ultimate adventure buddy! This curious and playful young pup is always up for exploring new trails, chasing...",
-        "id": 79755268,
-        "age": "YOUNG",
-        "breed": "Shih Tzu"
-    },
-    {
         "colour": "Yellow / Tan / Blond / Fawn",
         "gender": "FEMALE",
         "size": "MEDIUM",
