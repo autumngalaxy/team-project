@@ -28,24 +28,6 @@ public class SurveyInfo {
     final int ENRICHMENTSIZE = 5;
     private boolean[] adopterEnrichment = new boolean[ENRICHMENTSIZE];
 
-
-    /* public SurveyInfo(EnergyOfHome energy, AnimalStaying animals, AloneTime alone, boolean[] liveWith, boolean[] timeWith, boolean[] enrichment){
-        if (liveWith.length != LIVEWITHSIZE) { throw new IllegalArgumentException("Wrong liveWith length: " + liveWith.length); }
-        if (timeWith.length != TIMEWITHSIZE) { throw new IllegalArgumentException("Wrong timeWith length: " + timeWith.length); }
-        if (enrichment.length != ENRICHMENTSIZE) { throw new IllegalArgumentException("Wrong enrichment length: " + enrichment.length); }
-
-        adopterEnergy = energy;
-        animalStaying = animals;
-        animalAlone = alone;
-        adopterLivesWith = liveWith;
-        adopterSpendsTimeWith = timeWith;
-        adopterEnrichment = enrichment;
-    } // COMMENTED OUT DUE TO NOT BEING USED */
-
-    public SurveyInfo() {
-
-    }
-
     /* GETTERS */
 
     public EnergyOfHome getAdopterEnergy() {

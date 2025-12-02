@@ -1,16 +1,11 @@
 package view;
 
-import entity.application.AdoptionApplication;
 import entity.application.SurveyInfo;
 import interface_adapter.fill_application.FillApplicationController;
 import interface_adapter.fill_application.FillApplicationState;
 import interface_adapter.fill_application.FillApplicationViewModel;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,27 +24,6 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
     private FillApplicationController fillApplicationController = null;
     private Pet correspondingPet;
     private int correspondingUser;
-
-
-    /* NAME */
-    /*private final JTextField nameInputField = new JTextField(15);
-
-    /* RADIAL BUTTONS FOR ID TYPE* /
-    private final JRadioButton photoCard = new JRadioButton();
-    private final JRadioButton driverLicense = new JRadioButton();
-    private final JRadioButton mailLetter = new JRadioButton();
-    private final JRadioButton otherCardType = new JRadioButton();
-
-    /* ADOPTER ADDRESS [Street address, city, province, postal code, country] * /
-    private final JTextField streetAddressInputField = new JTextField(15);
-    private final JTextField cityInputField = new JTextField(15);
-    private final JTextField provinceInputField = new JTextField(15);
-    private final JTextField postalCodeInputField = new JTextField(15);
-    private final JTextField countryInputField = new JTextField(15);
-
-    /* PHONE NUMBER & EMAIL * /
-    private final JTextField phoneInputField = new JTextField(15);
-    private final JTextField emailInputField = new JTextField(15);*/
 
     /* SURVEY INFO */
     // 12 enums
@@ -119,66 +93,6 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
 
         /* APPLICATION INFO */
         final JPanel applicationInfo = new JPanel();
-        //applicationInfo.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        // Name
-        /*final LabelTextPanel nameInfo = new LabelTextPanel(
-                new JLabel(FillApplicationViewModel.NAME_LABEL), nameInputField);
-
-        // ID Type
-        final ButtonGroup idInfo = new ButtonGroup();
-        final JPanel idGroup = new JPanel();
-
-        final JRadioButton photoCardInfo = new JRadioButton(FillApplicationViewModel.PHOTOCARD_LABEL);
-        final JRadioButton driverInfo = new JRadioButton(FillApplicationViewModel.DRIVERS_LABEL);
-        final JRadioButton mailInfo = new JRadioButton(FillApplicationViewModel.MAIL_LABEL);
-        final JRadioButton otherInfo = new JRadioButton(FillApplicationViewModel.OTHER_LABEL);
-
-        idInfo.add(photoCardInfo);
-        idInfo.add(driverInfo);
-        idInfo.add(mailInfo);
-        idInfo.add(otherInfo);
-
-        idGroup.add(photoCardInfo);
-        idGroup.add(driverInfo);
-        idGroup.add(mailInfo);
-        idGroup.add(otherInfo);
-
-        // Address
-        final JPanel addressInfo = new JPanel();
-
-        final LabelTextPanel streetAddressInfo = new LabelTextPanel(
-                new JLabel(FillApplicationViewModel.STREET_LABEL), streetAddressInputField);
-        final LabelTextPanel cityInfo = new LabelTextPanel(
-                new JLabel(FillApplicationViewModel.CITY_LABEL), cityInputField);
-        final LabelTextPanel provinceInfo = new LabelTextPanel(
-                new JLabel(FillApplicationViewModel.PROVINCE_LABEL), provinceInputField);
-        final LabelTextPanel postalCodeInfo = new LabelTextPanel(
-                new JLabel(FillApplicationViewModel.POSTAL_LABEL), postalCodeInputField);
-        final LabelTextPanel countryInfo = new LabelTextPanel(
-                new JLabel(FillApplicationViewModel.COUNTRY_LABEL), countryInputField);
-
-        addressInfo.add(streetAddressInfo);
-        addressInfo.add(cityInfo);
-        addressInfo.add(provinceInfo);
-        addressInfo.add(postalCodeInfo);
-        addressInfo.add(countryInfo);
-
-        // Phone & Email
-        final JPanel phoneEmailInfo = new JPanel();
-
-        final LabelTextPanel phoneInfo = new LabelTextPanel(
-                new JLabel(FillApplicationViewModel.PHONE_LABEL), phoneInputField);
-        final LabelTextPanel emailInfo = new LabelTextPanel(
-                new JLabel(FillApplicationViewModel.EMAIL_LABEL), emailInputField);
-
-        phoneEmailInfo.add(phoneInfo);
-        phoneEmailInfo.add(emailInfo);
-
-        applicationInfo.add(nameInfo);
-        applicationInfo.add(idGroup);
-        applicationInfo.add(addressInfo);
-        applicationInfo.add(phoneEmailInfo); */
 
         /* SURVEY INFO */
         final JPanel surveyInfo = new JPanel();
@@ -190,18 +104,6 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
                 energyLabels,
                 energies
         );
-        /*final JPanel energyPanel = new JPanel();
-        final ButtonGroup energyGroup = new ButtonGroup();
-        final JRadioButton quietButton = new JRadioButton();
-        final JRadioButton loudButton = new JRadioButton();
-        final JRadioButton bothButton = new JRadioButton(); */
-
-        /*energyGroup.add(quietButton);
-        energyGroup.add(loudButton);
-        energyGroup.add(bothButton);
-        energyPanel.add(quietButton);
-        energyPanel.add(loudButton);
-        energyPanel.add(bothButton);*/
 
         surveyInfo.add(energyInfo);
 
@@ -212,13 +114,6 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
                 stayings
         );
         surveyInfo.add(stayingInfo);
-        /*final JPanel stayingPanel = new JPanel();
-        final ButtonGroup stayingGroup = new ButtonGroup();
-        final JRadioButton looseButton = new JRadioButton();
-        final JRadioButton confinedButton = new JRadioButton();
-        final JRadioButton cratedButton = new JRadioButton();
-        final JRadioButton outsideButton = new JRadioButton();
-        final JRadioButton otherStayingButton = new JRadioButton();*/
 
         JLabel[] aloneLabels = {new JLabel("10+ Hours"), new JLabel("8-10 Hours"), new JLabel("4-8 Hours"), new JLabel(">4 Hours")};
         JRadioButton[] aloneRadios = {aboveTenAlone, eightTenAlone, fourSixAlone, lessFour};
@@ -227,12 +122,6 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
                 aloneRadios
         );
         surveyInfo.add(aloneInfo);
-        /* final JPanel alonePanel = new JPanel();
-        final ButtonGroup aloneGroup = new ButtonGroup();
-        final JRadioButton moreTenAlone = new JRadioButton();
-        final JRadioButton eightTenAlone = new JRadioButton();
-        final JRadioButton fourSixAlone = new JRadioButton();
-        final JRadioButton lessFourAlone = new JRadioButton();*/
 
         // Checkboxes
         final JPanel liveWithPanel = new JPanel();
@@ -295,28 +184,19 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
         cancel.addActionListener(this);
 
         /* USE LISTENER METHODS */
-        //addNameListener();
-        //addPhoneListener();
-        //addEmailListener();
-        //addAddressListener();
         addEnumListener();
         addCheckboxListener();
-        //addIDListener();
 
         /* LAYOUT */
-        //this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
         mainPanel.add(title);
         mainPanel.add(applicationInfo);
         mainPanel.add(surveyInfo);
         mainPanel.add(buttons);
         setContentPane(mainPanel);
         getContentPane().setLayout( new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
-        // System.out.println("Done init FillApplicationView!");
 
         pack();
         setLocationRelativeTo(null);
-        // setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
@@ -332,235 +212,41 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
 
     public void makeInvisible(){
         setVisible(false);
-        // todo -- clear info
+
+        quietEnergy.setSelected(true);
+
+        looseStaying.setSelected(true);
+
+        aboveTenAlone.setSelected(true);
+
+        adultLiveWith.setSelected(false);
+        childLiveWith.setSelected(false);
+        seniorLiveWith.setSelected(false);
+        childLiveWith.setSelected(false);
+        teenLiveWith.setSelected(false);
+        catLiveWith.setSelected(false);
+        dogLiveWith.setSelected(false);
+        birdLiveWith.setSelected(false);
+        mammalLiveWith.setSelected(false);
+
+        cityTimeWith.setSelected(false);
+        parkTimeWith.setSelected(false);
+        hikeTimeWith.setSelected(false);
+        jogTimeWith.setSelected(false);
+        waterTimeWith.setSelected(false);
+        campingTimeWith.setSelected(false);
+        quietDayTimeWith.setSelected(false);
+        otherTimeWith.setSelected(false);
+
+        toyEnrichment.setSelected(false);
+        brushingEnrichment.setSelected(false);
+        otherAnimalEnrichment.setSelected(false);
+        playtimeEnrichment.setSelected(false);
+        otherEnrichment.setSelected(false);
+
     }
 
     /* LISTENER METHODS */
-    /*private void addNameListener(){
-        nameInputField.getDocument().addDocumentListener(new DocumentListener() {
-
-            private void documentListenerHelper() {
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                currentState.setAdopterName(nameInputField.getText());
-                fillApplicationViewModel.setState(currentState);
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) { documentListenerHelper(); }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) { documentListenerHelper(); }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) { documentListenerHelper(); }
-        });
-    }
-
-    private void addPhoneListener(){
-        phoneInputField.getDocument().addDocumentListener(new DocumentListener() {
-
-            private void documentListenerHelper(){
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                currentState.setAdopterPhone(phoneInputField.getText());
-                fillApplicationViewModel.setState(currentState);
-            }
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-    }
-
-    private void addEmailListener(){
-        emailInputField.getDocument().addDocumentListener(new DocumentListener() {
-            private void documentListenerHelper(){
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                currentState.setAdopterEmail(emailInputField.getText());
-                fillApplicationViewModel.setState(currentState);
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-    }
-
-    private void addAddressListener(){
-        streetAddressInputField.getDocument().addDocumentListener(new DocumentListener() {
-            private void documentListenerHelper(){
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                String[] curAddress = currentState.getAdopterAddress();
-                curAddress[0] = streetAddressInputField.getText();
-                currentState.setAdopterAddress(curAddress);
-                fillApplicationViewModel.setState(currentState);
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-
-        cityInputField.getDocument().addDocumentListener(new DocumentListener() {
-            private void documentListenerHelper(){
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                String[] curAddress = currentState.getAdopterAddress();
-                curAddress[1] = cityInputField.getText();
-                currentState.setAdopterAddress(curAddress);
-                fillApplicationViewModel.setState(currentState);
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-
-        provinceInputField.getDocument().addDocumentListener(new DocumentListener() {
-            private void documentListenerHelper(){
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                String[] curAddress = currentState.getAdopterAddress();
-                curAddress[2] = provinceInputField.getText();
-                currentState.setAdopterAddress(curAddress);
-                fillApplicationViewModel.setState(currentState);
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-
-        postalCodeInputField.getDocument().addDocumentListener(new DocumentListener() {
-            private void documentListenerHelper(){
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                String[] curAddress = currentState.getAdopterAddress();
-                curAddress[3] = postalCodeInputField.getText();
-                currentState.setAdopterAddress(curAddress);
-                fillApplicationViewModel.setState(currentState);
-            }
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-        countryInputField.getDocument().addDocumentListener(new DocumentListener() {
-            private void documentListenerHelper(){
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                String[] curAddress = currentState.getAdopterAddress();
-                curAddress[4] = countryInputField.getText();
-                currentState.setAdopterAddress(curAddress);
-                fillApplicationViewModel.setState(currentState);
-            }
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-    }
-
-    private void addIDListener(){
-        photoCard.addChangeListener(e -> {
-                if(photoCard.isSelected()){
-                    final FillApplicationState currentState = fillApplicationViewModel.getState();
-                    currentState.setIdType(AdoptionApplication.IDType.PHOTO_CARD);
-                    fillApplicationViewModel.setState(currentState);
-            }
-        });
-        driverLicense.addChangeListener(e -> {
-            if(driverLicense.isSelected()){
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                currentState.setIdType(AdoptionApplication.IDType.DRIVERS_LICENSE);
-                fillApplicationViewModel.setState(currentState);
-            }
-        });
-        mailLetter.addChangeListener(e -> {
-            if(mailLetter.isSelected()){
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                currentState.setIdType(AdoptionApplication.IDType.MAIL);
-                fillApplicationViewModel.setState(currentState);
-            }
-        });
-        otherCardType.addChangeListener(e -> {
-            if(otherCardType.isSelected()){
-                final FillApplicationState currentState = fillApplicationViewModel.getState();
-                currentState.setIdType(AdoptionApplication.IDType.OTHER);
-                fillApplicationViewModel.setState(currentState);
-            }
-        });
-    }*/
-
     private void addEnumListener(){
         quietEnergy.addChangeListener(e -> {
             if (quietEnergy.isSelected()) {
@@ -714,7 +400,7 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
     /* OTHER METHODS */
     @Override
     public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "Cancel not implemented yet.");
+        makeInvisible();
     }
 
     @Override

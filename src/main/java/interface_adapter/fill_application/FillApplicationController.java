@@ -1,7 +1,5 @@
 package interface_adapter.fill_application;
 
-
-import entity.application.AdoptionApplication;
 import use_case.fill_application.FillApplicationInputBoundary;
 import use_case.fill_application.FillApplicationInputData;
 import entity.Pet;

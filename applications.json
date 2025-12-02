@@ -3,7 +3,7 @@
         "date": "2025-12-02",
         "petId": 79748852,
         "id": 1,
-        "userId": 21,
+        "userId": 1,
         "status": "PENDING",
         "survey_info": {
             "enrichment": [
@@ -86,34 +86,34 @@
         "survey_info": {
             "enrichment": [
                 false,
-                true,
-                true,
+                false,
+                false,
                 false,
                 false
             ],
             "lives_with": [
                 false,
                 false,
-                true,
-                true,
                 false,
-                true,
-                true,
+                false,
+                false,
+                false,
+                false,
                 false
             ],
-            "animal_staying": "OTHER",
+            "animal_staying": "CRATED",
             "time_with": [
                 false,
-                true,
-                true,
-                false,
-                true,
                 false,
                 false,
-                true
+                false,
+                false,
+                false,
+                false,
+                false
             ],
-            "alone_time": "MORE_THAN_TEN",
-            "energy_of_home": "QUIET"
+            "alone_time": "EIGHT_TO_TEN",
+            "energy_of_home": "BOTH"
         }
     },
     {

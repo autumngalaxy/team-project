@@ -1,8 +1,6 @@
 package use_case.fill_application;
 
 import entity.Application;
-import entity.application.AdoptionApplication;
-import entity.application.ApplicationBuilder;
 import service.Backend;
 
 public class FillApplicationInteractor implements FillApplicationInputBoundary{
@@ -29,15 +27,6 @@ public class FillApplicationInteractor implements FillApplicationInputBoundary{
             System.out.println("User null");
         }
         else {
-            /*final AdoptionApplication application = new ApplicationBuilder()
-                    .addPet(fillApplicationInputData.getCorespondingPet())
-                    .addName(fillApplicationInputData.getAdopterName())
-                    .addID(fillApplicationInputData.getIdType())
-                    .addAddress(fillApplicationInputData.getAdopterAddress())
-                    .addPhone(fillApplicationInputData.getAdopterPhone())
-                    .addEmail(fillApplicationInputData.getAdopterEmail())
-                    .addSurveyInfo(fillApplicationInputData.getSurveyInfo())
-                    .addDate().build();*/
                 final Application application = new Application(fillApplicationInputData.getCorespondingPet().getId(),
                         fillApplicationInputData.getCorespondingUser(), applicationDataObject.newApplicationId(), fillApplicationInputData.getSurveyInfo());
 
@@ -47,8 +36,6 @@ public class FillApplicationInteractor implements FillApplicationInputBoundary{
                 userPresenter.prepareSuccessView(applicationOutputData);
             }
         }
-
-
 
     @Override
     public void switchToDashboardView() { userPresenter.switchToDashboardView(); }

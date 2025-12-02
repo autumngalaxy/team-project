@@ -7,18 +7,14 @@
     <list default="true" id="c398851c-52e7-409f-a045-c80faede2453" name="Changes" comment="able to complete applications">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications.json" beforeDir="false" afterPath="$PROJECT_DIR$/applications.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/AppBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/AppBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/FileApplicationDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/FileApplicationDataAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/FileApplicationDataAccessObject.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/application/SurveyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/application/SurveyInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/ViewPets/ViewPetsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/ViewPets/ViewPetsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInputData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInteractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/FillApplicationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/FillApplicationView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/menu/SideMenuPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/menu/SideMenuPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/pets/PetDetailView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/pets/PetDetailView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/pets/PetListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/pets/PetListView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +245,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764674753377</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="able to complete applications">
+      <option name="closed" value="true" />
+      <created>1764678027172</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1764678027172</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -278,16 +282,5 @@
     <MESSAGE value="should be able to complete applications" />
     <MESSAGE value="able to complete applications" />
     <option name="LAST_COMMIT_MESSAGE" value="able to complete applications" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/view/FillApplicationView.java</url>
-          <line>409</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -1,7 +1,6 @@
 package interface_adapter.fill_application;
 
 import entity.Pet;
-import entity.application.AdoptionApplication;
 import entity.application.SurveyBuilder;
 import entity.application.SurveyInfo;
 
@@ -12,11 +11,6 @@ import java.time.LocalDate;
  */
 public class FillApplicationState {
     private Pet correspondingPet;
-    /*private String adopterName = "";
-    private AdoptionApplication.IDType idType = AdoptionApplication.IDType.PHOTO_CARD;
-    private String[] adopterAddress = {"", "", "", "", ""};
-    private String adopterPhone = "";
-    private String adopterEmail = "";*/
     private int correspondingUser;
 
     private LocalDate applicationDate;
@@ -29,26 +23,6 @@ public class FillApplicationState {
     public Pet getCorespondingPet() {
         return correspondingPet;
     }
-
-    /*public String getAdopterName() {
-        return adopterName;
-    }
-
-    public AdoptionApplication.IDType getIdType() {
-        return idType;
-    }
-
-    public String[] getAdopterAddress() {
-        return adopterAddress;
-    }
-
-    public String getAdopterPhone() {
-        return adopterPhone;
-    }
-
-    public String getAdopterEmail() {
-        return adopterEmail;
-    }*/
 
     public SurveyInfo getSurveyInfo() {
         return surveyInfo;
