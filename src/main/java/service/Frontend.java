@@ -4,9 +4,6 @@ import interface_adapter.ViewPets.ViewPetsController;
 import interface_adapter.update_profile.UpdateUserProfileController;
 import interface_adapter.user_logout.UserLogoutController;
 import view.MainDashboardView;
-import view.menu.SideMenuPanel;
-import view.pets.PetListView;
-import view.profile.EditProfileView;
 import view.profile.UserProfileView;
 
 import javax.swing.*;
@@ -129,7 +126,7 @@ public class Frontend extends JFrame {
     }
 
 	public ViewPetsController getViewPetsController() {
-		return viewPetsController;
+        return viewPetsController;
 	}
 
     /**
@@ -150,23 +147,30 @@ public class Frontend extends JFrame {
     }
 
     // ===== Admin: Pet Management windows =====
-
-    /** Open the pet management screen from "Add Pet" menu item. */
+    /**
+     *  Open the pet management screen from "Add Pet" menu item.
+     *  */
     public void showAddPetPage() {
         showPetManagementDialog("Add Pet", AdminPetManagementView.Mode.ADD);
     }
 
-    /** Open the  pet management screen from "Modify Pet". */
+    /**
+     * Open the  pet management screen from "Modify Pet".
+     * */
     public void showModifyPetPage() {
         showPetManagementDialog("Modify Pet", AdminPetManagementView.Mode.MODIFY);
     }
 
-    /** Open the same pet management screen from "Delete Pet". */
+    /**
+     * Open the same pet management screen from "Delete Pet".
+     * */
     public void showDeletePetPage() {
         showPetManagementDialog("Delete Pet", AdminPetManagementView.Mode.DELETE);
     }
 
-    /** Common helper: show the AdminPetManagementView in a modal dialog. */
+    /**
+     * Common helper: show the AdminPetManagementView in a modal dialog.
+     * */
     private void showPetManagementDialog(String title, AdminPetManagementView.Mode mode) {
         JPanel panel = buildPetManagementPanel(mode);
 

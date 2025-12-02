@@ -28,10 +28,8 @@ public class UserLogoutPresenter implements UserLogoutOutputBoundary {
     public void prepareSuccessView(UserLogoutOutputData response) {
         // We need to switch to the login view, which should have
         // an empty username and password.
-
         // We also need to set the username in the LoggedInState to
         // the empty string.
-
         userLoginViewModel.setState(new UserLoginState());
         userLoginViewModel.firePropertyChange();
         // This code tells the View Manager to switch to the LoginView.

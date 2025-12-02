@@ -17,6 +17,8 @@ import java.io.FileWriter;
 
 import api.APIInterface;
 
+import javax.swing.*;
+
 
 /**
  * The Backend service class stores all core domain data for users, pets,
@@ -390,10 +392,41 @@ public class Backend {
                     added++;
                 }
             }
+            // return added to presenter
             System.out.println("Imported " + added + " pets from Petfinder API.");
         } catch (Exception e) {
             System.err.println("Failed to import pets from Petfinder API");
             e.printStackTrace();
+        }
+    }
+
+    public void getPetsFromApi() {
+        String message = getApiMessage();
+        JOptionPane.showMessageDialog(
+                null,
+                message,
+                "Petfinder API",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+
+    public String getApiMessage() {
+        APIInterface api = new APIInterface();
+        try {
+            List<Pet> apiPets = api.getPets();
+
+            int added = 0;
+            for (Pet pet : apiPets) {
+                if (!pets.containsKey(pet.getId())) {
+                    addPet(pet);
+                    added++;
+                }
+            }
+            // return added to presenter
+            return ("Add " + added + " pets from Petfinder API.");
+        } catch (Exception e) {
+            return ("Failed to import pets from Petfinder API");
         }
     }
 
