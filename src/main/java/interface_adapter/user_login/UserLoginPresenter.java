@@ -1,5 +1,7 @@
 package interface_adapter.user_login;
 
+import javax.swing.SwingUtilities;
+
 import interface_adapter.ViewManagerModel;
 import service.Backend;
 import service.Frontend;
@@ -28,11 +30,26 @@ public class UserLoginPresenter implements UserLoginOutputBoundary {
     	System.out.println("[UserLoginPresenter] success userType = " + response.getUserType());
         // clear login state
         userLoginViewModel.setState(new UserLoginState());
+        
+        String userType = response.getUserType();
+
+        backend.setCurrentUser(response.getUser());
+        frontend.showDashboard(userType);
+        
+        switch (userType) {
+            case "admin":
+                break;
+            case "staff":
+                SwingUtilities.invokeLater(() -> frontend.showAddPetPage());
+                break;
+            case "user":
+                SwingUtilities.invokeLater(() -> frontend.showMyProfile());
+                break;
+            default:
+                frontend.showDashboard("user");
+        }
 
         frontend.setVisible(true);
-        frontend.showDashboard(response.getUserType());
-        backend.setCurrentUser(response.getUser());
-
         viewManagerModel.firePropertyChange();
     }
 
