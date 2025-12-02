@@ -277,8 +277,6 @@ public class AppBuilder {
         return this;
     }
 
-
-
     public AppBuilder addViewPetsUseCase(Backend backend) {
 
         ViewPetsOutputBoundary presenter =
@@ -294,7 +292,6 @@ public class AppBuilder {
 
         return this;
     }
-
 
     /**
      * Finalizes the building of the app by attaching the card panel to the frontend

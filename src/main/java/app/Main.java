@@ -24,7 +24,7 @@ public class Main {
                 "applications.json"
         );
 
-        backend.importPetsFromApi();
+        // backend.importPetsFromApi();
 
         // 2 Create a single window Frontend
         final Frontend frontend = new Frontend(backend);
