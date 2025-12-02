@@ -63,8 +63,10 @@ public class MainDashboardView extends JPanel {
         contentPanel.add(initial, BorderLayout.CENTER);
 
         // Add panels to layout
-        add(menu, BorderLayout.WEST);      // fixed left menu
-        add(contentPanel, BorderLayout.CENTER); // variable right content
+        // fixed left menu
+        add(menu, BorderLayout.WEST);
+        // variable right content
+        add(contentPanel, BorderLayout.CENTER);
     }
 
     /**
@@ -74,9 +76,11 @@ public class MainDashboardView extends JPanel {
      * @param panel The new content panel to display
      */
     public void setContent(JPanel panel) {
-        contentPanel.removeAll();               // Remove previous content
+        // Remove previous content
+        contentPanel.removeAll();
         contentPanel.add(panel, BorderLayout.CENTER);
-        contentPanel.revalidate();              // Refresh UI
+        // Refresh UI
+        contentPanel.revalidate();
         contentPanel.repaint();
     }
 
