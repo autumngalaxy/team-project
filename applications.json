@@ -3,9 +3,40 @@
         "date": "2025-12-02",
         "petId": 79748852,
         "id": 1,
-        "userId": 1,
+        "userId": 21,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -13,7 +44,77 @@
         "id": 79753153,
         "userId": 1,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"LOUD\" \"animal_staying\": OTHER\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,true,true,false,true,false,false] \"time_with\": [false,false,true,true,true,false,true,true] \"enrichment\": [false,true,true,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
+    },
+    {
+        "date": "2025-12-02",
+        "petId": 1,
+        "id": 79755361,
+        "userId": 21,
+        "status": "PENDING",
+        "survey_info": {
+            "enrichment": [
+                false,
+                true,
+                true,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                true,
+                true,
+                false,
+                true,
+                true,
+                false
+            ],
+            "animal_staying": "OTHER",
+            "time_with": [
+                false,
+                true,
+                true,
+                false,
+                true,
+                false,
+                false,
+                true
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -21,7 +122,38 @@
         "id": 2,
         "userId": 2,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -29,7 +161,38 @@
         "id": 3,
         "userId": 3,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -37,7 +200,38 @@
         "id": 4,
         "userId": 4,
         "status": "REJECTED",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -45,7 +239,38 @@
         "id": 5,
         "userId": 5,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -53,7 +278,38 @@
         "id": 6,
         "userId": 6,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -61,7 +317,38 @@
         "id": 7,
         "userId": 7,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -69,7 +356,38 @@
         "id": 8,
         "userId": 8,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -77,7 +395,38 @@
         "id": 9,
         "userId": 9,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -85,7 +434,38 @@
         "id": 10,
         "userId": 10,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -93,7 +473,38 @@
         "id": 11,
         "userId": 11,
         "status": "APPROVED",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -101,7 +512,38 @@
         "id": 12,
         "userId": 12,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -109,7 +551,38 @@
         "id": 13,
         "userId": 13,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -117,7 +590,38 @@
         "id": 14,
         "userId": 14,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -125,7 +629,38 @@
         "id": 15,
         "userId": 15,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -133,7 +668,38 @@
         "id": 16,
         "userId": 16,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -141,7 +707,38 @@
         "id": 17,
         "userId": 17,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -149,7 +746,38 @@
         "id": 18,
         "userId": 18,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
@@ -157,14 +785,76 @@
         "id": 19,
         "userId": 19,
         "status": "PENDING",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     },
     {
         "date": "2025-12-02",
         "petId": 79748836,
         "id": 20,
-        "userId": 20,
+        "userId": 21,
         "status": "REJECTED",
-        "survey_info": "\"energy_of_home\": \"QUIET\" \"animal_staying\": LOOSE\" \"alone_time\": MORE_THAN_TEN\" \"lives_with\": [false,false,false,false,false,false,false,false] \"time_with\": [false,false,false,false,false,false,false,false] \"enrichment\": [false,false,false,false,false]"
+        "survey_info": {
+            "enrichment": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "lives_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "animal_staying": "LOOSE",
+            "time_with": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "alone_time": "MORE_THAN_TEN",
+            "energy_of_home": "QUIET"
+        }
     }
 ]

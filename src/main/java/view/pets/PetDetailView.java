@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 public class PetDetailView extends JFrame {
     private final ViewPetsController controller;
 
-    public PetDetailView(Pet pet, ViewPetsController controller) {
+    public PetDetailView(Pet pet, ViewPetsController controller, int user) {
         super("Pet Detail View");
 
         this.controller = controller;
@@ -93,7 +93,7 @@ public class PetDetailView extends JFrame {
         adoptButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.newApplication(pet);
+                controller.newApplication(pet, user);
             }
         });
         buttonPanel.add(adoptButton);

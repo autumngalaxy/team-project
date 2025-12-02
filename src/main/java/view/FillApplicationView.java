@@ -28,27 +28,28 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
     private final FillApplicationViewModel fillApplicationViewModel;
     private FillApplicationController fillApplicationController = null;
     private Pet correspondingPet;
+    private int correspondingUser;
 
 
     /* NAME */
-    private final JTextField nameInputField = new JTextField(15);
+    /*private final JTextField nameInputField = new JTextField(15);
 
-    /* RADIAL BUTTONS FOR ID TYPE*/
+    /* RADIAL BUTTONS FOR ID TYPE* /
     private final JRadioButton photoCard = new JRadioButton();
     private final JRadioButton driverLicense = new JRadioButton();
     private final JRadioButton mailLetter = new JRadioButton();
     private final JRadioButton otherCardType = new JRadioButton();
 
-    /* ADOPTER ADDRESS [Street address, city, province, postal code, country] */
+    /* ADOPTER ADDRESS [Street address, city, province, postal code, country] * /
     private final JTextField streetAddressInputField = new JTextField(15);
     private final JTextField cityInputField = new JTextField(15);
     private final JTextField provinceInputField = new JTextField(15);
     private final JTextField postalCodeInputField = new JTextField(15);
     private final JTextField countryInputField = new JTextField(15);
 
-    /* PHONE NUMBER & EMAIL */
+    /* PHONE NUMBER & EMAIL * /
     private final JTextField phoneInputField = new JTextField(15);
-    private final JTextField emailInputField = new JTextField(15);
+    private final JTextField emailInputField = new JTextField(15);*/
 
     /* SURVEY INFO */
     // 12 enums
@@ -102,13 +103,14 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
     private final JButton submit;
     private final JButton cancel;
 
-    public FillApplicationView(FillApplicationViewModel fillApplicationViewModel, Pet correspondingPet) {
+    public FillApplicationView(FillApplicationViewModel fillApplicationViewModel, Pet correspondingPet, int coorespondingUser) {
         super("Fill Application View");
 
         this.fillApplicationViewModel = fillApplicationViewModel;
         fillApplicationViewModel.addPropertyChangeListener(this);
 
         this.correspondingPet = correspondingPet;
+        this.correspondingUser = coorespondingUser;
 
         final JPanel mainPanel = new JPanel();
 
@@ -120,7 +122,7 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
         //applicationInfo.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Name
-        final LabelTextPanel nameInfo = new LabelTextPanel(
+        /*final LabelTextPanel nameInfo = new LabelTextPanel(
                 new JLabel(FillApplicationViewModel.NAME_LABEL), nameInputField);
 
         // ID Type
@@ -176,7 +178,7 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
         applicationInfo.add(nameInfo);
         applicationInfo.add(idGroup);
         applicationInfo.add(addressInfo);
-        applicationInfo.add(phoneEmailInfo);
+        applicationInfo.add(phoneEmailInfo); */
 
         /* SURVEY INFO */
         final JPanel surveyInfo = new JPanel();
@@ -281,29 +283,25 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
 
                             fillApplicationController.execute(
                                     currentState.getCorespondingPet(),
-                                    currentState.getAdopterName(),
-                                    currentState.getIdType(),
-                                    currentState.getAdopterAddress(),
-                                    currentState.getAdopterPhone(),
-                                    currentState.getAdopterEmail(),
+                                    currentState.getCorrespondingUser(),
                                     currentState.getSurveyInfo()
                             );
                             makeInvisible();
                         }
                     }
                 }
-        ); // TODO; see lab
+        );
 
         cancel.addActionListener(this);
 
         /* USE LISTENER METHODS */
-        addNameListener();
-        addPhoneListener();
-        addEmailListener();
-        addAddressListener();
+        //addNameListener();
+        //addPhoneListener();
+        //addEmailListener();
+        //addAddressListener();
         addEnumListener();
         addCheckboxListener();
-        addIDListener();
+        //addIDListener();
 
         /* LAYOUT */
         //this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -322,10 +320,12 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    public void makeVisible(Pet pet){
+    public void makeVisible(Pet pet, int user){
         this.correspondingPet = pet;
+        this.correspondingUser = user;
         FillApplicationState curState = fillApplicationViewModel.getState();
         curState.setCorrespondingPet(pet);
+        curState.setCorrespondingUser(user);
         fillApplicationViewModel.setState(curState);
         setVisible(true);
     }
@@ -336,7 +336,7 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
     }
 
     /* LISTENER METHODS */
-    private void addNameListener(){
+    /*private void addNameListener(){
         nameInputField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
@@ -559,7 +559,7 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
                 fillApplicationViewModel.setState(currentState);
             }
         });
-    }
+    }*/
 
     private void addEnumListener(){
         quietEnergy.addChangeListener(e -> {

@@ -12,16 +12,17 @@ import java.time.LocalDate;
 public class FillApplicationInputData {
 
     private final Pet corespondingPet;
-    private final String adopterName;
+    private final int corespondingUser;
+    /*private final String adopterName;
     private final AdoptionApplication.IDType idType;
     private final String[] adopterAddress;
     private final String adopterPhone;
-    private final String adopterEmail;
+    private final String adopterEmail;*/
 
     // Adopter Survey info
     private final SurveyInfo surveyInfo;
 
-    public FillApplicationInputData (Pet corespondingPet, String adopterName, AdoptionApplication.IDType idType,
+    /*public FillApplicationInputData (Pet corespondingPet, String adopterName, AdoptionApplication.IDType idType,
                                      String[] adopterAddress, String adopterPhone, String adopterEmail, SurveyInfo surveyInfo) {
         this.corespondingPet = corespondingPet;
         this.adopterName = adopterName;
@@ -29,6 +30,12 @@ public class FillApplicationInputData {
         this.adopterAddress = adopterAddress;
         this.adopterPhone = adopterPhone;
         this.adopterEmail = adopterEmail;
+        this.surveyInfo = surveyInfo;
+    }*/
+
+    public FillApplicationInputData(Pet correspondingPet, int correspondingUser, SurveyInfo surveyInfo) {
+        this.corespondingPet = correspondingPet;
+        this.corespondingUser = correspondingUser;
         this.surveyInfo = surveyInfo;
     }
 
@@ -38,7 +45,9 @@ public class FillApplicationInputData {
         return corespondingPet;
     }
 
-    public String getAdopterName() {
+    public int getCorespondingUser() {return corespondingUser; }
+
+    /*public String getAdopterName() {
         return adopterName;
     }
 
@@ -56,7 +65,7 @@ public class FillApplicationInputData {
 
     public String getAdopterEmail() {
         return adopterEmail;
-    }
+    }*/
 
     public SurveyInfo getSurveyInfo() {
         return surveyInfo;

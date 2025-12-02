@@ -12,11 +12,12 @@ import java.time.LocalDate;
  */
 public class FillApplicationState {
     private Pet correspondingPet;
-    private String adopterName = "";
+    /*private String adopterName = "";
     private AdoptionApplication.IDType idType = AdoptionApplication.IDType.PHOTO_CARD;
     private String[] adopterAddress = {"", "", "", "", ""};
     private String adopterPhone = "";
-    private String adopterEmail = "";
+    private String adopterEmail = "";*/
+    private int correspondingUser;
 
     private LocalDate applicationDate;
     private String applicationID;
@@ -29,7 +30,7 @@ public class FillApplicationState {
         return correspondingPet;
     }
 
-    public String getAdopterName() {
+    /*public String getAdopterName() {
         return adopterName;
     }
 
@@ -47,7 +48,7 @@ public class FillApplicationState {
 
     public String getAdopterEmail() {
         return adopterEmail;
-    }
+    }*/
 
     public SurveyInfo getSurveyInfo() {
         return surveyInfo;
@@ -64,7 +65,7 @@ public class FillApplicationState {
         this.correspondingPet = correspondingPet;
     }
 
-    public void setAdopterName(String adopterName) {
+    /*public void setAdopterName(String adopterName) {
         this.adopterName = adopterName;
     }
 
@@ -82,7 +83,7 @@ public class FillApplicationState {
 
     public void setAdopterEmail(String adopterEmail) {
         this.adopterEmail = adopterEmail;
-    }
+    }*/
 
     public void setSurveyInfo(SurveyInfo surveyInfo) {
         this.surveyInfo = surveyInfo;
@@ -169,5 +170,13 @@ public class FillApplicationState {
                 .build();
 
         setSurveyInfo(sb);
+    }
+
+    public void setCorrespondingUser(int user){
+        correspondingUser = user;
+    }
+
+    public int getCorrespondingUser() {
+        return correspondingUser;
     }
 }

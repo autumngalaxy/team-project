@@ -1,5 +1,8 @@
 package entity.application;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * An entity representing an Adoption Survey.
  * Applications contains survey information (who they live with, how they'll interact with the pet, etc.)
@@ -101,43 +104,15 @@ public class SurveyInfo {
         this.adopterEnrichment = adopterEnrichment;
     }
 
-    private String getBoolArray(boolean[] booleans){
-        StringBuilder result = new StringBuilder();
-        for(int i = 0; i < booleans.length; i++){
-            result.append(booleans[i]);
-            if(i < booleans.length - 1){
-                result.append(",");
-            }
-        }
-        return result.toString();
-    }
+    public JSONObject toJSON(){
+        JSONObject result2 = new JSONObject();
+        result2.put("energy_of_home", adopterEnergy.name());
+        result2.put("animal_staying", animalStaying.name());
+        result2.put("alone_time", animalAlone.name());
+        result2.put("lives_with", new JSONArray(adopterLivesWith));
+        result2.put("time_with", new JSONArray(adopterSpendsTimeWith));
+        result2.put("enrichment", new JSONArray(adopterEnrichment));
 
-    public String toJSON(){
-        return new StringBuilder()
-                .append("\"energy_of_home\": \"")
-                .append(adopterEnergy.name())
-                .append("\"")
-
-                .append(" \"animal_staying\": ")
-                .append(animalStaying.name())
-                .append("\"")
-
-                .append(" \"alone_time\": ")
-                .append(animalAlone.name())
-                .append("\"")
-
-                // ADULT, CHILDREN, SENIORS, TEENAGERS, CATS, DOGS, BIRDS, MAMMALS
-                .append(" \"lives_with\": [")
-                .append(getBoolArray(adopterLivesWith))
-                .append("] ")
-
-                .append("\"time_with\": [")
-                .append(getBoolArray(adopterSpendsTimeWith))
-                .append("] ")
-
-                .append("\"enrichment\": [")
-                .append(getBoolArray(adopterEnrichment))
-                .append("]")
-                .toString();
+        return result2;
     }
 }

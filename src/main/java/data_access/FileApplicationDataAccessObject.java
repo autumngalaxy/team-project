@@ -6,7 +6,7 @@ import use_case.fill_application.FillApplicationDataAccessInterface;
 import java.io.*;
 
 public class FileApplicationDataAccessObject implements FillApplicationDataAccessInterface {
-    private static final String HEADER = "HEADER HERE"; // TODO
+    private static final String HEADER = "HEADER HERE";
 
     private final File csvFile;
 
@@ -18,7 +18,6 @@ public class FileApplicationDataAccessObject implements FillApplicationDataAcces
         }
         else { /* Something is in the file--load it */
 
-            // TODO do this
         }
     }
 

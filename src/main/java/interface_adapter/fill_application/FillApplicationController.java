@@ -28,19 +28,19 @@ public class FillApplicationController {
      * @param adopterEmail the adopter's email.
      * @param surveyInfo the survey info the adopter filled out.
      */
-    public void execute(Pet correspondingPet, String adopterName, AdoptionApplication.IDType idType,
-                        String[] adopterAddress, String adopterPhone, String adopterEmail, SurveyInfo surveyInfo){
-        final FillApplicationInputData applicationInputData = new FillApplicationInputData(
-            correspondingPet, adopterName, idType, adopterAddress, adopterPhone, adopterEmail, surveyInfo
-        );
-
-        userFillApplicationUseCaseInteractor.execute(applicationInputData);
-    }
 
     /**
      * Executes the "switch to DashboardView" Use Case.
      */
     public void switchToDashboardView(){
         userFillApplicationUseCaseInteractor.switchToDashboardView();
+    }
+
+    public void execute(Pet correspondingPet, int correspondingUser, SurveyInfo surveyInfo) {
+        final FillApplicationInputData applicationInputData = new FillApplicationInputData(
+                correspondingPet, correspondingUser, surveyInfo
+        );
+        userFillApplicationUseCaseInteractor.execute(applicationInputData);
+
     }
 }

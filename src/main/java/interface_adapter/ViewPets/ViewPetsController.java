@@ -30,9 +30,9 @@ public class ViewPetsController {
         return viewModel;
     }
 
-    public void newApplication(Pet pet) {
+    public void newApplication(Pet pet, int user) {
         /* start a new application with the current pet. */
         //new FillApplicationView(fillAppViewModel, pet);
-        fillAppView.makeVisible(pet);
+        fillAppView.makeVisible(pet, user);
     }
 }

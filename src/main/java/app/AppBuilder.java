@@ -312,7 +312,7 @@ public class AppBuilder {
         FillApplicationController fillAppController =
                 new FillApplicationController(interactor);
 
-        fillApplicationView = new FillApplicationView(fillApplicationViewModel, null);
+        fillApplicationView = new FillApplicationView(fillApplicationViewModel, null, 0);
         fillApplicationView.setFillApplicationController(fillAppController);
 
         return this;

@@ -83,7 +83,7 @@ public class SideMenuPanel extends JPanel {
 
                 if (c != null) {
                     c.onViewPets();
-                    dashboard.setContent(new PetListView(c.getViewModel(), c));
+                    dashboard.setContent(new PetListView(c.getViewModel(), c, backend));
                 }
                 break;
             case "Call API":
