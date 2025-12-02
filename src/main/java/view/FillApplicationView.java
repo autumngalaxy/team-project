@@ -17,15 +17,17 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import entity.Pet;
 /**
  * The View for when the user is filling out an Adoption Application.
  */
-public class FillApplicationView extends JPanel implements ActionListener, PropertyChangeListener {
+public class FillApplicationView extends JFrame implements ActionListener, PropertyChangeListener {
 
     private final String viewName = "fill application";
 
     private final FillApplicationViewModel fillApplicationViewModel;
     private FillApplicationController fillApplicationController = null;
+    private Pet correspondingPet;
 
 
     /* NAME */
@@ -100,15 +102,22 @@ public class FillApplicationView extends JPanel implements ActionListener, Prope
     private final JButton submit;
     private final JButton cancel;
 
-    public FillApplicationView(FillApplicationViewModel fillApplicationViewModel) {
+    public FillApplicationView(FillApplicationViewModel fillApplicationViewModel, Pet correspondingPet) {
+        super("Fill Application View");
+
         this.fillApplicationViewModel = fillApplicationViewModel;
         fillApplicationViewModel.addPropertyChangeListener(this);
+
+        this.correspondingPet = correspondingPet;
+
+        final JPanel mainPanel = new JPanel();
 
         final JLabel title = new JLabel(FillApplicationViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         /* APPLICATION INFO */
         final JPanel applicationInfo = new JPanel();
+        //applicationInfo.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Name
         final LabelTextPanel nameInfo = new LabelTextPanel(
@@ -279,6 +288,7 @@ public class FillApplicationView extends JPanel implements ActionListener, Prope
                                     currentState.getAdopterEmail(),
                                     currentState.getSurveyInfo()
                             );
+                            makeInvisible();
                         }
                     }
                 }
@@ -293,14 +303,36 @@ public class FillApplicationView extends JPanel implements ActionListener, Prope
         addAddressListener();
         addEnumListener();
         addCheckboxListener();
+        addIDListener();
 
         /* LAYOUT */
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        //this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.add(title);
-        this.add(applicationInfo);
-        this.add(surveyInfo);
-        this.add(buttons);
+        mainPanel.add(title);
+        mainPanel.add(applicationInfo);
+        mainPanel.add(surveyInfo);
+        mainPanel.add(buttons);
+        setContentPane(mainPanel);
+        getContentPane().setLayout( new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
+        // System.out.println("Done init FillApplicationView!");
+
+        pack();
+        setLocationRelativeTo(null);
+        // setVisible(true);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
+    public void makeVisible(Pet pet){
+        this.correspondingPet = pet;
+        FillApplicationState curState = fillApplicationViewModel.getState();
+        curState.setCorrespondingPet(pet);
+        fillApplicationViewModel.setState(curState);
+        setVisible(true);
+    }
+
+    public void makeInvisible(){
+        setVisible(false);
+        // todo -- clear info
     }
 
     /* LISTENER METHODS */
@@ -494,6 +526,37 @@ public class FillApplicationView extends JPanel implements ActionListener, Prope
             @Override
             public void changedUpdate(DocumentEvent e) {
                 documentListenerHelper();
+            }
+        });
+    }
+
+    private void addIDListener(){
+        photoCard.addChangeListener(e -> {
+                if(photoCard.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setIdType(AdoptionApplication.IDType.PHOTO_CARD);
+                    fillApplicationViewModel.setState(currentState);
+            }
+        });
+        driverLicense.addChangeListener(e -> {
+            if(driverLicense.isSelected()){
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setIdType(AdoptionApplication.IDType.DRIVERS_LICENSE);
+                fillApplicationViewModel.setState(currentState);
+            }
+        });
+        mailLetter.addChangeListener(e -> {
+            if(mailLetter.isSelected()){
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setIdType(AdoptionApplication.IDType.MAIL);
+                fillApplicationViewModel.setState(currentState);
+            }
+        });
+        otherCardType.addChangeListener(e -> {
+            if(otherCardType.isSelected()){
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setIdType(AdoptionApplication.IDType.OTHER);
+                fillApplicationViewModel.setState(currentState);
             }
         });
     }

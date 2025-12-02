@@ -15,11 +15,13 @@ public class PetListView extends RightContentTemplate implements PropertyChangeL
 	
     private final PetListViewModel viewModel;
     private final JPanel listPanel = new JPanel();
+    private final ViewPetsController controller;
     
     public PetListView(PetListViewModel viewModel, ViewPetsController controller) {
         super("Available Pets");
 
         this.viewModel = viewModel;
+        this.controller = controller;
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
         listPanel.setBackground(Color.WHITE);
 
@@ -89,7 +91,7 @@ public class PetListView extends RightContentTemplate implements PropertyChangeL
         return card;
     }
     private void showDetails(Pet pet) {
-        new PetDetailView(pet);
+        new PetDetailView(pet, controller);
     }
 
     @Override

@@ -44,6 +44,7 @@ public class Main {
                 .addLoginChoosePresenter()
                 .addDashboardViews(backend)
                 .addUpdateProfileUseCase()
+                .addFillApplicationUseCase()
                 .addViewPetsUseCase(backend)
                 .addUserLoginUseCase()
                 .addUserLogoutUseCase()

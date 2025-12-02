@@ -12,16 +12,17 @@ import java.time.LocalDate;
  */
 public class FillApplicationState {
     private Pet correspondingPet;
-    private String adopterName;
-    private AdoptionApplication.IDType idType;
-    private String[] adopterAddress;
-    private String adopterPhone;
-    private String adopterEmail;
+    private String adopterName = "";
+    private AdoptionApplication.IDType idType = AdoptionApplication.IDType.PHOTO_CARD;
+    private String[] adopterAddress = {"", "", "", "", ""};
+    private String adopterPhone = "";
+    private String adopterEmail = "";
 
     private LocalDate applicationDate;
     private String applicationID;
 
-    private SurveyInfo surveyInfo;
+    private SurveyInfo surveyInfo = new SurveyBuilder().build();
+
 
     /* GETTERS */
     public Pet getCorespondingPet() {
@@ -97,7 +98,7 @@ public class FillApplicationState {
                 .addAdopterEnergy(energy)
                 .addAnimalAlone(surveyInfo.getAnimalAlone())
                 .addEnrichment(surveyInfo.getAdopterEnrichment())
-                .addTimeWith(surveyInfo.getAdopterEnrichment())
+                .addTimeWith(surveyInfo.getAdopterSpendsTimeWith())
                 .addLivesWith(surveyInfo.getAdopterLivesWith())
                 .addAnimalStaying(surveyInfo.getAnimalStaying())
                 .build();
@@ -110,7 +111,7 @@ public class FillApplicationState {
                 .addAdopterEnergy(surveyInfo.getAdopterEnergy())
                 .addAnimalAlone(surveyInfo.getAnimalAlone())
                 .addEnrichment(surveyInfo.getAdopterEnrichment())
-                .addTimeWith(surveyInfo.getAdopterEnrichment())
+                .addTimeWith(surveyInfo.getAdopterSpendsTimeWith())
                 .addLivesWith(surveyInfo.getAdopterLivesWith())
                 .addAnimalStaying(staying)
                 .build();
@@ -123,7 +124,7 @@ public class FillApplicationState {
                 .addAdopterEnergy(surveyInfo.getAdopterEnergy())
                 .addAnimalAlone(aloneTime)
                 .addEnrichment(surveyInfo.getAdopterEnrichment())
-                .addTimeWith(surveyInfo.getAdopterEnrichment())
+                .addTimeWith(surveyInfo.getAdopterSpendsTimeWith())
                 .addLivesWith(surveyInfo.getAdopterLivesWith())
                 .addAnimalStaying(surveyInfo.getAnimalStaying())
                 .build();
@@ -136,7 +137,7 @@ public class FillApplicationState {
                 .addAdopterEnergy(surveyInfo.getAdopterEnergy())
                 .addAnimalAlone(surveyInfo.getAnimalAlone())
                 .addEnrichment(surveyInfo.getAdopterEnrichment())
-                .addTimeWith(surveyInfo.getAdopterEnrichment())
+                .addTimeWith(surveyInfo.getAdopterSpendsTimeWith())
                 .addLivesWith(liveWith)
                 .addAnimalStaying(surveyInfo.getAnimalStaying())
                 .build();
@@ -162,7 +163,7 @@ public class FillApplicationState {
                 .addAdopterEnergy(surveyInfo.getAdopterEnergy())
                 .addAnimalAlone(surveyInfo.getAnimalAlone())
                 .addEnrichment(enrichment)
-                .addTimeWith(surveyInfo.getAdopterEnrichment())
+                .addTimeWith(surveyInfo.getAdopterSpendsTimeWith())
                 .addLivesWith(surveyInfo.getAdopterLivesWith())
                 .addAnimalStaying(surveyInfo.getAnimalStaying())
                 .build();

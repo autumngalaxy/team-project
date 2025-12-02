@@ -2,6 +2,7 @@ package service;
 
 import api.APIInterface;
 import entity.*;
+import entity.application.SurveyBuilder;
 import org.json.JSONArray;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -73,7 +74,8 @@ public class DummyDataGenerator {
             Application application = new Application(
                     i,
                     i,
-                    seenPetIds.get(random.nextInt(seenPetIds.size()))
+                    seenPetIds.get(random.nextInt(seenPetIds.size())),
+                    SurveyBuilder.defaultSettings()
             );
 
             applications.put(application.toJson());

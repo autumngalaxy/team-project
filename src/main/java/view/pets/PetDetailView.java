@@ -3,14 +3,21 @@ package view.pets;
 Pet detail that user can see
 */
 import entity.Pet;
+import interface_adapter.ViewPets.ViewPetsController;
+import use_case.view_pets.ViewPetsOutputBoundary;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PetDetailView extends JFrame {
-    public PetDetailView(Pet pet) {
+    private final ViewPetsController controller;
+
+    public PetDetailView(Pet pet, ViewPetsController controller) {
         super("Pet Detail View");
+
+        this.controller = controller;
 
         //the main panel
         JPanel mainPanel = new JPanel();
@@ -86,10 +93,7 @@ public class PetDetailView extends JFrame {
         adoptButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(
-                        PetDetailView.this,
-                        "Apply to Adopt",
-                        "Adopt", JOptionPane.INFORMATION_MESSAGE);
+                controller.newApplication(pet);
             }
         });
         buttonPanel.add(adoptButton);

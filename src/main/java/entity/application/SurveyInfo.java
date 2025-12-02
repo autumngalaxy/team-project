@@ -66,7 +66,7 @@ public class SurveyInfo {
     }
 
     public boolean[] getAdopterEnrichment() {
-        return adopterSpendsTimeWith;
+        return adopterEnrichment;
     }
 
     /* SETTERS */
@@ -99,5 +99,45 @@ public class SurveyInfo {
         if (adopterEnrichment.length != ENRICHMENTSIZE)
         { throw new IllegalArgumentException("Wrong enrichment length: " + adopterEnrichment.length); }
         this.adopterEnrichment = adopterEnrichment;
+    }
+
+    private String getBoolArray(boolean[] booleans){
+        StringBuilder result = new StringBuilder();
+        for(int i = 0; i < booleans.length; i++){
+            result.append(booleans[i]);
+            if(i < booleans.length - 1){
+                result.append(",");
+            }
+        }
+        return result.toString();
+    }
+
+    public String toJSON(){
+        return new StringBuilder()
+                .append("\"energy_of_home\": \"")
+                .append(adopterEnergy.name())
+                .append("\"")
+
+                .append(" \"animal_staying\": ")
+                .append(animalStaying.name())
+                .append("\"")
+
+                .append(" \"alone_time\": ")
+                .append(animalAlone.name())
+                .append("\"")
+
+                // ADULT, CHILDREN, SENIORS, TEENAGERS, CATS, DOGS, BIRDS, MAMMALS
+                .append(" \"lives_with\": [")
+                .append(getBoolArray(adopterLivesWith))
+                .append("] ")
+
+                .append("\"time_with\": [")
+                .append(getBoolArray(adopterSpendsTimeWith))
+                .append("] ")
+
+                .append("\"enrichment\": [")
+                .append(getBoolArray(adopterEnrichment))
+                .append("]")
+                .toString();
     }
 }

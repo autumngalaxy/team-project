@@ -7,6 +7,9 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.FilterPets.PetListViewModel;
 import interface_adapter.ViewPets.ViewPetsController;
 import interface_adapter.ViewPets.ViewPetsPresenter;
+import interface_adapter.fill_application.FillApplicationController;
+import interface_adapter.fill_application.FillApplicationPresenter;
+import interface_adapter.fill_application.FillApplicationViewModel;
 import interface_adapter.homepage.LoginChoosePresenter;
 import interface_adapter.homepage.LoginChooseViewModel;
 import interface_adapter.sign_up.SignupController;
@@ -24,6 +27,9 @@ import interface_adapter.pet_management.PetManagementPresenter;
 import interface_adapter.pet_management.PetManagementViewModel;
 import service.Backend;
 import service.Frontend;
+import use_case.fill_application.FillApplicationInputBoundary;
+import use_case.fill_application.FillApplicationInteractor;
+import use_case.fill_application.FillApplicationOutputBoundary;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
@@ -83,12 +89,15 @@ public class AppBuilder {
 
     private final PetManagementViewModel petManagementViewModel = new PetManagementViewModel();
 
+    private final FillApplicationViewModel fillApplicationViewModel = new FillApplicationViewModel();
+
     // Views
     private LoginChooseView loginChooseView;
     private CreateUserAccountView createUserAccountView;
     private UserLoginView userLoginView;
     private AdminPetManagementView adminPetManagementView;
 
+    private FillApplicationView fillApplicationView;
 
     /**
      * Constructs an AppBuilder that initializes all required managers and shared
@@ -286,9 +295,25 @@ public class AppBuilder {
                 new ViewPetsInteractor(backend, presenter);
 
         viewPetsController =
-                new ViewPetsController(interactor, petListViewModel);
+                new ViewPetsController(interactor, petListViewModel, fillApplicationView);
 
         frontend.setViewPetsController(viewPetsController);
+
+        return this;
+    }
+
+    public AppBuilder addFillApplicationUseCase(){
+        FillApplicationOutputBoundary presenter =
+                new FillApplicationPresenter();
+
+        FillApplicationInputBoundary interactor =
+                new FillApplicationInteractor(backend, presenter);
+
+        FillApplicationController fillAppController =
+                new FillApplicationController(interactor);
+
+        fillApplicationView = new FillApplicationView(fillApplicationViewModel, null);
+        fillApplicationView.setFillApplicationController(fillAppController);
 
         return this;
     }
