@@ -6,13 +6,13 @@ import service.Backend;
 
 public class UpdateUserProfileInteractor implements UpdateUserProfileInputBoundary {
 
-    private final FileUserDataAccessObject userDAO;
+    private final FileUserDataAccessObject userdao;
     private final Backend backend;
     private final UpdateUserProfileOutputBoundary presenter;
 
     public UpdateUserProfileInteractor(FileUserDataAccessObject userDataAccessObject, Backend backend,
                                        UpdateUserProfileOutputBoundary presenter) {
-        this.userDAO = userDataAccessObject;
+        this.userdao = userDataAccessObject;
         this.backend = backend;
         this.presenter = presenter;
     }
@@ -29,7 +29,7 @@ public class UpdateUserProfileInteractor implements UpdateUserProfileInputBounda
 
     @Override
     public void saveProfile(UpdateUserProfileInputData data) {
-        final User u = userDAO.getCurrentUser();
+        final User u = userdao.getCurrentUser();
         if (u != null) {
             final User updated = new User(
                     u.getId(),
@@ -42,7 +42,7 @@ public class UpdateUserProfileInteractor implements UpdateUserProfileInputBounda
                     u.getPassword(),
                     u.getUserType()
             );
-            userDAO.save(updated);
+            userdao.save(updated);
             backend.setCurrentUser(updated);
         }
         // saveProfile
@@ -52,7 +52,7 @@ public class UpdateUserProfileInteractor implements UpdateUserProfileInputBounda
     @Override
     public void save(String name, String email, String address, int phoneNumber) {
 
-        final User user = userDAO.getCurrentUser();
+        final User user = userdao.getCurrentUser();
 
         final User updated = new User(
                 user.getId(),
@@ -66,7 +66,7 @@ public class UpdateUserProfileInteractor implements UpdateUserProfileInputBounda
                 user.getUserType()
         );
 
-        userDAO.updateUser(updated);
+        userdao.updateUser(updated);
         backend.setCurrentUser(updated);
 
         presenter.showProfileUpdateSuccess();

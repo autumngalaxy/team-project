@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+
 import service.Backend;
 import service.Frontend;
 import view.menu.SideMenuPanel;
@@ -11,7 +12,6 @@ import view.menu.SideMenuPanel;
  * It contains:
  *   - A left-side menu (SideMenuPanel)
  *   - A right-side content panel that changes depending on menu selection
- *
  * This class allows switching ONLY the right-side content
  * while keeping the left menu fixed.
  */
@@ -35,10 +35,10 @@ public class MainDashboardView extends JPanel {
         contentPanel.setBackground(Color.WHITE);
 
         // Left panel: the side menu.
-        SideMenuPanel menu = new SideMenuPanel(frontend, backend, this, userType);
+        final SideMenuPanel menu = new SideMenuPanel(frontend, backend, this, userType);
 
         // Initial content selection
-        JPanel initial;
+        final JPanel initial;
 
         switch (userType) {
             case "admin":
@@ -91,8 +91,8 @@ public class MainDashboardView extends JPanel {
      * @return JPanel containing centered JLabel
      */
     private JPanel centerLabel(String text) {
-        JPanel p = new JPanel(new BorderLayout());
-        p.add(new JLabel(text, SwingConstants.CENTER), BorderLayout.CENTER);
-        return p;
+        final JPanel jPanel = new JPanel(new BorderLayout());
+        jPanel.add(new JLabel(text, SwingConstants.CENTER), BorderLayout.CENTER);
+        return jPanel;
     }
 }

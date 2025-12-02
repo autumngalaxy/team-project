@@ -3,13 +3,9 @@ package interface_adapter.homepage;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.user_login.UserLoginState;
 import interface_adapter.user_login.UserLoginViewModel;
-import view.auth.UserLoginView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 public class LoginChoosePresenter implements PropertyChangeListener {
 
@@ -17,11 +13,10 @@ public class LoginChoosePresenter implements PropertyChangeListener {
     private final UserLoginViewModel userLoginViewModel;
 
     public LoginChoosePresenter(ViewManagerModel viewManagerModel,
-    		UserLoginViewModel userLoginViewModel) {
+                                UserLoginViewModel userLoginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.userLoginViewModel = userLoginViewModel;
     }
-    
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -29,13 +24,13 @@ public class LoginChoosePresenter implements PropertyChangeListener {
         final String property = evt.getPropertyName();
         
         if ("login".equals(property)) {
-            String userType = (String) evt.getNewValue(); 
-            UserLoginState state = userLoginViewModel.getState();
+            final String userType = (String) evt.getNewValue();
+            final UserLoginState state = userLoginViewModel.getState();
             state.setUserType(userType);
             userLoginViewModel.setState(state); 
             userLoginViewModel.firePropertyChange(userType);
 
-            String title;
+            final String title;
 
             switch (userType) {
                 case "user":

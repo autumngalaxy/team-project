@@ -36,13 +36,11 @@ public class SignupPresenter implements SignupOutputBoundary {
                 JOptionPane.INFORMATION_MESSAGE
         );
         SwingUtilities.invokeLater(() -> {	        
-	        UserLoginState loginState = new UserLoginState();
+	        final UserLoginState loginState = new UserLoginState();
 	        loginState.setUserType("user"); 
 	        loginState.setUsername(response.getUsername());
 	        loginViewModel.setState(loginState);
 	        loginViewModel.firePropertyChange();
-	        
-	
 	        viewManagerModel.setState("login"); 
 	        viewManagerModel.setWindowTitle("User Login");
 	        viewManagerModel.firePropertyChange();

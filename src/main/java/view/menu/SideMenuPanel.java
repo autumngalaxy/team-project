@@ -66,7 +66,7 @@ public class SideMenuPanel extends JPanel {
 
     private void handleMenuClick(String item) {
         switch (item) {
-	        case "My Profile":
+            case "My Profile":
 	        	dashboard.setContent(new UserProfileView(backend));
 	            break;
 	        case "Edit Profile":

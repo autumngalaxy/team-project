@@ -22,5 +22,8 @@ public interface SignupOutputBoundary {
      */
     void switchToLoginView();
 
+    /**
+     * Executes the switch to choose login view use case.
+     */
     void prepareGoBackView(String viewName);
 }

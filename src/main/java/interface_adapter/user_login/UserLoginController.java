@@ -29,5 +29,5 @@ public class UserLoginController {
      */
     public void goBack() {
         loginUseCaseInteractor.goBack();
-	}
+    }
 }

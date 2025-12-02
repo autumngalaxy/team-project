@@ -48,10 +48,10 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
 
         // ====== UI ======
         setBackground(new Color(0xF5F7FB));
-        setLayout(new GridBagLayout()); // 居中
+        setLayout(new GridBagLayout());
 
         // middle
-        JPanel card = new JPanel();
+        final JPanel card = new JPanel();
         card.setBackground(Color.WHITE);
         card.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true),
@@ -176,11 +176,11 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
         setFields(state);
         usernameErrorField.setText(state.getLoginError());
         
-        String userType = state.getUserType();
+        final String userType = state.getUserType();
         this.userType = userType;
 
         switch (userType) {
-	        case "user":
+            case "user":
 	            titleLabel.setText("User Login");
 	            break;
 
@@ -217,7 +217,7 @@ public class UserLoginView extends JPanel implements ActionListener, PropertyCha
     public void updateTitle() {
         this.titleLabel.setText(formatTitle(userType));
 
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        final JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (frame != null) {
             frame.setTitle(getTitleText());
         }
