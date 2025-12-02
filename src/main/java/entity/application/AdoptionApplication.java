@@ -1,19 +1,26 @@
-package entity;
+package entity.application;
 
+import entity.Pet;
 
 import java.time.LocalDate;
 
+/**
+ * An entity representing an Application for Adoption.
+ * Applications contain essential information (Pet, name of Adopter, ID, address, etc.), and survey information through a SurveyInfo.
+ */
 public class AdoptionApplication {
     // Required info
-    enum IDType {PHOTO_CARD, DRIVERS_LICENSE, MAIL, OTHER}
+    public enum IDType {PHOTO_CARD, DRIVERS_LICENSE, MAIL, OTHER}
 
-    private Pet corespondingPet;
+    private Pet correspondingPet;
     private String adopterName;
     private IDType idType;
     private String[] adopterAddress;
     private String adopterPhone;
     private String adopterEmail;
+
     private LocalDate applicationDate;
+    private String applicationID;
 
     // Adopter Survey info
     private SurveyInfo surveyInfo;
@@ -21,7 +28,7 @@ public class AdoptionApplication {
     /* GETTERS (FOR OTHER USE) */
 
     public Pet getCorespondingPet() {
-        return corespondingPet;
+        return correspondingPet;
     }
 
     public String getAdopterName() {
@@ -52,9 +59,11 @@ public class AdoptionApplication {
         return applicationDate;
     }
 
+    public String getApplicationID() { return applicationID; }
+
     /* SETTERS (FOR BUILDER USE) */
-    public void setCorespondingPet(Pet corespondingPet) {
-        this.corespondingPet = corespondingPet;
+    public void setCorrespondingPet(Pet correspondingPet) {
+        this.correspondingPet = correspondingPet;
     }
 
     public void setAdopterName(String adopterName) {
@@ -83,5 +92,41 @@ public class AdoptionApplication {
 
     public void setApplicationDate() {
         this.applicationDate = LocalDate.now();
+    }
+
+    /* ToString */
+
+    private String addressToString() {
+        StringBuilder result = new StringBuilder();
+        result.append("{");
+
+        for (int i = 0; i < adopterAddress.length; i++) {
+            result.append(adopterAddress[i]);
+            if (i < adopterAddress.length - 1){ result.append(", "); }
+        }
+        result.append("}");
+        return result.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Application: " + applicationID +
+                " [Pet: " +
+                correspondingPet +
+                "] [Name: " +
+                adopterName +
+                "] [idType: " +
+                idType +
+                "] [Address: " +
+                addressToString() +
+                "] [Phone: " +
+                adopterPhone +
+                "] [Email: " +
+                adopterEmail +
+                "] [SurveyInfo: " +
+                surveyInfo +
+                "] [Date: " +
+                applicationDate +
+                "]";
     }
 }

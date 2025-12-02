@@ -1,5 +1,8 @@
-package entity;
+package entity.application;
 
+/**
+ * An entity that builds Survey Info entities. Requires adding desired info using methods, then calling build().
+ */
 public class SurveyBuilder {
     SurveyInfo survey;
 
@@ -38,6 +41,17 @@ public class SurveyBuilder {
     public SurveyBuilder addEnrichment(boolean[] enrichment){
         survey.setAdopterEnrichment(enrichment);
         return this;
+    }
+
+    public static SurveyInfo defaultSettings(){
+        return new SurveyBuilder().addAdopterEnergy(SurveyInfo.EnergyOfHome.QUIET)
+                .addAnimalStaying(SurveyInfo.AnimalStaying.LOOSE)
+                .addAnimalAlone(SurveyInfo.AloneTime.MORE_THAN_TEN)
+                .addLivesWith(new boolean[8])
+                .addTimeWith(new boolean[8])
+                .addEnrichment(new boolean[5])
+                .build();
+
     }
 
 }

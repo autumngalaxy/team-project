@@ -11,15 +11,22 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
+import service.Backend;
+
 public class PetListView extends RightContentTemplate implements PropertyChangeListener { 
 	
     private final PetListViewModel viewModel;
     private final JPanel listPanel = new JPanel();
+    private final ViewPetsController controller;
+
+    private final Backend backend;
     
-    public PetListView(PetListViewModel viewModel, ViewPetsController controller) {
+    public PetListView(PetListViewModel viewModel, ViewPetsController controller, Backend backend) {
         super("Available Pets");
 
         this.viewModel = viewModel;
+        this.controller = controller;
+        this.backend = backend;
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
         listPanel.setBackground(Color.WHITE);
 
@@ -89,7 +96,7 @@ public class PetListView extends RightContentTemplate implements PropertyChangeL
         return card;
     }
     private void showDetails(Pet pet) {
-        new PetDetailView(pet);
+        new PetDetailView(pet, controller, backend.getCurrentUser().getId());
     }
 
 

@@ -218,5 +218,16 @@
         "userType": "user",
         "email": "user20@example.com",
         "username": "user20"
+    },
+    {
+        "password": "123",
+        "address": "",
+        "idType": "PHOTO_CARD",
+        "phoneNumber": 0,
+        "name": "123",
+        "id": 21,
+        "userType": "user",
+        "email": "",
+        "username": "123"
     }
 ]

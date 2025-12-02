@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c398851c-52e7-409f-a045-c80faede2453" name="Changes" comment="able to complete applications">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications.json" beforeDir="false" afterPath="$PROJECT_DIR$/applications.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/FileApplicationDataAccessObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/application/SurveyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/application/SurveyInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/FillApplicationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/FillApplicationView.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;autumngalaxy&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/autumngalaxy/team-project.git&quot;,
+    &quot;accountId&quot;: &quot;7bbef146-3f15-4a2c-95bd-16792debfdf6&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="34yTy6a6yS4LazRu6mvf2U5OsIG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StandardRun.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;implement-adoption-application-beginnings&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/spencerswiader/IdeaProjects/csc207-team-project&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="entity.application" />
+      <recent name="interface_adapter" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="StandardRun" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="app.Main" />
+      <module name="TeamProject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="csc207-team-project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="csc207-team-project" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="csc207-team-project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="csc207-team-project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c398851c-52e7-409f-a045-c80faede2453" name="Changes" comment="" />
+      <created>1762185062396</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762185062396</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Add AdoptionApplication, ApplicationBuilder, SurveyInfo, SurveyBuilder, and class for Pet.">
+      <option name="closed" value="true" />
+      <created>1762369772120</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1762369772120</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Main &amp; Application toString">
+      <option name="closed" value="true" />
+      <created>1762371480760</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1762371480760</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add files needed for FillApplication use case">
+      <option name="closed" value="true" />
+      <created>1762372060075</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1762372060075</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Refactored entity location &amp; added class text for AdoptionApplication.">
+      <option name="closed" value="true" />
+      <created>1762372372528</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762372372528</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Slight refactoring">
+      <option name="closed" value="true" />
+      <created>1762388599031</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1762388599031</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Use case layer complete">
+      <option name="closed" value="true" />
+      <created>1763996867240</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1763996867240</updated>
+    </task>
+    <task id="LOCAL-00007" summary="FillApplicationController finished">
+      <option name="closed" value="true" />
+      <created>1763997815600</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1763997815600</updated>
+    </task>
+    <task id="LOCAL-00008" summary="FillApplicationViewModel finished">
+      <option name="closed" value="true" />
+      <created>1763998562759</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1763998562759</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Progress on FillApplicationView">
+      <option name="closed" value="true" />
+      <created>1763999564627</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1763999564627</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Progress on FillApplicationView">
+      <option name="closed" value="true" />
+      <created>1764641663730</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1764641663730</updated>
+    </task>
+    <task id="LOCAL-00011" summary="adding listeners (no checkbox yet)">
+      <option name="closed" value="true" />
+      <created>1764651726060</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1764651726060</updated>
+    </task>
+    <task id="LOCAL-00012" summary="All listeners done">
+      <option name="closed" value="true" />
+      <created>1764659396354</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1764659396354</updated>
+    </task>
+    <task id="LOCAL-00013" summary="should be able to complete applications">
+      <option name="closed" value="true" />
+      <created>1764674753377</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1764674753377</updated>
+    </task>
+    <task id="LOCAL-00014" summary="able to complete applications">
+      <option name="closed" value="true" />
+      <created>1764678027172</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1764678027172</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add AdoptionApplication, ApplicationBuilder, SurveyInfo, SurveyBuilder, and class for Pet." />
+    <MESSAGE value="Main &amp; Application toString" />
+    <MESSAGE value="Add files needed for FillApplication use case" />
+    <MESSAGE value="Refactored entity location &amp; added class text for AdoptionApplication." />
+    <MESSAGE value="Slight refactoring" />
+    <MESSAGE value="Use case layer complete" />
+    <MESSAGE value="FillApplicationController finished" />
+    <MESSAGE value="FillApplicationViewModel finished" />
+    <MESSAGE value="Progress on FillApplicationView" />
+    <MESSAGE value="adding listeners (no checkbox yet)" />
+    <MESSAGE value="All listeners done" />
+    <MESSAGE value="should be able to complete applications" />
+    <MESSAGE value="able to complete applications" />
+    <option name="LAST_COMMIT_MESSAGE" value="able to complete applications" />
+  </component>
+</project>

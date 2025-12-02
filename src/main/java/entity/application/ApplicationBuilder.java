@@ -1,5 +1,10 @@
-package entity;
+package entity.application;
 
+import entity.Pet;
+
+/**
+ * An entity that builds Adoption Application entities. Requires adding desired info using methods, then calling build().
+ */
 public class ApplicationBuilder {
 
     AdoptionApplication application;
@@ -19,7 +24,7 @@ public class ApplicationBuilder {
     }
 
     public ApplicationBuilder addPet(Pet pet){
-        application.setCorespondingPet(pet);
+        application.setCorrespondingPet(pet);
         return this;
     }
 
