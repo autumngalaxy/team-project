@@ -1,9 +1,14 @@
 package view;
 
+import entity.application.AdoptionApplication;
+import entity.application.SurveyInfo;
 import interface_adapter.fill_application.FillApplicationController;
+import interface_adapter.fill_application.FillApplicationState;
 import interface_adapter.fill_application.FillApplicationViewModel;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
@@ -258,7 +263,6 @@ public class FillApplicationView extends JPanel implements ActionListener, Prope
         buttons.add(cancel);
 
         /* LISTENERS */
-        // todo
         submit.addActionListener(
                 new ActionListener() {
                     @Override
@@ -282,6 +286,13 @@ public class FillApplicationView extends JPanel implements ActionListener, Prope
 
         cancel.addActionListener(this);
 
+        /* USE LISTENER METHODS */
+        addNameListener();
+        addPhoneListener();
+        addEmailListener();
+        addAddressListener();
+        addEnumListener();
+
         /* LAYOUT */
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -291,6 +302,330 @@ public class FillApplicationView extends JPanel implements ActionListener, Prope
         this.add(buttons);
     }
 
+    /* LISTENER METHODS */
+    private void addNameListener(){
+        nameInputField.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void documentListenerHelper() {
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setName(nameInputField.getText());
+                fillApplicationViewModel.setState(currentState);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) { documentListenerHelper(); }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) { documentListenerHelper(); }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) { documentListenerHelper(); }
+        });
+    }
+
+    private void addPhoneListener(){
+        phoneInputField.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void documentListenerHelper(){
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setPhone(phoneInputField.getText());
+                fillApplicationViewModel.setState(currentState);
+            }
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
+    }
+
+    private void addEmailListener(){
+        emailInputField.getDocument().addDocumentListener(new DocumentListener() {
+            private void documentListenerHelper(){
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setEmail(emailInputField.getText());
+                fillApplicationViewModel.setState(currentState);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
+    }
+
+    private void addAddressListener(){
+        streetAddressInputField.getDocument().addDocumentListener(new DocumentListener() {
+            private void documentListenerHelper(){
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setStreetAddress(streetAddressInputField.getText());
+                fillApplicationViewModel.setState(currentState);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
+
+        cityInputField.getDocument().addDocumentListener(new DocumentListener() {
+            private void documentListenerHelper(){
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setCity(cityInputField.getText());
+                fillApplicationViewModel.setState(currentState);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
+
+        provinceInputField.getDocument().addDocumentListener(new DocumentListener() {
+            private void documentListenerHelper(){
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setProvince(provinceInputField.getText());
+                fillApplicationViewModel.setState(currentState);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
+
+        postalCodeInputField.getDocument().addDocumentListener(new DocumentListener() {
+            private void documentListenerHelper(){
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setPostalCode(postalCodeInputField.getText());
+                fillApplicationViewModel.setState(currentState);
+            }
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
+        countryInputField.getDocument().addDocumentListener(new DocumentListener() {
+            private void documentListenerHelper(){
+                final FillApplicationState currentState = fillApplicationViewModel.getState();
+                currentState.setCountry(countryInputField.getText());
+                fillApplicationViewModel.setState(currentState);
+            }
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
+    }
+
+    private void addEnumListener(){
+        quietEnergy.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (quietEnergy.isSelected()) {
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setEnergy(SurveyInfo.EnergyOfHome.QUIET);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+        loudEnergy.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (loudEnergy.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setEnergy(SurveyInfo.EnergyOfHome.LOUD);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+        bothEnergy.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (bothEnergy.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setEnergy(SurveyInfo.EnergyOfHome.BOTH);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+
+        /* Animal Staying*/
+        looseStaying.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (looseStaying.isSelected()) {
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setStaying(SurveyInfo.AnimalStaying.LOOSE);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+
+        confinedStaying.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (confinedStaying.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setStaying(SurveyInfo.AnimalStaying.CONFINED);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+        cratedStaying.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(cratedStaying.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setStaying(SurveyInfo.AnimalStaying.CRATED);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+        outsideStaying.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(outsideStaying.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setStaying(SurveyInfo.AnimalStaying.OUTSIDE);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+        otherStaying.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (otherStaying.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setStaying(SurveyInfo.AnimalStaying.OTHER);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+
+
+        /* Animal Alone Time */
+        aboveTenAlone.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(aboveTenAlone.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setAlone(SurveyInfo.AloneTime.MORE_THAN_TEN);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+        eightTenAlone.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(eightTenAlone.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setAlone(SurveyInfo.AloneTime.EIGHT_TO_TEN);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+        fourSixAlone.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(fourSixAlone.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setAlone(SurveyInfo.AloneTime.FOUR_TO_SIX);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+        lessFour.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(lessFour.isSelected()){
+                    final FillApplicationState currentState = fillApplicationViewModel.getState();
+                    currentState.setAlone(SurveyInfo.AloneTime.LESS_THAN_FOUR);
+                    fillApplicationViewModel.setState(currentState);
+                }
+            }
+        });
+
+
+        final FillApplicationState currentState = fillApplicationViewModel.getState();
+
+        fillApplicationViewModel.setState(currentState);
+    }
+
+    private void addCheckboxListener(){
+
+    }
+
+    /* OTHER METHODS */
     @Override
     public void actionPerformed(ActionEvent e) {
 
