@@ -213,7 +213,7 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
     }
 
     /**
-     * Presenter pushed ViewModel changes → update UI fields.
+     * Presenter pushed ViewModel changes → update UI fields
      * */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -228,7 +228,7 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
     }
 
     /**
-     *  Helper: create one label + textfield row.
+     *  Helper: create one label + textfield row
      *  */
     private JPanel createRow(String labelText, JComponent field) {
         final JPanel panel = new JPanel();
@@ -253,7 +253,7 @@ public class CreateUserAccountView extends JPanel implements ActionListener, Pro
     }
 
     /**
-     * Clear all input fields and error messages.
+     * Clear all input fields and error messages
      * */
     private void clearFields() {
         usernameField.setText("");

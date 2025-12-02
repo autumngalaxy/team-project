@@ -1,7 +1,7 @@
 package interface_adapter;
 
 public class ViewManagerModel extends ViewModel<String> {
-    private String windowTitle = "";
+	private String windowTitle = "";
 	 
     public ViewManagerModel() {
         super("view manager");

@@ -14,7 +14,7 @@ public class UserLogoutPresenter implements UserLogoutOutputBoundary {
 
     private ViewManagerModel viewManagerModel;
     private UserLoginViewModel userLoginViewModel;
-    private final Frontend frontend;
+	private final Frontend frontend;
 
     public UserLogoutPresenter(ViewManagerModel viewManagerModel,
             UserLoginViewModel userLoginViewModel,

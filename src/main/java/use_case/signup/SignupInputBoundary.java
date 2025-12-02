@@ -16,9 +16,6 @@ public interface SignupInputBoundary {
      */
     void switchToLoginView();
 
-    /**
-     * Executes the switch to choose login view use case.
-     */
     void goBack();
 
 }

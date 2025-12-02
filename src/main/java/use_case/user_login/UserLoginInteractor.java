@@ -40,21 +40,22 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
                 return;
             }
 
+
             final User user = userDataAccessObject.get(loginInputData.getUsername());
             
             backend.setCurrentUser(user);
             userDataAccessObject.setCurrentUsername(username);
 
-            final UserLoginOutputData userLoginOutputData =
-                    new UserLoginOutputData(user.getUsername(), user.getUserType(), user);
+            final UserLoginOutputData userLoginOutputData = new UserLoginOutputData
+                    (user.getUsername(), user.getUserType(), user);
             
             userLoginPresenter.prepareSuccessView(userLoginOutputData);
 
         }
     }
 
-    @Override
-    public void goBack() {
-        userLoginPresenter.prepareGoBackView("loginChoose");
-    }
+	@Override
+	public void goBack() {
+		userLoginPresenter.prepareGoBackView("loginChoose");
+	}
 }

@@ -64,7 +64,6 @@ public class ViewModel<T> {
     public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
         this.support.firePropertyChange(propertyName, oldValue, newValue);
     }
-
     /**
      * Adds a listener that will be notified when any property change event occurs.
      *

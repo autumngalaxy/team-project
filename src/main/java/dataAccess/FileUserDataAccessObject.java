@@ -33,39 +33,37 @@ public class FileUserDataAccessObject implements
         this.jsonPath = jsonPath;
         this.userFactory = userFactory;
 
-        final File file = new File(jsonPath);
+        File f = new File(jsonPath);
 
-        if (!file.exists()) {
-            // create empty file
-            saveToDisk();
-        }
-        else {
+        if (!f.exists()) {
+            saveToDisk();  // create empty file
+        } else {
             loadFromDisk();
         }
     }
 
     /**
-     * Load all users from JSON file.
+     * Load all users from JSON file
      */
     private void loadFromDisk() {
         try {
-            final String text = new String(Files.readAllBytes(Paths.get(jsonPath)));
+            String text = new String(Files.readAllBytes(Paths.get(jsonPath)));
 
-            final JSONArray jsonArray = new JSONArray(text);
+            JSONArray arr = new JSONArray(text);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                final JSONObject jsonObject = jsonArray.getJSONObject(i);
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject o = arr.getJSONObject(i);
 
-                final User user = new User(
-                        jsonObject.getInt("id"),
-                        jsonObject.getString("name"),
-                        jsonObject.optString("address", ""),
-                        User.idType.valueOf(jsonObject.getString("idType")),
-                        jsonObject.optInt("phoneNumber", 0),
-                        jsonObject.optString("email", ""),
-                        jsonObject.getString("username"),
-                        jsonObject.getString("password"),
-                        jsonObject.getString("userType")
+                User user = new User(
+                        o.getInt("id"),
+                        o.getString("name"),
+                        o.optString("address", ""),
+                        User.idType.valueOf(o.getString("idType")),
+                        o.optInt("phoneNumber", 0),
+                        o.optString("email", ""),
+                        o.getString("username"),
+                        o.getString("password"),
+                        o.getString("userType")
                 );
 
                 accounts.put(user.getUsername(), user);
@@ -73,8 +71,7 @@ public class FileUserDataAccessObject implements
 
             System.out.println("Loaded users: " + accounts.size());
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException("Failed to load JSON users", e);
         }
     }
@@ -85,17 +82,15 @@ public class FileUserDataAccessObject implements
     private void saveToDisk() {
         try (FileWriter writer = new FileWriter(jsonPath)) {
 
-            final JSONArray arr = new JSONArray();
+            JSONArray arr = new JSONArray();
 
             for (User user : accounts.values()) {
-                // use your User.toJson()
-                arr.put(user.toJson());
+                arr.put(user.toJson()); // use your User.toJson()
             }
-            // pretty print
-            writer.write(arr.toString(4));
 
-        }
-        catch (Exception e) {
+            writer.write(arr.toString(4)); // pretty print
+
+        } catch (Exception e) {
             throw new RuntimeException("Failed to save JSON users", e);
         }
     }
@@ -116,11 +111,11 @@ public class FileUserDataAccessObject implements
     public void save(User user) {
         // auto-generate ID if missing or 0
         if (user.getId() == 0) {
-            final int maxId = accounts.values().stream()
+            int maxId = accounts.values().stream()
                     .mapToInt(User::getId)
                     .max()
                     .orElse(0);
-            final int newId = maxId + 1;
+            int newId = maxId + 1;
 
             user = new User(
                     newId,

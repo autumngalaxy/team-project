@@ -7,32 +7,14 @@
     <list default="true" id="c398851c-52e7-409f-a045-c80faede2453" name="Changes" comment="able to complete applications">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications.json" beforeDir="false" afterPath="$PROJECT_DIR$/applications.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pets.json" beforeDir="false" afterPath="$PROJECT_DIR$/pets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/AppBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/AppBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dataAccess/FileUserDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dataAccess/FileUserDataAccessObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/ViewManagerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/ViewManagerModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/ViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/homepage/LoginChoosePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/homepage/LoginChoosePresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/sign_up/SignupPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/sign_up/SignupPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/update_profile/UpdateUserProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/update_profile/UpdateUserProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/user_login/UserLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/user_login/UserLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/user_login/UserLoginPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/user_login/UserLoginPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/user_logout/UserLogoutPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/user_logout/UserLogoutPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/signup/SignupInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/signup/SignupInputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/signup/SignupOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/signup/SignupOutputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/update_profile/UpdateUserProfileInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/update_profile/UpdateUserProfileInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/user_login/UserLoginInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/user_login/UserLoginInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/user_login/UserLoginUserDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/user_login/UserLoginUserDataAccessInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/user_logout/UserLogoutInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/user_logout/UserLogoutInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/AdminPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/AdminPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/FileApplicationDataAccessObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/application/SurveyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/application/SurveyInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInteractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/FillApplicationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/FillApplicationView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/LabelRadioPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LabelRadioPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/LabelTextPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LabelTextPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainDashboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainDashboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/menu/MenuConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/menu/MenuConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/use_case/logout/LogoutInteractorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/use_case/logout/LogoutInteractorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,39 +55,49 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="34yTy6a6yS4LazRu6mvf2U5OsIG" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.StandardRun.executor": "Run",
-    "JUnit.LoginInteractorTest.executor": "Coverage",
-    "JUnit.LogoutInteractorTest.executor": "Coverage",
-    "JUnit.java in TeamProject.executor": "Coverage",
-    "JUnit.logout in TeamProject.executor": "Coverage",
-    "JUnit.signup in TeamProject.executor": "Coverage",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "TestAndStyle",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/spencerswiader/IdeaProjects/csc207-team-project"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StandardRun.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;implement-adoption-application-beginnings&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/spencerswiader/IdeaProjects/csc207-team-project&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="entity.application" />
       <recent name="interface_adapter" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.java in TeamProject">
+  <component name="RunManager">
+    <configuration name="StandardRun" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="app.Main" />
+      <module name="TeamProject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="csc207-team-project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="csc207-team-project" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="csc207-team-project" />
       <option name="ENV_FILES" value="" />
@@ -140,87 +132,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <method v="2" />
     </configuration>
-    <configuration name="StandardRun" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="app.Main" />
-      <module name="TeamProject" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LoginInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TeamProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="use_case.user_login.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="use_case.user_login" />
-      <option name="MAIN_CLASS_NAME" value="use_case.user_login.LoginInteractorTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LogoutInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TeamProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="use_case.logout.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="use_case.logout" />
-      <option name="MAIN_CLASS_NAME" value="use_case.logout.LogoutInteractorTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="java in TeamProject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TeamProject" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="logout in TeamProject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TeamProject" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/use_case/logout" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="signup in TeamProject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TeamProject" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/use_case/signup" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="csc207-team-project" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="csc207-team-project" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.java in TeamProject" />
-        <item itemvalue="JUnit.logout in TeamProject" />
-        <item itemvalue="JUnit.LoginInteractorTest" />
-        <item itemvalue="JUnit.signup in TeamProject" />
-        <item itemvalue="JUnit.LogoutInteractorTest" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -371,16 +282,5 @@
     <MESSAGE value="should be able to complete applications" />
     <MESSAGE value="able to complete applications" />
     <option name="LAST_COMMIT_MESSAGE" value="able to complete applications" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/team_project$LoginInteractorTest.ic" NAME="LoginInteractorTest Coverage Results" MODIFIED="1764712100895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>use_case.user_login.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/team_project$logout_in_TeamProject.ic" NAME="logout in TeamProject Coverage Results" MODIFIED="1764712185780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
-    <SUITE FILE_PATH="coverage/team_project$signup_in_TeamProject.ic" NAME="signup in TeamProject Coverage Results" MODIFIED="1764712073453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
-    <SUITE FILE_PATH="coverage/team_project$LogoutInteractorTest.ic" NAME="LogoutInteractorTest Coverage Results" MODIFIED="1764712004900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>use_case.logout.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/team_project$java_in_TeamProject.ic" NAME="java in TeamProject Coverage Results" MODIFIED="1764712219858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>

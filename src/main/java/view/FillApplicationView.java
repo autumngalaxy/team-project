@@ -13,20 +13,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import entity.Pet;
-
 /**
  * The View for when the user is filling out an Adoption Application.
  */
 public class FillApplicationView extends JFrame implements ActionListener, PropertyChangeListener {
-
-    public static final int ZERO = 0;
-    public static final int ONE = 1;
-    public static final int TWO = 2;
-    public static final int THREE = 3;
-    public static final int FOUR = 4;
-    public static final int FIVE = 5;
-    public static final int SIX = 6;
-    public static final int SEVEN = 7;
 
     private final String viewName = "fill application";
 
@@ -87,8 +77,7 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
     private final JButton submit;
     private final JButton cancel;
 
-    public FillApplicationView(FillApplicationViewModel fillApplicationViewModel,
-                               Pet correspondingPet, int coorespondingUser) {
+    public FillApplicationView(FillApplicationViewModel fillApplicationViewModel, Pet correspondingPet, int coorespondingUser) {
         super("Fill Application View");
 
         this.fillApplicationViewModel = fillApplicationViewModel;
@@ -109,8 +98,8 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
         final JPanel surveyInfo = new JPanel();
 
         // Radials
-        final JLabel[] energyLabels = {new JLabel("Quiet"), new JLabel("Loud"), new JLabel("Both")};
-        final JRadioButton[] energies = {quietEnergy, loudEnergy, bothEnergy};
+        JLabel[] energyLabels = {new JLabel("Quiet"), new JLabel("Loud"), new JLabel("Both")};
+        JRadioButton[] energies = {quietEnergy, loudEnergy, bothEnergy};
         final LabelRadioPanel energyInfo = new LabelRadioPanel(
                 energyLabels,
                 energies
@@ -118,18 +107,16 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
 
         surveyInfo.add(energyInfo);
 
-        final JLabel[] stayingLabels = {new JLabel("Loose"),
-                new JLabel("Confined"), new JLabel("Crated"), new JLabel("Outside"), new JLabel("Other")};
-        final JRadioButton[] stayings = {looseStaying, confinedStaying, cratedStaying, outsideStaying, otherStaying};
+        JLabel[] stayingLabels = {new JLabel("Loose"), new JLabel("Confined"), new JLabel("Crated"), new JLabel("Outside"), new JLabel("Other")};
+        JRadioButton[] stayings = {looseStaying, confinedStaying, cratedStaying, outsideStaying, otherStaying};
         final LabelRadioPanel stayingInfo = new LabelRadioPanel(
                 stayingLabels,
                 stayings
         );
         surveyInfo.add(stayingInfo);
 
-        final JLabel[] aloneLabels =
-                {new JLabel("10+ Hours"), new JLabel("8-10 Hours"), new JLabel("4-8 Hours"), new JLabel(">4 Hours")};
-        final JRadioButton[] aloneRadios = {aboveTenAlone, eightTenAlone, fourSixAlone, lessFour};
+        JLabel[] aloneLabels = {new JLabel("10+ Hours"), new JLabel("8-10 Hours"), new JLabel("4-8 Hours"), new JLabel(">4 Hours")};
+        JRadioButton[] aloneRadios = {aboveTenAlone, eightTenAlone, fourSixAlone, lessFour};
         final LabelRadioPanel aloneInfo = new LabelRadioPanel(
                 aloneLabels,
                 aloneRadios
@@ -180,7 +167,7 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(submit)) {
+                        if (evt.getSource().equals(submit)){
                             final FillApplicationState currentState = fillApplicationViewModel.getState();
 
                             fillApplicationController.execute(
@@ -206,24 +193,24 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
         mainPanel.add(surveyInfo);
         mainPanel.add(buttons);
         setContentPane(mainPanel);
-        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
+        getContentPane().setLayout( new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
 
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    public void makeVisible(Pet pet, int user) {
+    public void makeVisible(Pet pet, int user){
         this.correspondingPet = pet;
         this.correspondingUser = user;
-        final FillApplicationState curState = fillApplicationViewModel.getState();
+        FillApplicationState curState = fillApplicationViewModel.getState();
         curState.setCorrespondingPet(pet);
         curState.setCorrespondingUser(user);
         fillApplicationViewModel.setState(curState);
         setVisible(true);
     }
 
-    public void makeInvisible() {
+    public void makeInvisible(){
         setVisible(false);
 
         quietEnergy.setSelected(true);
@@ -260,7 +247,7 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
     }
 
     /* LISTENER METHODS */
-    private void addEnumListener() {
+    private void addEnumListener(){
         quietEnergy.addChangeListener(e -> {
             if (quietEnergy.isSelected()) {
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
@@ -269,14 +256,14 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
             }
         });
         loudEnergy.addChangeListener(e -> {
-            if (loudEnergy.isSelected()) {
+            if (loudEnergy.isSelected()){
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
                 currentState.setEnergy(SurveyInfo.EnergyOfHome.LOUD);
                 fillApplicationViewModel.setState(currentState);
             }
         });
         bothEnergy.addChangeListener(e -> {
-            if (bothEnergy.isSelected()) {
+            if (bothEnergy.isSelected()){
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
                 currentState.setEnergy(SurveyInfo.EnergyOfHome.BOTH);
                 fillApplicationViewModel.setState(currentState);
@@ -293,88 +280,90 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
         });
 
         confinedStaying.addChangeListener(e -> {
-            if (confinedStaying.isSelected()) {
+            if (confinedStaying.isSelected()){
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
                 currentState.setStaying(SurveyInfo.AnimalStaying.CONFINED);
                 fillApplicationViewModel.setState(currentState);
             }
         });
         cratedStaying.addChangeListener(e -> {
-            if (cratedStaying.isSelected()) {
+            if(cratedStaying.isSelected()){
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
                 currentState.setStaying(SurveyInfo.AnimalStaying.CRATED);
                 fillApplicationViewModel.setState(currentState);
             }
         });
         outsideStaying.addChangeListener(e -> {
-            if (outsideStaying.isSelected()) {
+            if(outsideStaying.isSelected()){
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
                 currentState.setStaying(SurveyInfo.AnimalStaying.OUTSIDE);
                 fillApplicationViewModel.setState(currentState);
             }
         });
         otherStaying.addChangeListener(e -> {
-            if (otherStaying.isSelected()) {
+            if (otherStaying.isSelected()){
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
                 currentState.setStaying(SurveyInfo.AnimalStaying.OTHER);
                 fillApplicationViewModel.setState(currentState);
             }
         });
 
+
         /* Animal Alone Time */
         aboveTenAlone.addChangeListener(e -> {
-            if (aboveTenAlone.isSelected()) {
+            if(aboveTenAlone.isSelected()){
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
                 currentState.setAlone(SurveyInfo.AloneTime.MORE_THAN_TEN);
                 fillApplicationViewModel.setState(currentState);
             }
         });
         eightTenAlone.addChangeListener(e -> {
-            if (eightTenAlone.isSelected()) {
+            if(eightTenAlone.isSelected()){
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
                 currentState.setAlone(SurveyInfo.AloneTime.EIGHT_TO_TEN);
                 fillApplicationViewModel.setState(currentState);
             }
         });
         fourSixAlone.addChangeListener(e -> {
-            if (fourSixAlone.isSelected()) {
+            if(fourSixAlone.isSelected()){
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
                 currentState.setAlone(SurveyInfo.AloneTime.FOUR_TO_SIX);
                 fillApplicationViewModel.setState(currentState);
             }
         });
         lessFour.addChangeListener(e -> {
-            if (lessFour.isSelected()) {
+            if(lessFour.isSelected()){
                 final FillApplicationState currentState = fillApplicationViewModel.getState();
                 currentState.setAlone(SurveyInfo.AloneTime.LESS_THAN_FOUR);
                 fillApplicationViewModel.setState(currentState);
             }
         });
 
+
         final FillApplicationState currentState = fillApplicationViewModel.getState();
 
         fillApplicationViewModel.setState(currentState);
     }
 
-    void liveWithAdd(JCheckBox updatedBox, int num) {
+    void liveWithAdd(JCheckBox updatedBox, int num){
         final FillApplicationState currentState = fillApplicationViewModel.getState();
-        final boolean[] updatedState = currentState.getSurveyInfo().getAdopterLivesWith();
+        boolean[] updatedState = currentState.getSurveyInfo().getAdopterLivesWith();
         updatedState[num] = updatedBox.isSelected();
         currentState.setLiveWith(updatedState);
         fillApplicationViewModel.setState(currentState);
     }
 
-    void timeWithAdd(JCheckBox updatedBox, int num) {
+    void timeWithAdd(JCheckBox updatedBox, int num){
         final FillApplicationState currentState = fillApplicationViewModel.getState();
-        final boolean[] updatedState = currentState.getSurveyInfo().getAdopterSpendsTimeWith();
+        boolean[] updatedState = currentState.getSurveyInfo().getAdopterSpendsTimeWith();
         updatedState[num] = updatedBox.isSelected();
         currentState.setTimeWith(updatedState);
         fillApplicationViewModel.setState(currentState);
     }
 
-    void enrichmentAdd(JCheckBox updatedBox, int num) {
+    void enrichmentAdd(JCheckBox updatedBox, int num){
         final FillApplicationState currentState = fillApplicationViewModel.getState();
-        final boolean[] updatedState = currentState.getSurveyInfo().getAdopterEnrichment();
+        boolean[] updatedState = currentState.getSurveyInfo().getAdopterEnrichment();
         updatedState[num] = updatedBox.isSelected();
         currentState.setEnrichment(updatedState);
         fillApplicationViewModel.setState(currentState);
@@ -382,30 +371,30 @@ public class FillApplicationView extends JFrame implements ActionListener, Prope
 
     private void addCheckboxListener(){
         /* LIVE WITH CHECKBOXES */
-        adultLiveWith.addChangeListener(e -> liveWithAdd(adultLiveWith, ZERO));
-        childLiveWith.addChangeListener(e -> liveWithAdd(childLiveWith, ONE));
-        seniorLiveWith.addChangeListener(e -> liveWithAdd(seniorLiveWith, TWO));
-        teenLiveWith.addChangeListener(e -> liveWithAdd(teenLiveWith, THREE));
-        catLiveWith.addChangeListener(e -> liveWithAdd(teenLiveWith, FOUR));
-        dogLiveWith.addChangeListener(e -> liveWithAdd(dogLiveWith, FIVE));
-        birdLiveWith.addChangeListener(e -> liveWithAdd(birdLiveWith, SIX));
-        mammalLiveWith.addChangeListener(e -> liveWithAdd(mammalLiveWith, SEVEN));
+        adultLiveWith.addChangeListener(e -> liveWithAdd(adultLiveWith, 0));
+        childLiveWith.addChangeListener(e -> liveWithAdd(childLiveWith, 1));
+        seniorLiveWith.addChangeListener(e -> liveWithAdd(seniorLiveWith, 2));
+        teenLiveWith.addChangeListener(e -> liveWithAdd(teenLiveWith, 3));
+        catLiveWith.addChangeListener(e -> liveWithAdd(teenLiveWith, 4));
+        dogLiveWith.addChangeListener(e -> liveWithAdd(dogLiveWith, 5));
+        birdLiveWith.addChangeListener(e -> liveWithAdd(birdLiveWith, 6));
+        mammalLiveWith.addChangeListener(e -> liveWithAdd(mammalLiveWith, 7));
 
-        cityTimeWith.addChangeListener(e -> timeWithAdd(cityTimeWith, ZERO));
-        parkTimeWith.addChangeListener(e -> timeWithAdd(parkTimeWith, ONE));
-        hikeTimeWith.addChangeListener(e -> timeWithAdd(hikeTimeWith, TWO));
-        jogTimeWith.addChangeListener(e -> timeWithAdd(jogTimeWith, THREE));
-        waterTimeWith.addChangeListener(e -> timeWithAdd(waterTimeWith, FOUR));
-        campingTimeWith.addChangeListener(e -> timeWithAdd(campingTimeWith, FIVE));
-        quietDayTimeWith.addChangeListener(e -> timeWithAdd(quietDayTimeWith, SIX));
-        otherTimeWith.addChangeListener(e -> timeWithAdd(otherTimeWith, SEVEN));
+        cityTimeWith.addChangeListener(e -> timeWithAdd(cityTimeWith, 0));
+        parkTimeWith.addChangeListener(e -> timeWithAdd(parkTimeWith, 1));
+        hikeTimeWith.addChangeListener(e -> timeWithAdd(hikeTimeWith, 2));
+        jogTimeWith.addChangeListener(e -> timeWithAdd(jogTimeWith, 3));
+        waterTimeWith.addChangeListener(e -> timeWithAdd(waterTimeWith, 4));
+        campingTimeWith.addChangeListener(e -> timeWithAdd(campingTimeWith, 5));
+        quietDayTimeWith.addChangeListener(e -> timeWithAdd(quietDayTimeWith, 6));
+        otherTimeWith.addChangeListener(e -> timeWithAdd(otherTimeWith, 7));
 
         /* ENRICHMENT CHECBOXES */
-        toyEnrichment.addChangeListener(e -> enrichmentAdd(toyEnrichment, ZERO));
-        brushingEnrichment.addChangeListener(e -> enrichmentAdd(brushingEnrichment, ONE));
-        otherAnimalEnrichment.addChangeListener(e -> enrichmentAdd(otherAnimalEnrichment, TWO));
-        playtimeEnrichment.addChangeListener(e -> enrichmentAdd(playtimeEnrichment, THREE));
-        otherEnrichment.addChangeListener(e -> enrichmentAdd(playtimeEnrichment, FOUR));
+        toyEnrichment.addChangeListener(e -> enrichmentAdd(toyEnrichment, 0));
+        brushingEnrichment.addChangeListener(e -> enrichmentAdd(brushingEnrichment, 1));
+        otherAnimalEnrichment.addChangeListener(e -> enrichmentAdd(otherAnimalEnrichment, 2));
+        playtimeEnrichment.addChangeListener(e -> enrichmentAdd(playtimeEnrichment, 3));
+        otherEnrichment.addChangeListener(e -> enrichmentAdd(playtimeEnrichment, 4));
     }
 
     /* OTHER METHODS */
