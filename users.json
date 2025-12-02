@@ -12,12 +12,12 @@
     },
     {
         "password": "pass2",
-        "address": "Address 2",
+        "address": "addree",
         "idType": "PHOTO_CARD",
         "phoneNumber": 2,
-        "name": "User 2",
+        "name": "name",
         "id": 2,
-        "userType": "user",
+        "userType": "staff",
         "email": "user2@example.com",
         "username": "user2"
     },
@@ -116,7 +116,7 @@
         "phoneNumber": 11,
         "name": "User 11",
         "id": 11,
-        "userType": "user",
+        "userType": "staff",
         "email": "user11@example.com",
         "username": "user11"
     },

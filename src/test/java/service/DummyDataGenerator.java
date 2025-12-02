@@ -32,7 +32,7 @@ public class DummyDataGenerator {
                     "user"+i+"@example.com",
                     "user" + i,
                     "pass" + i,
-                    i == 1 ? "admin" :  "user"
+                    i == 1 ? "admin" :  "staff"
             );
 
             users.put(userK.toJson());

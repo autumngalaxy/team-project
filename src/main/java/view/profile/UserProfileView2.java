@@ -7,9 +7,9 @@ import view.common.RightContentTemplate;
 import javax.swing.*;
 import java.awt.*;
 
-public class UserProfileView extends RightContentTemplate {
+public class UserProfileView2 extends RightContentTemplate {
 
-    public UserProfileView(Backend backend) {
+    public UserProfileView2(Backend backend) {
         super("My Profile");
 
         User user = backend.getCurrentUser();

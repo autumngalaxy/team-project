@@ -2,7 +2,6 @@ package view.menu;
 
 import javax.swing.*;
 
-import interface_adapter.FilterPets.PetListViewModel;
 import interface_adapter.ViewPets.ViewPetsController;
 
 import java.awt.*;
@@ -11,6 +10,7 @@ import service.Backend;
 import service.Frontend;
 import view.AdminPage;
 import view.MainDashboardView;
+import view.auth.MyApplicationsView;
 import view.pets.PetListView;
 import view.profile.EditProfileView;
 import view.profile.UserProfileView;
@@ -20,7 +20,7 @@ public class SideMenuPanel extends JPanel {
     private final Frontend frontend;
     private final Backend backend;
     private final MainDashboardView dashboard; 
-    private String userType;
+    private final String userType;
 
     public SideMenuPanel(Frontend frontend, Backend backend, MainDashboardView dashboard, String userType) {
         this.frontend = frontend;
@@ -73,8 +73,8 @@ public class SideMenuPanel extends JPanel {
 	        	dashboard.setContent(new EditProfileView(backend, frontend.getUpdateProfileController()));
 	            break;
             case "My Applications":
-//              frontend.showAddPetPage();
-              break;
+				dashboard.setContent(new MyApplicationsView(backend));
+				break;
             case "Manage Applications":
                 dashboard.setContent(new AdminPage(frontend, backend));
                 break;
