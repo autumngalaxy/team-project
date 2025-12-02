@@ -92,6 +92,7 @@ public class PetListView extends RightContentTemplate implements PropertyChangeL
         new PetDetailView(pet);
     }
 
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         refreshList();

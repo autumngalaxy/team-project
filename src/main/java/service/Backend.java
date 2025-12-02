@@ -430,7 +430,7 @@ public class Backend {
         }
     }
 
-
+    // add start by YZ
     public void setCurrentUser(User user) {
         this.currentUser = user;
     }
@@ -438,4 +438,20 @@ public class Backend {
     public User getCurrentUser() {
         return this.currentUser;
     }
+    
+    public List<Application> getApplicationsForUser(int userId) {
+        List<Application> list = new ArrayList<>();
+        for (Application app : applications.values()) {
+            if (app.getUserId() == userId) {
+                list.add(app);
+            }
+        }
+        return list;
+    }
+    
+    public void deleteApplicationById(int appId) {
+        applications.remove(appId);
+    }
+    // add end by YZ
+
 }

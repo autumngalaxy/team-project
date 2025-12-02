@@ -1,89 +1,90 @@
 package use_case.update_profile;
 
+import dataAccess.FileUserDataAccessObject;
 import entity.User;
-import entity.User.idType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import service.Backend;
 
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UpdateUserProfileInteractorTest {
 
-    // 辅助方法创建初始用户
-    private User makeUser() {
-        return new User(
+    private FileUserDataAccessObject mockDao;
+    private Backend mockBackend;
+    private UpdateUserProfileOutputBoundary mockPresenter;
+
+    private UpdateUserProfileInteractor interactor;
+    private User sampleUser;
+
+    @BeforeEach
+    void setup() {
+        mockDao = mock(FileUserDataAccessObject.class);
+        mockBackend = mock(Backend.class);
+        mockPresenter = mock(UpdateUserProfileOutputBoundary.class);
+
+        interactor = new UpdateUserProfileInteractor(mockDao, mockBackend, mockPresenter);
+
+        sampleUser = new User(
                 1,
-                "John",
-                "OldAddr",
-                idType.PHOTO_CARD,
-                12345,
+                "Old Name",
+                "Old Address",
+                User.idType.PASSPORT,
+                123,
                 "old@mail.com",
-                "john",
-                "pwd",
-                "user"
+                "user1",
+                "pass",
+                "admin"
         );
+
+        when(mockDao.getCurrentUser()).thenReturn(sampleUser);
     }
 
     @Test
     void testOpenEditPage() {
-        FakeUserDAO dao = new FakeUserDAO(makeUser());
-        FakeBackend backend = new FakeBackend();
-        FakePresenter presenter = new FakePresenter();
-
-        UpdateUserProfileInteractor interactor =
-                new UpdateUserProfileInteractor(null, backend, presenter);
-
         interactor.openEditPage();
-
-        assertTrue(presenter.editShown);
+        verify(mockPresenter, times(1)).showEditProfile();
     }
 
     @Test
     void testSaveProfile() {
-        User initial = makeUser();
-
-        FakeUserDAO dao = new FakeUserDAO(initial);
-        FakeBackend backend = new FakeBackend();
-        FakePresenter presenter = new FakePresenter();
-
-//        UpdateUserProfileInteractor interactor =
-//                new UpdateUserProfileInteractor(dao, backend, presenter);
-
         UpdateUserProfileInputData data = new UpdateUserProfileInputData(
                 "NewName",
+                "NewAddress",
                 "new@mail.com",
-                "NewAddr",
-                99999
+                999
         );
 
-//        interactor.saveProfile(data);
+        interactor.saveProfile(data);
 
-        int number = 1;
-        assertEquals(1, number);
+        // verify presenter called success
+        verify(mockPresenter, times(1)).showProfileUpdateSuccess();
 
-//        assertTrue(presenter.successShown);
+        // verify userDAO.save was called
+        verify(mockDao, times(1)).save(any(User.class));
+
+        // verify backend updated
+        verify(mockBackend, times(1)).setCurrentUser(any(User.class));
     }
 
     @Test
     void testSave() {
-        User initial = makeUser();
+        interactor.save("NameX", "mailX@mail.com", "AddrX", 88);
 
-        FakeUserDAO dao = new FakeUserDAO(initial);
-        FakeBackend backend = new FakeBackend();
-        FakePresenter presenter = new FakePresenter();
+        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
 
-//        UpdateUserProfileInteractor interactor =
-//                new UpdateUserProfileInteractor(dao, backend, presenter);
+        verify(mockDao).updateUser(userCaptor.capture());
+        verify(mockBackend).setCurrentUser(userCaptor.capture());
 
-//        interactor.save("A", "B@mail.com", "C", 777);
+        User saved = userCaptor.getAllValues().get(0);
 
-        User updated = dao.getCurrentUser();
+        assertEquals("NameX", saved.getName());
+        assertEquals("mailX@mail.com", saved.getEmail());
+        assertEquals("AddrX", saved.getAddress());
+        assertEquals(88, saved.getPhoneNumber());
 
-//        assertEquals("A", updated.getName());
-//        assertEquals("B@mail.com", updated.getEmail());
-//        assertEquals("C", updated.getAddress());
-//        assertEquals(777, updated.getPhoneNumber());
-        int number = 1;
-        assertEquals(1, number);
-//        assertTrue(presenter.successShown);
+        verify(mockPresenter).showProfileUpdateSuccess();
     }
 }
