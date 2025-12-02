@@ -5,18 +5,20 @@ import java.util.Map;
 
 /**
  * MenuConfig defines the menu items available for each user role.
+ * 
  * This class provides a static method that returns a mapping:
+ *
  * The returned menu preserves the order using LinkedHashMap.
  */
 public class MenuConfig {
 
     /**
-     * Returns a map defining menu items for different user roles.
+     * Returns a map defining menu items for different user roles
+     *
      * @return LinkedHashMap mapping userType → String[] of menu labels
      */
     public static Map<String, String[]> getMenuItems() {
-
-        final Map<String, String[]> map = new LinkedHashMap<>();
+        Map<String, String[]> map = new LinkedHashMap<>();
 
         // Menu for Admin
         map.put("admin", new String[]{
@@ -29,7 +31,7 @@ public class MenuConfig {
                 "Add Pet",
                 "Modify Pet",
                 "Delete Pet",
-                "Log Out",
+                "Log Out"
         });
 
         // Menu for Staff
@@ -41,7 +43,7 @@ public class MenuConfig {
                 "Add Pet",
                 "Modify Pet",
                 "Delete Pet",
-                "Log Out",
+                "Log Out"
         });
 
         // Menu for Regular User
@@ -50,7 +52,7 @@ public class MenuConfig {
                 "Edit Profile",
                 "My Applications",
                 "View Pets",
-                "Log Out",
+                "Log Out"
         });
 
         return map;

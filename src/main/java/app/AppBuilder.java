@@ -75,6 +75,7 @@ public class AppBuilder {
     private final ViewManager viewManager;
 
     private final FileUserDataAccessObject userDataAccessObject;
+//    private final PetDataAccessInterface petDataAccess;
 
     private final Frontend frontend;
     private final Backend backend;
@@ -82,7 +83,7 @@ public class AppBuilder {
     // ViewModels
     private final LoginChooseViewModel loginChooseViewModel = new LoginChooseViewModel();
     private final UserLoginViewModel userLoginViewModel = new UserLoginViewModel();
-    private final SignupViewModel signupViewModel = new SignupViewModel();
+    private final SignupViewModel signupViewModel= new SignupViewModel();
     private final PetListViewModel petListViewModel = new PetListViewModel();
     private ViewPetsController viewPetsController;
 
@@ -135,7 +136,7 @@ public class AppBuilder {
 //        LoginChoosePresenter presenter =
 //                new LoginChoosePresenter(viewManagerModel, userLoginView);
 
-        final LoginChoosePresenter presenter =
+        LoginChoosePresenter presenter =
                 new LoginChoosePresenter(viewManagerModel, userLoginViewModel);
         loginChooseViewModel.addPropertyChangeListener(presenter);
 
@@ -171,13 +172,13 @@ public class AppBuilder {
      */
     public AppBuilder addUserLoginUseCase() {
 
-        final UserLoginOutputBoundary output =
+        UserLoginOutputBoundary output =
                 new UserLoginPresenter(viewManagerModel, userLoginViewModel, frontend, backend);
 
-        final UserLoginInputBoundary interactor =
+        UserLoginInputBoundary interactor =
                 new UserLoginInteractor(userDataAccessObject, output, backend);
 
-        final UserLoginController controller = new UserLoginController(interactor);
+        UserLoginController controller = new UserLoginController(interactor);
         userLoginView.setLoginController(controller);
 
         return this;
@@ -246,7 +247,7 @@ public class AppBuilder {
     	final UpdateUserProfileInputBoundary interactor =
                 new UpdateUserProfileInteractor(userDataAccessObject, backend, output);
 
-        final UpdateUserProfileController controller =
+        UpdateUserProfileController controller =
                 new UpdateUserProfileController(interactor);
 
         frontend.setUpdateProfileController(controller);
@@ -262,17 +263,17 @@ public class AppBuilder {
     public AppBuilder addPetManagementUseCase() {
 
         // DAO implementing PetDataAccessInterface
-        final PetDataAccessInterface petGateway = new InMemoryPetDataAccessObject();
+        PetDataAccessInterface petGateway = new InMemoryPetDataAccessObject();
 
         // Presenter & Interactors
-        final PetManagementOutputBoundary presenter = new PetManagementPresenter(petManagementViewModel);
+        PetManagementOutputBoundary presenter = new PetManagementPresenter(petManagementViewModel);
 
-        final AddPetInputBoundary addUC = new AddPetInteractor(petGateway, presenter);
-        final UpdatePetInputBoundary updateUC = new UpdatePetInteractor(petGateway, presenter);
-        final DeletePetInputBoundary deleteUC = new DeletePetInteractor(petGateway, presenter);
+        AddPetInputBoundary addUC = new AddPetInteractor(petGateway, presenter);
+        UpdatePetInputBoundary updateUC = new UpdatePetInteractor(petGateway, presenter);
+        DeletePetInputBoundary deleteUC = new DeletePetInteractor(petGateway, presenter);
 
         // Controller
-        final PetManagementController controller =
+        PetManagementController controller =
                 new PetManagementController(addUC, updateUC, deleteUC);
 
         // View
@@ -287,10 +288,10 @@ public class AppBuilder {
 
     public AppBuilder addViewPetsUseCase(Backend backend) {
 
-        final ViewPetsOutputBoundary presenter =
+        ViewPetsOutputBoundary presenter =
                 new ViewPetsPresenter(petListViewModel);
 
-        final ViewPetsInputBoundary interactor =
+        ViewPetsInputBoundary interactor =
                 new ViewPetsInteractor(backend, presenter);
 
         viewPetsController =
@@ -301,14 +302,14 @@ public class AppBuilder {
         return this;
     }
 
-    public AppBuilder addFillApplicationUseCase() {
-        final FillApplicationOutputBoundary presenter =
+    public AppBuilder addFillApplicationUseCase(){
+        FillApplicationOutputBoundary presenter =
                 new FillApplicationPresenter();
 
-        final FillApplicationInputBoundary interactor =
+        FillApplicationInputBoundary interactor =
                 new FillApplicationInteractor(backend, presenter);
 
-        final FillApplicationController fillAppController =
+        FillApplicationController fillAppController =
                 new FillApplicationController(interactor);
 
         fillApplicationView = new FillApplicationView(fillApplicationViewModel, null, 0);

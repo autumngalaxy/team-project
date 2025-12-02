@@ -7,11 +7,11 @@ import javax.swing.*;
  * labels and radioButtons must be the same length.
  */
 public class LabelRadioPanel extends JPanel {
-    LabelRadioPanel(JLabel[] labels, JRadioButton[] radioButtons) {
-        assert labels.length == radioButtons.length;
+    LabelRadioPanel (JLabel[] labels, JRadioButton[] radioButtons){
+        assert(labels.length == radioButtons.length);
 
-        final ButtonGroup panelGroup = new ButtonGroup();
-        for (int i = 0; i < labels.length; i++) {
+        ButtonGroup panelGroup = new ButtonGroup();
+        for (int i = 0; i < labels.length; i++){
             this.add(labels[i]);
             this.add(radioButtons[i]);
             panelGroup.add(radioButtons[i]);

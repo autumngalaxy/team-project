@@ -20,8 +20,7 @@ public class UpdateUserProfileController {
         int phoneNumber;
         try {
             phoneNumber = Integer.parseInt(phoneNumberStr);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             interactor.phoneNumberInvalid("Phone number should be a number.");
             return;
         }

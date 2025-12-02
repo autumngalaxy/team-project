@@ -24,11 +24,11 @@ public class LoginChooseView extends JPanel implements ActionListener, PropertyC
         setLayout(new GridBagLayout());
 
         // Panel
-        final JPanel card = new JPanel();
+        JPanel card = new JPanel();
         card.setBackground(Color.WHITE);
         card.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(20, 20, 20, 20),
-                BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true)
+                BorderFactory.createLineBorder(new Color(220,220,220), 1, true)
         ));
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
         card.setPreferredSize(new Dimension(350, 380));
@@ -40,10 +40,10 @@ public class LoginChooseView extends JPanel implements ActionListener, PropertyC
         title.setForeground(new Color(60, 60, 75));
 
         // button
-        final JButton userLoginBtn = UIFactory.createPrimaryButton("User Login");
-        final JButton staffLoginBtn = UIFactory.createPrimaryButton("Staff Login");
-        final JButton adminLoginBtn = UIFactory.createPrimaryButton("Admin Login");
-        final JButton createAccountBtn = UIFactory.createSecondaryButton("Create New Account");
+        JButton userLoginBtn = UIFactory.createPrimaryButton("User Login");
+        JButton staffLoginBtn = UIFactory.createPrimaryButton("Staff Login");
+        JButton adminLoginBtn = UIFactory.createPrimaryButton("Admin Login");
+        JButton createAccountBtn = UIFactory.createSecondaryButton("Create New Account");
 
         card.add(Box.createVerticalStrut(20));
         card.add(title);
@@ -63,7 +63,7 @@ public class LoginChooseView extends JPanel implements ActionListener, PropertyC
 
         // addActionListener
         userLoginBtn.addActionListener(e ->
-                loginChooseViewModel.firePropertyChange("login", null, "user"));
+                loginChooseViewModel.firePropertyChange("login", null,  "user"));
         staffLoginBtn.addActionListener(e ->
                 loginChooseViewModel.firePropertyChange("login", null, "staff"));
         adminLoginBtn.addActionListener(e ->
@@ -77,12 +77,8 @@ public class LoginChooseView extends JPanel implements ActionListener, PropertyC
     }
 
     @Override
-    public void actionPerformed(ActionEvent evt) {
-
-    }
+    public void actionPerformed(ActionEvent evt) { }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-
-    }
+    public void propertyChange(PropertyChangeEvent evt) { }
 }
