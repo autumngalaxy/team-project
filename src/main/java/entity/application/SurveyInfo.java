@@ -84,17 +84,20 @@ public class SurveyInfo {
     }
 
     public void setAdopterLivesWith(boolean[] adopterLivesWith) {
-        if (adopterLivesWith.length != LIVEWITHSIZE) { throw new IllegalArgumentException("Wrong liveWith length: " + adopterLivesWith.length); }
+        if (adopterLivesWith.length != LIVEWITHSIZE)
+        { throw new IllegalArgumentException("Wrong liveWith length: " + adopterLivesWith.length); }
         this.adopterLivesWith = adopterLivesWith;
     }
 
     public void setAdopterSpendsTimeWith(boolean[] adopterSpendsTimeWith) {
-        if (adopterSpendsTimeWith.length != TIMEWITHSIZE) { throw new IllegalArgumentException("Wrong timeWith length: " + adopterSpendsTimeWith.length); }
+        if (adopterSpendsTimeWith.length != TIMEWITHSIZE)
+        { throw new IllegalArgumentException("Wrong timeWith length: " + adopterSpendsTimeWith.length); }
         this.adopterSpendsTimeWith = adopterSpendsTimeWith;
     }
 
     public void setAdopterEnrichment(boolean[] adopterEnrichment) {
-        if (adopterEnrichment.length != ENRICHMENTSIZE) { throw new IllegalArgumentException("Wrong enrichment length: " + adopterEnrichment.length); }
+        if (adopterEnrichment.length != ENRICHMENTSIZE)
+        { throw new IllegalArgumentException("Wrong enrichment length: " + adopterEnrichment.length); }
         this.adopterEnrichment = adopterEnrichment;
     }
 }
