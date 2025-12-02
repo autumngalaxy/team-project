@@ -292,6 +292,7 @@ public class FillApplicationView extends JPanel implements ActionListener, Prope
         addEmailListener();
         addAddressListener();
         addEnumListener();
+        addCheckboxListener();
 
         /* LAYOUT */
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -621,19 +622,176 @@ public class FillApplicationView extends JPanel implements ActionListener, Prope
         fillApplicationViewModel.setState(currentState);
     }
 
-    private void addCheckboxListener(){
+    void liveWithAdd(JCheckBox updatedBox, int num){
+        final FillApplicationState currentState = fillApplicationViewModel.getState();
+        boolean[] updatedState = currentState.getLiveWith();
+        updatedState[num] = updatedBox.isSelected();
+        currentState.setLiveWith(updatedState);
+        fillApplicationViewModel.setState(currentState);
+    }
 
+    void timeWithAdd(JCheckBox updatedBox, int num){
+        final FillApplicationState currentState = fillApplicationViewModel.getState();
+        boolean[] updatedState = currentState.getTimeWith();
+        updatedState[num] = updatedBox.isSelected();
+        currentState.setTimeWith(updatedState);
+        fillApplicationViewModel.setState(currentState);
+    }
+
+    void enrichmentAdd(JCheckBox updatedBox, int num){
+        final FillApplicationState currentState = fillApplicationViewModel.getState();
+        boolean[] updatedState = currentState.getEnrichment();
+        updatedState[num] = updatedBox.isSelected();
+        currentState.setEnrichment(updatedState);
+        fillApplicationViewModel.setState(currentState);
+    }
+
+    private void addCheckboxListener(){
+        /* LIVE WITH CHECKBOXES */
+        adultLiveWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                liveWithAdd(adultLiveWith, 0);
+            }
+        });
+
+        childLiveWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                liveWithAdd(childLiveWith, 1);
+            }
+        });
+        seniorLiveWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                liveWithAdd(seniorLiveWith, 2);
+            }
+        });
+        teenLiveWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                liveWithAdd(teenLiveWith, 3);
+            }
+        });
+        catLiveWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                liveWithAdd(teenLiveWith, 4);
+            }
+        });
+        dogLiveWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                liveWithAdd(dogLiveWith, 5);
+            }
+        });
+        birdLiveWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                liveWithAdd(birdLiveWith, 6);
+            }
+        });
+        mammalLiveWith.addChangeListener(new ChangeListener() {
+             @Override
+             public void stateChanged(ChangeEvent e) {
+                 liveWithAdd(mammalLiveWith, 7);
+             }
+         });
+
+        cityTimeWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                timeWithAdd(cityTimeWith, 0);
+            }
+        });
+        parkTimeWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                timeWithAdd(parkTimeWith, 1);
+            }
+        });
+        hikeTimeWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                timeWithAdd(hikeTimeWith, 2);
+            }
+        });
+        jogTimeWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                timeWithAdd(jogTimeWith, 3);
+            }
+        });
+        waterTimeWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                timeWithAdd(waterTimeWith, 4);
+            }
+        });
+        campingTimeWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                timeWithAdd(campingTimeWith, 5);
+            }
+        });
+        quietDayTimeWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                timeWithAdd(quietDayTimeWith, 6);
+            }
+        });
+        otherTimeWith.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                timeWithAdd(otherTimeWith, 7);
+            }
+        });
+
+        /* ENRICHMENT CHECBOXES */
+        toyEnrichment.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                enrichmentAdd(toyEnrichment, 0);
+            }
+        });
+        brushingEnrichment.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                enrichmentAdd(brushingEnrichment, 1);
+            }
+        });
+        otherAnimalEnrichment.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                enrichmentAdd(otherAnimalEnrichment, 2);
+            }
+        });
+        playtimeEnrichment.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                enrichmentAdd(playtimeEnrichment, 3);
+            }
+        });
+        otherEnrichment.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                enrichmentAdd(playtimeEnrichment, 4);
+            }
+        });
     }
 
     /* OTHER METHODS */
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        JOptionPane.showMessageDialog(this, "Cancel not implemented yet.");
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        final FillApplicationState state = (FillApplicationState) evt.getNewValue();
+        /*if (state.getUsernameError() != null) {
+            JOptionPane.showMessageDialog(this, state.getUsernameError());
+        }*/
     }
 
     public String getViewName() {
