@@ -6,15 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c398851c-52e7-409f-a045-c80faede2453" name="Changes" comment="able to complete applications">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications.json" beforeDir="false" afterPath="$PROJECT_DIR$/applications.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/FileApplicationDataAccessObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/application/SurveyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/application/SurveyInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/fill_application/FillApplicationViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/fill_application/FillApplicationInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/FillApplicationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/FillApplicationView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,20 +50,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.StandardRun.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;implement-adoption-application-beginnings&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/spencerswiader/IdeaProjects/csc207-team-project&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.StandardRun.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "Ang'sTests",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/spencerswiader/IdeaProjects/csc207-team-project"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="entity.application" />
@@ -80,24 +71,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="StandardRun" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="app.Main" />
-      <module name="TeamProject" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="csc207-team-project" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="csc207-team-project" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="csc207-team-project" />
       <option name="ENV_FILES" value="" />
@@ -130,6 +103,24 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="StandardRun" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="app.Main" />
+      <module name="TeamProject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="csc207-team-project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="csc207-team-project" />
+      <option name="filePath" />
       <method v="2" />
     </configuration>
   </component>
